@@ -1,0 +1,6 @@
+github.com/nickwells/english.mod v1.1.5 h1:OFmYaQ83fguWAJs3mFUcUYKILKYE4qJRiNDNnuXwp4s=
+github.com/nickwells/english.mod v1.1.5/go.mod h1:CEoMsqNbwx3J9NpMm94O1x1OW266Tj7osHmwJkQ4y/4=
+github.com/nickwells/testhelper.mod/v2 v2.3.0 h1:b/EpnHiYr8dnr6C0a6zW2KAyHgfQ72pVw3cNklSzwxs=
+github.com/nickwells/testhelper.mod/v2 v2.3.0/go.mod h1:pdhf+XHRINEUH6a0OcwC98ETD3ZluAXKA5xOhC2I2Qk=
+golang.org/x/exp v0.0.0-20231006140011-7918f672742d h1:jtJma62tbqLibJ5sFQz8bKtEM8rJBtfilJ2qTU199MI=
+golang.org/x/exp v0.0.0-20231006140011-7918f672742d/go.mod h1:ldy0pHrwJyGW56pPQzzkH36rKxoZW1tw7ZJpeKx+hdo=
