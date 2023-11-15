@@ -97,25 +97,27 @@ func (f Family) IsValid() bool {
 	return f < maxFamily
 }
 
-// Names returns the names of colours in the given Family.
-func (f Family) Names() []string {
+// ColourNames returns the names of colours in the given Family.
+func (f Family) ColourNames() []string {
 	var names []string
-
+	nameMap := map[string]bool{}
 	if f == AnyColours {
 		for _, m := range cFamMap {
 			for n := range m {
-				names = append(names, n)
+				nameMap[n] = true
 			}
 		}
-		return names
-	}
-
-	if m, ok := cFamMap[f]; ok {
-		for n := range m {
-			names = append(names, n)
+	} else {
+		if m, ok := cFamMap[f]; ok {
+			for n := range m {
+				nameMap[n] = true
+			}
 		}
 	}
 
+	for n := range nameMap {
+		names = append(names, n)
+	}
 	return names
 }
 

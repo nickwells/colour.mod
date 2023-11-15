@@ -128,16 +128,18 @@ func TestFamilyList(t *testing.T) {
 }
 
 func TestFamilyNames(t *testing.T) {
-	webCount := len(webColours)
-	cgaCount := len(cgaColours)
-	x11Count := len(x11Colours)
-	htmlCount := len(htmlColours)
-	pantoneCount := len(pantoneColours)
-	anyCount := webCount +
-		cgaCount +
-		x11Count +
-		htmlCount +
-		pantoneCount
+	var (
+		webCount     = len(webColours)
+		cgaCount     = len(cgaColours)
+		x11Count     = len(x11Colours)
+		htmlCount    = len(htmlColours)
+		pantoneCount = len(pantoneColours)
+		anyCount     = webCount +
+			cgaCount +
+			x11Count +
+			htmlCount +
+			pantoneCount
+	)
 
 	testCases := []struct {
 		testhelper.ID
@@ -169,17 +171,25 @@ func TestFamilyNames(t *testing.T) {
 			f:            PantoneColours,
 			expNameCount: pantoneCount,
 		},
-		{
-			ID:           testhelper.MkID("Any"),
-			f:            AnyColours,
-			expNameCount: anyCount,
-		},
 	}
 
 	for _, tc := range testCases {
-		names := tc.f.Names()
+		names := tc.f.ColourNames()
 		testhelper.DiffInt[int](t, tc.IDStr(), "number of colour names",
 			len(names), tc.expNameCount)
+	}
+
+	// Handle the 'Any' family separately - we remove duplicates so we can
+	// only say that the number of names must be less than the sum of the
+	// constituent name sets
+	names := AnyColours.ColourNames()
+	if len(names) > anyCount {
+		t.Log("Any count\n")
+		t.Logf("\t:             the sum of parts is: %d\n", anyCount)
+		t.Logf("\t: the number of distinct names is: %d\n", len(names))
+		t.Logf("\t:                            diff: %d\n",
+			len(names)-anyCount)
+		t.Error("full set of colour names should be <= than it's constituents")
 	}
 }
 

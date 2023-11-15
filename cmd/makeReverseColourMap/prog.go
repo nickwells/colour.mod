@@ -154,28 +154,24 @@ func (prog *Prog) writeMapContents() error {
 		return err
 	}
 
-	cnm := map[uint32][]colour.QualifiedColourName{}
-	for _, ifn := range colour.NamesByIndex() {
-		v := cnm[ifn.Idx]
-		v = append(v,
-			colour.QualifiedColourName{
-				Family:     ifn.Family,
-				ColourName: ifn.ColourName,
-			})
-		cnm[ifn.Idx] = v
-	}
-	keys := []uint32{}
-	for k := range cnm {
-		keys = append(keys, k)
-	}
-	sort.Slice(keys, func(i, j int) bool { return keys[i] < keys[j] })
-	for _, k := range keys {
-		_, err := fmt.Fprintf(prog.fd, "\t0x%06x: {\n", k)
+	cnm, idxKeys := getColoursByIdx()
+	for _, idx := range idxKeys {
+		_, err := fmt.Fprintf(prog.fd, "\t0x%06x: {\n", idx)
 		if err != nil {
 			return err
 		}
 
-		for _, qcn := range cnm[k] {
+		// collect the values and sort them so that we get the same order
+		// every time
+		qcnVals := cnm[idx]
+		sort.Slice(qcnVals, func(i, j int) bool {
+			if qcnVals[i].Family == qcnVals[j].Family {
+				return qcnVals[i].ColourName < qcnVals[j].ColourName
+			}
+			return qcnVals[i].Family < qcnVals[j].Family
+		})
+
+		for _, qcn := range qcnVals {
 			noLintComment := ""
 			if prog.knownMisspellings[qcn.ColourName] {
 				noLintComment = " // nolint:misspell"
@@ -192,6 +188,30 @@ func (prog *Prog) writeMapContents() error {
 		fmt.Fprintln(prog.fd, "\t},")
 	}
 	return nil
+}
+
+// getColoursByIdx returns the map of colour index values to qualified names
+// and a set of keys in order to access the map in a predictable order.
+func getColoursByIdx() (map[uint32][]colour.QualifiedColourName, []uint32) {
+	cnm := map[uint32][]colour.QualifiedColourName{}
+
+	for _, ifn := range colour.NamesByIndex() {
+		v := cnm[ifn.Idx]
+		v = append(v,
+			colour.QualifiedColourName{
+				Family:     ifn.Family,
+				ColourName: ifn.ColourName,
+			})
+		cnm[ifn.Idx] = v
+	}
+
+	idxKeys := []uint32{}
+	for k := range cnm {
+		idxKeys = append(idxKeys, k)
+	}
+	sort.Slice(idxKeys, func(i, j int) bool { return idxKeys[i] < idxKeys[j] })
+
+	return cnm, idxKeys
 }
 
 // findStart finds the location of the end of the start comment

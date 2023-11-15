@@ -6,30 +6,30 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 	0x000000: {
 		{WebColours, "black"},
 		{CGAColours, "black"},
-		{HTMLColours, "black"},
 		{X11Colours, "black"},
-		{X11Colours, "grey0"},
 		{X11Colours, "gray0"},
+		{X11Colours, "grey0"},
+		{HTMLColours, "black"},
 	},
 	0x000080: {
 		{WebColours, "navy"},
 		{CGAColours, "low blue"},
-		{HTMLColours, "navy"},
 		{X11Colours, "navy"},
-		{X11Colours, "navyblue"},
 		{X11Colours, "navy blue"},
+		{X11Colours, "navyblue"},
+		{HTMLColours, "navy"},
 	},
 	0x00008b: {
-		{HTMLColours, "darkblue"},
 		{X11Colours, "blue4"},
-		{X11Colours, "darkblue"},
 		{X11Colours, "dark blue"},
+		{X11Colours, "darkblue"},
+		{HTMLColours, "darkblue"},
 	},
 	0x0000cd: {
-		{HTMLColours, "mediumblue"},
-		{X11Colours, "mediumblue"},
-		{X11Colours, "medium blue"},
 		{X11Colours, "blue3"},
+		{X11Colours, "medium blue"},
+		{X11Colours, "mediumblue"},
+		{HTMLColours, "mediumblue"},
 	},
 	0x0000ee: {
 		{X11Colours, "blue2"},
@@ -37,9 +37,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 	0x0000ff: {
 		{WebColours, "blue"},
 		{CGAColours, "high blue"},
-		{HTMLColours, "blue"},
-		{X11Colours, "blue1"},
 		{X11Colours, "blue"},
+		{X11Colours, "blue1"},
+		{HTMLColours, "blue"},
 	},
 	0x004b8d: {
 		{PantoneColours, "lapis blue"},
@@ -90,9 +90,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "celestial"},
 	},
 	0x006400: {
-		{HTMLColours, "darkgreen"},
 		{X11Colours, "dark green"},
 		{X11Colours, "darkgreen"},
+		{HTMLColours, "darkgreen"},
 	},
 	0x00656b: {
 		{PantoneColours, "deep lake"},
@@ -264,10 +264,10 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{X11Colours, "springgreen4"},
 	},
 	0x008b8b: {
-		{HTMLColours, "darkcyan"},
+		{X11Colours, "cyan4"},
 		{X11Colours, "dark cyan"},
 		{X11Colours, "darkcyan"},
-		{X11Colours, "cyan4"},
+		{HTMLColours, "darkcyan"},
 	},
 	0x008c45: {
 		{PantoneColours, "fern green"},
@@ -363,10 +363,10 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "aqua green"},
 	},
 	0x00bfff: {
-		{HTMLColours, "deepskyblue"},
+		{X11Colours, "deep sky blue"},
 		{X11Colours, "deepskyblue"},
 		{X11Colours, "deepskyblue1"},
-		{X11Colours, "deep sky blue"},
+		{HTMLColours, "deepskyblue"},
 	},
 	0x00c5cd: {
 		{X11Colours, "turquoise3"},
@@ -381,9 +381,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{X11Colours, "cyan3"},
 	},
 	0x00ced1: {
-		{HTMLColours, "darkturquoise"},
-		{X11Colours, "darkturquoise"},
 		{X11Colours, "dark turquoise"},
+		{X11Colours, "darkturquoise"},
+		{HTMLColours, "darkturquoise"},
 	},
 	0x00e5ee: {
 		{X11Colours, "turquoise2"},
@@ -401,32 +401,32 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{X11Colours, "turquoise1"},
 	},
 	0x00fa9a: {
-		{HTMLColours, "mediumspringgreen"},
 		{X11Colours, "medium spring green"},
 		{X11Colours, "mediumspringgreen"},
+		{HTMLColours, "mediumspringgreen"},
 	},
 	0x00ff00: {
 		{WebColours, "lime"},
 		{CGAColours, "green"},
 		{CGAColours, "high green"},
-		{HTMLColours, "lime"},
-		{X11Colours, "green1"},
 		{X11Colours, "green"},
+		{X11Colours, "green1"},
+		{HTMLColours, "lime"},
 	},
 	0x00ff7f: {
-		{HTMLColours, "springgreen"},
+		{X11Colours, "spring green"},
 		{X11Colours, "springgreen"},
 		{X11Colours, "springgreen1"},
-		{X11Colours, "spring green"},
+		{HTMLColours, "springgreen"},
 	},
 	0x00ffff: {
 		{WebColours, "aqua"},
 		{CGAColours, "cyan"},
 		{CGAColours, "high cyan"},
-		{HTMLColours, "aqua"},
-		{HTMLColours, "cyan"},
 		{X11Colours, "cyan"},
 		{X11Colours, "cyan1"},
+		{HTMLColours, "aqua"},
+		{HTMLColours, "cyan"},
 	},
 	0x030303: {
 		{X11Colours, "gray1"},
@@ -456,8 +456,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "biscay bay"},
 	},
 	0x0a0a0a: {
-		{X11Colours, "grey4"},
 		{X11Colours, "gray4"},
+		{X11Colours, "grey4"},
 	},
 	0x0a6f69: {
 		{PantoneColours, "tidepool"},
@@ -466,15 +466,15 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "ink blue"},
 	},
 	0x0d0d0d: {
-		{X11Colours, "grey5"},
 		{X11Colours, "gray5"},
+		{X11Colours, "grey5"},
 	},
 	0x0e3a53: {
 		{PantoneColours, "sailor blue"},
 	},
 	0x0f0f0f: {
-		{X11Colours, "grey6"},
 		{X11Colours, "gray6"},
+		{X11Colours, "grey6"},
 	},
 	0x0f3b57: {
 		{PantoneColours, "blue opal"},
@@ -555,9 +555,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{X11Colours, "dodgerblue3"},
 	},
 	0x191970: {
-		{HTMLColours, "midnightblue"},
 		{X11Colours, "midnight blue"},
 		{X11Colours, "midnightblue"},
+		{HTMLColours, "midnightblue"},
 	},
 	0x195190: {
 		{PantoneColours, "turkish sea"},
@@ -589,14 +589,14 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "true blue"},
 	},
 	0x1e90ff: {
-		{HTMLColours, "dodgerblue"},
+		{X11Colours, "dodger blue"},
 		{X11Colours, "dodgerblue"},
 		{X11Colours, "dodgerblue1"},
-		{X11Colours, "dodger blue"},
+		{HTMLColours, "dodgerblue"},
 	},
 	0x1f1f1f: {
-		{X11Colours, "grey12"},
 		{X11Colours, "gray12"},
+		{X11Colours, "grey12"},
 	},
 	0x1f495b: {
 		{PantoneColours, "legion blue"},
@@ -626,9 +626,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "bayou"},
 	},
 	0x20b2aa: {
-		{HTMLColours, "lightseagreen"},
-		{X11Colours, "lightseagreen"},
 		{X11Colours, "light sea green"},
+		{X11Colours, "lightseagreen"},
+		{HTMLColours, "lightseagreen"},
 	},
 	0x212121: {
 		{X11Colours, "gray13"},
@@ -644,9 +644,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "ivy"},
 	},
 	0x228b22: {
-		{HTMLColours, "forestgreen"},
 		{X11Colours, "forest green"},
 		{X11Colours, "forestgreen"},
+		{HTMLColours, "forestgreen"},
 	},
 	0x232f36: {
 		{PantoneColours, "dark navy"},
@@ -738,8 +738,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "horizon blue"},
 	},
 	0x292929: {
-		{X11Colours, "grey16"},
 		{X11Colours, "gray16"},
+		{X11Colours, "grey16"},
 	},
 	0x292a2d: {
 		{PantoneColours, "caviar"},
@@ -787,8 +787,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "meteorite"},
 	},
 	0x2b2b2b: {
-		{X11Colours, "grey17"},
 		{X11Colours, "gray17"},
+		{X11Colours, "grey17"},
 	},
 	0x2b2c30: {
 		{PantoneColours, "stretch limo"},
@@ -840,10 +840,10 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "mountain view"},
 	},
 	0x2e8b57: {
-		{HTMLColours, "seagreen"},
-		{X11Colours, "seagreen4"},
-		{X11Colours, "seagreen"},
 		{X11Colours, "sea green"},
+		{X11Colours, "seagreen"},
+		{X11Colours, "seagreen4"},
+		{HTMLColours, "seagreen"},
 	},
 	0x2ea785: {
 		{PantoneColours, "gumdrop green"},
@@ -858,16 +858,16 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "insignia blue"},
 	},
 	0x2f4f4f: {
-		{HTMLColours, "darkslategrey"},
-		{HTMLColours, "darkslategray"},
-		{X11Colours, "darkslategray"},
 		{X11Colours, "dark slate gray"},
-		{X11Colours, "darkslategrey"},
 		{X11Colours, "dark slate grey"},
+		{X11Colours, "darkslategray"},
+		{X11Colours, "darkslategrey"},
+		{HTMLColours, "darkslategray"},
+		{HTMLColours, "darkslategrey"},
 	},
 	0x303030: {
-		{X11Colours, "grey19"},
 		{X11Colours, "gray19"},
+		{X11Colours, "grey19"},
 	},
 	0x303d3c: {
 		{PantoneColours, "darkest spruce"},
@@ -918,13 +918,13 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "blue curacao"},
 	},
 	0x32cd32: {
-		{HTMLColours, "limegreen"},
 		{X11Colours, "lime green"},
 		{X11Colours, "limegreen"},
+		{HTMLColours, "limegreen"},
 	},
 	0x333333: {
-		{X11Colours, "grey20"},
 		{X11Colours, "gray20"},
+		{X11Colours, "grey20"},
 	},
 	0x334d41: {
 		{PantoneColours, "pineneedle"},
@@ -1100,8 +1100,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "peat"},
 	},
 	0x3b3b3b: {
-		{X11Colours, "grey23"},
 		{X11Colours, "gray23"},
+		{X11Colours, "grey23"},
 	},
 	0x3b3b48: {
 		{PantoneColours, "graphite"},
@@ -1134,9 +1134,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "aquarius"},
 	},
 	0x3cb371: {
-		{HTMLColours, "mediumseagreen"},
 		{X11Colours, "medium sea green"},
 		{X11Colours, "mediumseagreen"},
+		{HTMLColours, "mediumseagreen"},
 	},
 	0x3d3c7c: {
 		{PantoneColours, "spectrum blue"},
@@ -1191,8 +1191,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "navy blue"},
 	},
 	0x404040: {
-		{X11Colours, "grey25"},
 		{X11Colours, "gray25"},
+		{X11Colours, "grey25"},
 	},
 	0x404466: {
 		{PantoneColours, "deep cobalt"},
@@ -1207,8 +1207,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "marine green"},
 	},
 	0x40e0d0: {
-		{HTMLColours, "turquoise"},
 		{X11Colours, "turquoise"},
+		{HTMLColours, "turquoise"},
 	},
 	0x41354d: {
 		{PantoneColours, "purple velvet"},
@@ -1226,13 +1226,13 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "black forest"},
 	},
 	0x4169e1: {
-		{HTMLColours, "royalblue"},
-		{X11Colours, "royalblue"},
 		{X11Colours, "royal blue"},
+		{X11Colours, "royalblue"},
+		{HTMLColours, "royalblue"},
 	},
 	0x424242: {
-		{X11Colours, "grey26"},
 		{X11Colours, "gray26"},
+		{X11Colours, "grey26"},
 	},
 	0x426972: {
 		{PantoneColours, "hydro"},
@@ -1301,8 +1301,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "capri"},
 	},
 	0x454545: {
-		{X11Colours, "grey27"},
 		{X11Colours, "gray27"},
+		{X11Colours, "grey27"},
 	},
 	0x458b00: {
 		{X11Colours, "chartreuse4"},
@@ -1347,9 +1347,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "stellar"},
 	},
 	0x4682b4: {
-		{HTMLColours, "steelblue"},
 		{X11Colours, "steel blue"},
 		{X11Colours, "steelblue"},
+		{HTMLColours, "steelblue"},
 	},
 	0x47243b: {
 		{PantoneColours, "winter bloom"},
@@ -1389,9 +1389,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "crown jewel"},
 	},
 	0x483d8b: {
-		{HTMLColours, "darkslateblue"},
 		{X11Colours, "dark slate blue"},
 		{X11Colours, "darkslateblue"},
+		{HTMLColours, "darkslateblue"},
 	},
 	0x483f39: {
 		{PantoneColours, "turkish coffee"},
@@ -1418,9 +1418,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "mint green"},
 	},
 	0x48d1cc: {
-		{HTMLColours, "mediumturquoise"},
 		{X11Colours, "medium turquoise"},
 		{X11Colours, "mediumturquoise"},
+		{HTMLColours, "mediumturquoise"},
 	},
 	0x492a34: {
 		{PantoneColours, "winetasting"},
@@ -1660,8 +1660,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "pavement"},
 	},
 	0x525252: {
-		{X11Colours, "grey32"},
 		{X11Colours, "gray32"},
+		{X11Colours, "grey32"},
 	},
 	0x525f48: {
 		{PantoneColours, "bronze green"},
@@ -1764,9 +1764,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "dark forest"},
 	},
 	0x556b2f: {
-		{HTMLColours, "darkolivegreen"},
-		{X11Colours, "darkolivegreen"},
 		{X11Colours, "dark olive green"},
+		{X11Colours, "darkolivegreen"},
+		{HTMLColours, "darkolivegreen"},
 	},
 	0x558367: {
 		{PantoneColours, "deep grass green"},
@@ -1857,8 +1857,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "brown stone"},
 	},
 	0x595959: {
-		{X11Colours, "grey35"},
 		{X11Colours, "gray35"},
+		{X11Colours, "grey35"},
 	},
 	0x595f34: {
 		{PantoneColours, "pesto"},
@@ -1963,8 +1963,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "eiffel tower"},
 	},
 	0x5c5c5c: {
-		{X11Colours, "grey36"},
 		{X11Colours, "gray36"},
+		{X11Colours, "grey36"},
 	},
 	0x5c5d5b: {
 		{PantoneColours, "gunmetal"},
@@ -2064,9 +2064,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "vineyard green"},
 	},
 	0x5f9ea0: {
-		{HTMLColours, "cadetblue"},
-		{X11Colours, "cadetblue"},
 		{X11Colours, "cadet blue"},
+		{X11Colours, "cadetblue"},
+		{HTMLColours, "cadetblue"},
 	},
 	0x603535: {
 		{PantoneColours, "andorra"},
@@ -2120,8 +2120,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "granite gray"},
 	},
 	0x616161: {
-		{X11Colours, "grey38"},
 		{X11Colours, "gray38"},
+		{X11Colours, "grey38"},
 	},
 	0x616652: {
 		{PantoneColours, "four leaf clover"},
@@ -2227,9 +2227,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "arctic"},
 	},
 	0x6495ed: {
-		{HTMLColours, "cornflowerblue"},
 		{X11Colours, "cornflower blue"},
 		{X11Colours, "cornflowerblue"},
+		{HTMLColours, "cornflowerblue"},
 	},
 	0x649b9e: {
 		{PantoneColours, "dusty turquoise"},
@@ -2286,8 +2286,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "pewter"},
 	},
 	0x666666: {
-		{X11Colours, "grey40"},
 		{X11Colours, "gray40"},
+		{X11Colours, "grey40"},
 	},
 	0x66676d: {
 		{PantoneColours, "quiet shade"},
@@ -2308,10 +2308,10 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{X11Colours, "chartreuse3"},
 	},
 	0x66cdaa: {
-		{HTMLColours, "mediumaquamarine"},
 		{X11Colours, "aquamarine3"},
 		{X11Colours, "medium aquamarine"},
 		{X11Colours, "mediumaquamarine"},
+		{HTMLColours, "mediumaquamarine"},
 	},
 	0x674550: {
 		{PantoneColours, "plum wine"},
@@ -2392,14 +2392,14 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "bungee cord"},
 	},
 	0x696969: {
-		{HTMLColours, "dimgray"},
-		{HTMLColours, "dimgrey"},
-		{X11Colours, "gray41"},
+		{X11Colours, "dim gray"},
 		{X11Colours, "dim grey"},
 		{X11Colours, "dimgray"},
-		{X11Colours, "dim gray"},
-		{X11Colours, "grey41"},
 		{X11Colours, "dimgrey"},
+		{X11Colours, "gray41"},
+		{X11Colours, "grey41"},
+		{HTMLColours, "dimgray"},
+		{HTMLColours, "dimgrey"},
 	},
 	0x696ba0: {
 		{PantoneColours, "dusted peri"},
@@ -2435,9 +2435,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "coffee liqueur"},
 	},
 	0x6a5acd: {
-		{HTMLColours, "slateblue"},
-		{X11Colours, "slateblue"},
 		{X11Colours, "slate blue"},
+		{X11Colours, "slateblue"},
+		{HTMLColours, "slateblue"},
 	},
 	0x6a6378: {
 		{PantoneColours, "cadet"},
@@ -2471,9 +2471,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "forest green"},
 	},
 	0x6b8e23: {
-		{HTMLColours, "olivedrab"},
-		{X11Colours, "olivedrab"},
 		{X11Colours, "olive drab"},
+		{X11Colours, "olivedrab"},
+		{HTMLColours, "olivedrab"},
 	},
 	0x6baaae: {
 		{PantoneColours, "aqua sea"},
@@ -2634,12 +2634,12 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "iolite"},
 	},
 	0x708090: {
-		{HTMLColours, "slategray"},
-		{HTMLColours, "slategrey"},
 		{X11Colours, "slate gray"},
+		{X11Colours, "slate grey"},
 		{X11Colours, "slategray"},
 		{X11Colours, "slategrey"},
-		{X11Colours, "slate grey"},
+		{HTMLColours, "slategray"},
+		{HTMLColours, "slategrey"},
 	},
 	0x709a89: {
 		{PantoneColours, "malachite green"},
@@ -2848,12 +2848,12 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "grasshopper"},
 	},
 	0x778899: {
+		{X11Colours, "light slate gray"},
+		{X11Colours, "light slate grey"},
+		{X11Colours, "lightslategray"},
+		{X11Colours, "lightslategrey"},
 		{HTMLColours, "lightslategray"},
 		{HTMLColours, "lightslategrey"},
-		{X11Colours, "lightslategray"},
-		{X11Colours, "light slate grey"},
-		{X11Colours, "lightslategrey"},
-		{X11Colours, "light slate gray"},
 	},
 	0x77a276: {
 		{PantoneColours, "jadesheen"},
@@ -2877,8 +2877,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "storm front"},
 	},
 	0x787878: {
-		{X11Colours, "grey47"},
 		{X11Colours, "gray47"},
+		{X11Colours, "grey47"},
 	},
 	0x788f74: {
 		{PantoneColours, "loden frost"},
@@ -2938,8 +2938,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{X11Colours, "slateblue2"},
 	},
 	0x7a7a7a: {
-		{X11Colours, "grey48"},
 		{X11Colours, "gray48"},
+		{X11Colours, "grey48"},
 	},
 	0x7a898f: {
 		{PantoneColours, "lead"},
@@ -2972,9 +2972,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "deep taupe"},
 	},
 	0x7b68ee: {
-		{HTMLColours, "mediumslateblue"},
 		{X11Colours, "medium slate blue"},
 		{X11Colours, "mediumslateblue"},
+		{HTMLColours, "mediumslateblue"},
 	},
 	0x7b7f32: {
 		{PantoneColours, "woodbine"},
@@ -3028,9 +3028,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{X11Colours, "palegreen3"},
 	},
 	0x7cfc00: {
-		{HTMLColours, "lawngreen"},
 		{X11Colours, "lawn green"},
 		{X11Colours, "lawngreen"},
+		{HTMLColours, "lawngreen"},
 	},
 	0x7d2027: {
 		{PantoneColours, "red dahlia"},
@@ -3091,8 +3091,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "silver filigree"},
 	},
 	0x7f7f7f: {
-		{X11Colours, "grey50"},
 		{X11Colours, "gray50"},
+		{X11Colours, "grey50"},
 	},
 	0x7f8793: {
 		{PantoneColours, "tradewinds"},
@@ -3101,14 +3101,14 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "neptune green"},
 	},
 	0x7fff00: {
-		{HTMLColours, "chartreuse"},
 		{X11Colours, "chartreuse"},
 		{X11Colours, "chartreuse1"},
+		{HTMLColours, "chartreuse"},
 	},
 	0x7fffd4: {
-		{HTMLColours, "aquamarine"},
-		{X11Colours, "aquamarine1"},
 		{X11Colours, "aquamarine"},
+		{X11Colours, "aquamarine1"},
+		{HTMLColours, "aquamarine"},
 	},
 	0x800000: {
 		{WebColours, "maroon"},
@@ -3170,8 +3170,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 	0x808080: {
 		{WebColours, "gray"},
 		{WebColours, "grey"},
-		{CGAColours, "dark grey"},
 		{CGAColours, "dark gray"},
+		{CGAColours, "dark grey"},
 		{HTMLColours, "gray"},
 		{HTMLColours, "grey"},
 	},
@@ -3242,8 +3242,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "steeple gray"},
 	},
 	0x828282: {
-		{X11Colours, "grey51"},
 		{X11Colours, "gray51"},
+		{X11Colours, "grey51"},
 	},
 	0x829ca5: {
 		{PantoneColours, "stone blue"},
@@ -3300,8 +3300,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "apple butter"},
 	},
 	0x8470ff: {
-		{X11Colours, "lightslateblue"},
 		{X11Colours, "light slate blue"},
+		{X11Colours, "lightslateblue"},
 	},
 	0x847986: {
 		{PantoneColours, "gray ridge"},
@@ -3352,8 +3352,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "green moss"},
 	},
 	0x858585: {
-		{X11Colours, "grey52"},
 		{X11Colours, "gray52"},
+		{X11Colours, "grey52"},
 	},
 	0x858961: {
 		{PantoneColours, "mosstone"},
@@ -3395,8 +3395,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "clove"},
 	},
 	0x878787: {
-		{X11Colours, "grey53"},
 		{X11Colours, "gray53"},
+		{X11Colours, "grey53"},
 	},
 	0x879ba3: {
 		{PantoneColours, "arona"},
@@ -3411,14 +3411,14 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "petit four"},
 	},
 	0x87ceeb: {
-		{HTMLColours, "skyblue"},
-		{X11Colours, "skyblue"},
 		{X11Colours, "sky blue"},
+		{X11Colours, "skyblue"},
+		{HTMLColours, "skyblue"},
 	},
 	0x87cefa: {
-		{HTMLColours, "lightskyblue"},
-		{X11Colours, "lightskyblue"},
 		{X11Colours, "light sky blue"},
+		{X11Colours, "lightskyblue"},
+		{HTMLColours, "lightskyblue"},
 	},
 	0x87ceff: {
 		{X11Colours, "skyblue1"},
@@ -3484,9 +3484,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "rio red"},
 	},
 	0x8a2be2: {
-		{HTMLColours, "blueviolet"},
 		{X11Colours, "blue violet"},
 		{X11Colours, "blueviolet"},
+		{HTMLColours, "blueviolet"},
 	},
 	0x8a3371: {
 		{PantoneColours, "clover"},
@@ -3520,16 +3520,16 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "sky blue"},
 	},
 	0x8b0000: {
-		{HTMLColours, "darkred"},
-		{X11Colours, "darkred"},
 		{X11Colours, "dark red"},
+		{X11Colours, "darkred"},
 		{X11Colours, "red4"},
+		{HTMLColours, "darkred"},
 	},
 	0x8b008b: {
-		{HTMLColours, "darkmagenta"},
-		{X11Colours, "magenta4"},
 		{X11Colours, "dark magenta"},
 		{X11Colours, "darkmagenta"},
+		{X11Colours, "magenta4"},
+		{HTMLColours, "darkmagenta"},
 	},
 	0x8b0a50: {
 		{X11Colours, "deeppink4"},
@@ -3565,10 +3565,10 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{X11Colours, "darkorange4"},
 	},
 	0x8b4513: {
-		{HTMLColours, "saddlebrown"},
-		{X11Colours, "saddlebrown"},
 		{X11Colours, "chocolate4"},
 		{X11Colours, "saddle brown"},
+		{X11Colours, "saddlebrown"},
+		{HTMLColours, "saddlebrown"},
 	},
 	0x8b4726: {
 		{X11Colours, "sienna4"},
@@ -3812,16 +3812,16 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "elephant skin"},
 	},
 	0x8f8f8f: {
-		{X11Colours, "grey56"},
 		{X11Colours, "gray56"},
+		{X11Colours, "grey56"},
 	},
 	0x8f9e9d: {
 		{PantoneColours, "abyss"},
 	},
 	0x8fbc8f: {
-		{HTMLColours, "darkseagreen"},
 		{X11Colours, "dark sea green"},
 		{X11Colours, "darkseagreen"},
+		{HTMLColours, "darkseagreen"},
 	},
 	0x903f75: {
 		{PantoneColours, "deep orchid"},
@@ -3836,10 +3836,10 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "blue surf"},
 	},
 	0x90ee90: {
-		{HTMLColours, "lightgreen"},
 		{X11Colours, "light green"},
 		{X11Colours, "lightgreen"},
 		{X11Colours, "palegreen2"},
+		{HTMLColours, "lightgreen"},
 	},
 	0x912cee: {
 		{X11Colours, "purple2"},
@@ -3869,8 +3869,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "gull"},
 	},
 	0x919191: {
-		{X11Colours, "grey57"},
 		{X11Colours, "gray57"},
+		{X11Colours, "grey57"},
 	},
 	0x91946e: {
 		{PantoneColours, "sage"},
@@ -3942,9 +3942,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "hyacinth"},
 	},
 	0x9370db: {
-		{HTMLColours, "mediumpurple"},
-		{X11Colours, "mediumpurple"},
 		{X11Colours, "medium purple"},
+		{X11Colours, "mediumpurple"},
+		{HTMLColours, "mediumpurple"},
 	},
 	0x937b6a: {
 		{PantoneColours, "portabella"},
@@ -3959,9 +3959,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "blue bell"},
 	},
 	0x9400d3: {
-		{HTMLColours, "darkviolet"},
 		{X11Colours, "dark violet"},
 		{X11Colours, "darkviolet"},
+		{HTMLColours, "darkviolet"},
 	},
 	0x941e32: {
 		{PantoneColours, "scooter"},
@@ -3979,8 +3979,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "wistful mauve"},
 	},
 	0x947764: {
-		{PantoneColours, "woodsmoke"},
 		{PantoneColours, "burro"},
+		{PantoneColours, "woodsmoke"},
 	},
 	0x9479af: {
 		{PantoneColours, "fairy wren"},
@@ -3995,8 +3995,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "mourning dove"},
 	},
 	0x949494: {
-		{X11Colours, "grey58"},
 		{X11Colours, "gray58"},
+		{X11Colours, "grey58"},
 	},
 	0x9499bb: {
 		{PantoneColours, "thistle down"},
@@ -4150,14 +4150,14 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{X11Colours, "cadetblue1"},
 	},
 	0x98fb98: {
-		{HTMLColours, "palegreen"},
-		{X11Colours, "palegreen"},
 		{X11Colours, "pale green"},
+		{X11Colours, "palegreen"},
+		{HTMLColours, "palegreen"},
 	},
 	0x9932cc: {
-		{HTMLColours, "darkorchid"},
 		{X11Colours, "dark orchid"},
 		{X11Colours, "darkorchid"},
+		{HTMLColours, "darkorchid"},
 	},
 	0x993c7c: {
 		{PantoneColours, "vivid viola"},
@@ -4242,10 +4242,10 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{X11Colours, "lightblue3"},
 	},
 	0x9acd32: {
-		{HTMLColours, "yellowgreen"},
 		{X11Colours, "olivedrab3"},
-		{X11Colours, "yellowgreen"},
 		{X11Colours, "yellow green"},
+		{X11Colours, "yellowgreen"},
+		{HTMLColours, "yellowgreen"},
 	},
 	0x9aff9a: {
 		{X11Colours, "palegreen1"},
@@ -4421,8 +4421,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{X11Colours, "purple"},
 	},
 	0xa0522d: {
-		{HTMLColours, "sienna"},
 		{X11Colours, "sienna"},
+		{HTMLColours, "sienna"},
 	},
 	0xa05c17: {
 		{PantoneColours, "pumpkin spice"},
@@ -4482,8 +4482,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "silver sconce"},
 	},
 	0xa1a1a1: {
-		{X11Colours, "grey63"},
 		{X11Colours, "gray63"},
+		{X11Colours, "grey63"},
 	},
 	0xa1ad92: {
 		{PantoneColours, "reseda"},
@@ -4564,8 +4564,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "oasis"},
 	},
 	0xa3a3a3: {
-		{X11Colours, "grey64"},
 		{X11Colours, "gray64"},
+		{X11Colours, "grey64"},
 	},
 	0xa3a969: {
 		{PantoneColours, "sweet pea"},
@@ -4640,8 +4640,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "granita"},
 	},
 	0xa52a2a: {
-		{HTMLColours, "brown"},
 		{X11Colours, "brown"},
+		{HTMLColours, "brown"},
 	},
 	0xa58d7f: {
 		{PantoneColours, "stucco"},
@@ -4753,8 +4753,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "atmosphere"},
 	},
 	0xa8a8a8: {
-		{X11Colours, "grey66"},
 		{X11Colours, "gray66"},
+		{X11Colours, "grey66"},
 	},
 	0xa8b0ae: {
 		{PantoneColours, "puritan gray"},
@@ -4784,12 +4784,12 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "bark"},
 	},
 	0xa9a9a9: {
-		{HTMLColours, "darkgrey"},
-		{HTMLColours, "darkgray"},
+		{X11Colours, "dark gray"},
 		{X11Colours, "dark grey"},
 		{X11Colours, "darkgray"},
 		{X11Colours, "darkgrey"},
-		{X11Colours, "dark gray"},
+		{HTMLColours, "darkgray"},
+		{HTMLColours, "darkgrey"},
 	},
 	0xa9adc2: {
 		{PantoneColours, "icelandic blue"},
@@ -4916,8 +4916,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "pure cashmere"},
 	},
 	0xadadad: {
-		{X11Colours, "grey68"},
 		{X11Colours, "gray68"},
+		{X11Colours, "grey68"},
 	},
 	0xadbba1: {
 		{PantoneColours, "laurel green"},
@@ -4929,14 +4929,14 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "aqua foam"},
 	},
 	0xadd8e6: {
-		{HTMLColours, "lightblue"},
-		{X11Colours, "lightblue"},
 		{X11Colours, "light blue"},
+		{X11Colours, "lightblue"},
+		{HTMLColours, "lightblue"},
 	},
 	0xadff2f: {
-		{HTMLColours, "greenyellow"},
-		{X11Colours, "greenyellow"},
 		{X11Colours, "green yellow"},
+		{X11Colours, "greenyellow"},
+		{HTMLColours, "greenyellow"},
 	},
 	0xae0e36: {
 		{PantoneColours, "crimson"},
@@ -5011,9 +5011,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "brook green"},
 	},
 	0xafeeee: {
-		{HTMLColours, "paleturquoise"},
 		{X11Colours, "pale turquoise"},
 		{X11Colours, "paleturquoise"},
+		{HTMLColours, "paleturquoise"},
 	},
 	0xb03060: {
 		{X11Colours, "maroon"},
@@ -5062,9 +5062,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "pearl blue"},
 	},
 	0xb0c4de: {
-		{HTMLColours, "lightsteelblue"},
-		{X11Colours, "lightsteelblue"},
 		{X11Colours, "light steel blue"},
+		{X11Colours, "lightsteelblue"},
+		{HTMLColours, "lightsteelblue"},
 	},
 	0xb0c965: {
 		{PantoneColours, "green glow"},
@@ -5073,9 +5073,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "icy morn"},
 	},
 	0xb0e0e6: {
-		{HTMLColours, "powderblue"},
 		{X11Colours, "powder blue"},
 		{X11Colours, "powderblue"},
+		{HTMLColours, "powderblue"},
 	},
 	0xb0e2ff: {
 		{X11Colours, "lightskyblue1"},
@@ -5108,8 +5108,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "jalapeno red"},
 	},
 	0xb22222: {
-		{HTMLColours, "firebrick"},
 		{X11Colours, "firebrick"},
+		{HTMLColours, "firebrick"},
 	},
 	0xb23aee: {
 		{X11Colours, "darkorchid2"},
@@ -5166,8 +5166,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "weeping willow"},
 	},
 	0xb3b3b3: {
-		{X11Colours, "grey70"},
 		{X11Colours, "gray70"},
+		{X11Colours, "grey70"},
 	},
 	0xb3ee3a: {
 		{X11Colours, "olivedrab2"},
@@ -5245,8 +5245,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "pale olive green"},
 	},
 	0xb5b5b5: {
-		{X11Colours, "grey71"},
 		{X11Colours, "gray71"},
+		{X11Colours, "grey71"},
 	},
 	0xb5b644: {
 		{PantoneColours, "apple green"},
@@ -5345,9 +5345,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "sea foam"},
 	},
 	0xb8860b: {
-		{HTMLColours, "darkgoldenrod"},
 		{X11Colours, "dark goldenrod"},
 		{X11Colours, "darkgoldenrod"},
+		{HTMLColours, "darkgoldenrod"},
 	},
 	0xb88995: {
 		{PantoneColours, "lilas"},
@@ -5368,8 +5368,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "citronelle"},
 	},
 	0xb8b8b8: {
-		{X11Colours, "grey72"},
 		{X11Colours, "gray72"},
+		{X11Colours, "grey72"},
 	},
 	0xb8ccba: {
 		{PantoneColours, "celadon"},
@@ -5426,9 +5426,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "lychee"},
 	},
 	0xba55d3: {
-		{HTMLColours, "mediumorchid"},
 		{X11Colours, "medium orchid"},
 		{X11Colours, "mediumorchid"},
+		{HTMLColours, "mediumorchid"},
 	},
 	0xba69a1: {
 		{PantoneColours, "spring crocus"},
@@ -5540,9 +5540,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "arrowwood"},
 	},
 	0xbc8f8f: {
-		{HTMLColours, "rosybrown"},
 		{X11Colours, "rosy brown"},
 		{X11Colours, "rosybrown"},
+		{HTMLColours, "rosybrown"},
 	},
 	0xbca4cb: {
 		{PantoneColours, "lavendula"},
@@ -5617,16 +5617,16 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "silver lining"},
 	},
 	0xbdb76b: {
-		{HTMLColours, "darkkhaki"},
 		{X11Colours, "dark khaki"},
 		{X11Colours, "darkkhaki"},
+		{HTMLColours, "darkkhaki"},
 	},
 	0xbdb8c7: {
 		{PantoneColours, "evening haze"},
 	},
 	0xbdbdbd: {
-		{X11Colours, "grey74"},
 		{X11Colours, "gray74"},
+		{X11Colours, "grey74"},
 	},
 	0xbdc6dc: {
 		{PantoneColours, "halogen blue"},
@@ -5665,8 +5665,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "vapor blue"},
 	},
 	0xbebebe: {
-		{X11Colours, "grey"},
 		{X11Colours, "gray"},
+		{X11Colours, "grey"},
 	},
 	0xbed38e: {
 		{PantoneColours, "lettuce green"},
@@ -5761,8 +5761,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 	},
 	0xc0c0c0: {
 		{WebColours, "silver"},
-		{CGAColours, "light grey"},
 		{CGAColours, "light gray"},
+		{CGAColours, "light grey"},
 		{HTMLColours, "silver"},
 	},
 	0xc0cba1: {
@@ -5926,8 +5926,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "linden green"},
 	},
 	0xc4c4c4: {
-		{X11Colours, "grey77"},
 		{X11Colours, "gray77"},
+		{X11Colours, "grey77"},
 	},
 	0xc4d1c2: {
 		{PantoneColours, "dewkist"},
@@ -6032,9 +6032,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "sharp green"},
 	},
 	0xc71585: {
-		{HTMLColours, "mediumvioletred"},
 		{X11Colours, "medium violet red"},
 		{X11Colours, "mediumvioletred"},
+		{HTMLColours, "mediumvioletred"},
 	},
 	0xc71f2d: {
 		{PantoneColours, "high risk red"},
@@ -6274,9 +6274,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{X11Colours, "coral3"},
 	},
 	0xcd5c5c: {
-		{HTMLColours, "indianred"},
 		{X11Colours, "indian red"},
 		{X11Colours, "indianred"},
+		{HTMLColours, "indianred"},
 	},
 	0xcd6090: {
 		{X11Colours, "hotpink3"},
@@ -6309,9 +6309,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{X11Colours, "orange3"},
 	},
 	0xcd853f: {
-		{HTMLColours, "peru"},
 		{X11Colours, "peru"},
 		{X11Colours, "tan3"},
+		{HTMLColours, "peru"},
 	},
 	0xcd8c95: {
 		{X11Colours, "lightpink3"},
@@ -6482,8 +6482,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "rainy day"},
 	},
 	0xcfcfcf: {
-		{X11Colours, "grey81"},
 		{X11Colours, "gray81"},
+		{X11Colours, "grey81"},
 	},
 	0xcfdbd1: {
 		{PantoneColours, "milky green"},
@@ -6568,8 +6568,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "muted lime"},
 	},
 	0xd1d1d1: {
-		{X11Colours, "grey82"},
 		{X11Colours, "gray82"},
+		{X11Colours, "grey82"},
 	},
 	0xd1d5d0: {
 		{PantoneColours, "foggy dew"},
@@ -6584,8 +6584,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "magenta"},
 	},
 	0xd2691e: {
-		{HTMLColours, "chocolate"},
 		{X11Colours, "chocolate"},
+		{HTMLColours, "chocolate"},
 	},
 	0xd2738f: {
 		{PantoneColours, "chateau rose"},
@@ -6615,8 +6615,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "bamboo"},
 	},
 	0xd2b48c: {
-		{HTMLColours, "tan"},
 		{X11Colours, "tan"},
+		{HTMLColours, "tan"},
 	},
 	0xd2b49c: {
 		{PantoneColours, "toasted almond"},
@@ -6685,12 +6685,12 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "hay"},
 	},
 	0xd3d3d3: {
-		{HTMLColours, "lightgrey"},
-		{HTMLColours, "lightgray"},
-		{X11Colours, "lightgray"},
 		{X11Colours, "light gray"},
-		{X11Colours, "lightgrey"},
 		{X11Colours, "light grey"},
+		{X11Colours, "lightgray"},
+		{X11Colours, "lightgrey"},
+		{HTMLColours, "lightgray"},
+		{HTMLColours, "lightgrey"},
 	},
 	0xd3d95f: {
 		{PantoneColours, "limeade"},
@@ -6726,8 +6726,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "dusty yellow"},
 	},
 	0xd4d4d4: {
-		{X11Colours, "grey83"},
 		{X11Colours, "gray83"},
+		{X11Colours, "grey83"},
 	},
 	0xd4dbb2: {
 		{PantoneColours, "white jade"},
@@ -6836,8 +6836,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "mellow buff"},
 	},
 	0xd8bfd8: {
-		{HTMLColours, "thistle"},
 		{X11Colours, "thistle"},
+		{HTMLColours, "thistle"},
 	},
 	0xd8c09d: {
 		{PantoneColours, "marzipan"},
@@ -6907,15 +6907,15 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "geranium"},
 	},
 	0xda70d6: {
-		{HTMLColours, "orchid"},
 		{X11Colours, "orchid"},
+		{HTMLColours, "orchid"},
 	},
 	0xda7e7a: {
 		{PantoneColours, "lantana"},
 	},
 	0xdaa520: {
-		{HTMLColours, "goldenrod"},
 		{X11Colours, "goldenrod"},
+		{HTMLColours, "goldenrod"},
 	},
 	0xdab58f: {
 		{PantoneColours, "sheepskin"},
@@ -6954,9 +6954,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "icicle"},
 	},
 	0xdb7093: {
-		{HTMLColours, "palevioletred"},
-		{X11Colours, "palevioletred"},
 		{X11Colours, "pale violet red"},
+		{X11Colours, "palevioletred"},
+		{HTMLColours, "palevioletred"},
 	},
 	0xdb9b59: {
 		{PantoneColours, "golden nugget"},
@@ -7026,8 +7026,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "garden glade"},
 	},
 	0xdcdcdc: {
-		{HTMLColours, "gainsboro"},
 		{X11Colours, "gainsboro"},
+		{HTMLColours, "gainsboro"},
 	},
 	0xdce4d7: {
 		{PantoneColours, "phantom green"},
@@ -7051,8 +7051,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "gold earth"},
 	},
 	0xdda0dd: {
-		{HTMLColours, "plum"},
 		{X11Colours, "plum"},
+		{HTMLColours, "plum"},
 	},
 	0xdda758: {
 		{PantoneColours, "golden apricot"},
@@ -7097,8 +7097,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "dusty pink"},
 	},
 	0xdeb887: {
-		{HTMLColours, "burlywood"},
 		{X11Colours, "burlywood"},
+		{HTMLColours, "burlywood"},
 	},
 	0xdec05f: {
 		{PantoneColours, "cream gold"},
@@ -7116,8 +7116,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "turtledove"},
 	},
 	0xdedede: {
-		{X11Colours, "grey87"},
 		{X11Colours, "gray87"},
+		{X11Colours, "grey87"},
 	},
 	0xdf3f32: {
 		{PantoneColours, "grenadine"},
@@ -7198,8 +7198,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "whitecap gray"},
 	},
 	0xe0e0e0: {
-		{X11Colours, "grey88"},
 		{X11Colours, "gray88"},
+		{X11Colours, "grey88"},
 	},
 	0xe0e4d9: {
 		{PantoneColours, "ice"},
@@ -7214,10 +7214,10 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{X11Colours, "azure2"},
 	},
 	0xe0ffff: {
-		{HTMLColours, "lightcyan"},
+		{X11Colours, "light cyan"},
 		{X11Colours, "lightcyan"},
 		{X11Colours, "lightcyan1"},
-		{X11Colours, "light cyan"},
+		{HTMLColours, "lightcyan"},
 	},
 	0xe1927a: {
 		{PantoneColours, "canyon sunset"},
@@ -7393,8 +7393,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "cloud cream"},
 	},
 	0xe6e6fa: {
-		{HTMLColours, "lavender"},
 		{X11Colours, "lavender"},
+		{HTMLColours, "lavender"},
 	},
 	0xe74a33: {
 		{PantoneColours, "mandarin red"},
@@ -7467,9 +7467,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "burnt coral"},
 	},
 	0xe9967a: {
-		{HTMLColours, "darksalmon"},
 		{X11Colours, "dark salmon"},
 		{X11Colours, "darksalmon"},
+		{HTMLColours, "darksalmon"},
 	},
 	0xe9adca: {
 		{PantoneColours, "lilac sachet"},
@@ -7629,8 +7629,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "tender yellow"},
 	},
 	0xededed: {
-		{X11Colours, "grey93"},
 		{X11Colours, "gray93"},
+		{X11Colours, "grey93"},
 	},
 	0xedf1fe: {
 		{PantoneColours, "brilliant white"},
@@ -7699,8 +7699,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{X11Colours, "salmon2"},
 	},
 	0xee82ee: {
-		{HTMLColours, "violet"},
 		{X11Colours, "violet"},
+		{HTMLColours, "violet"},
 	},
 	0xee9572: {
 		{X11Colours, "lightsalmon2"},
@@ -7775,8 +7775,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{X11Colours, "lightgoldenrod2"},
 	},
 	0xeedd82: {
-		{X11Colours, "lightgoldenrod"},
 		{X11Colours, "light goldenrod"},
+		{X11Colours, "lightgoldenrod"},
 	},
 	0xeeded1: {
 		{PantoneColours, "dew"},
@@ -7800,9 +7800,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "yellow iris"},
 	},
 	0xeee8aa: {
-		{HTMLColours, "palegoldenrod"},
-		{X11Colours, "palegoldenrod"},
 		{X11Colours, "pale goldenrod"},
+		{X11Colours, "palegoldenrod"},
+		{HTMLColours, "palegoldenrod"},
 	},
 	0xeee8cd: {
 		{X11Colours, "cornsilk2"},
@@ -7859,9 +7859,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "red orange"},
 	},
 	0xf08080: {
-		{HTMLColours, "lightcoral"},
 		{X11Colours, "light coral"},
 		{X11Colours, "lightcoral"},
+		{HTMLColours, "lightcoral"},
 	},
 	0xf0a1bf: {
 		{PantoneColours, "prism pink"},
@@ -7882,8 +7882,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "pearled ivory"},
 	},
 	0xf0e68c: {
-		{HTMLColours, "khaki"},
 		{X11Colours, "khaki"},
+		{HTMLColours, "khaki"},
 	},
 	0xf0e79d: {
 		{PantoneColours, "lemonade"},
@@ -7914,19 +7914,19 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{X11Colours, "grey94"},
 	},
 	0xf0f8ff: {
-		{HTMLColours, "aliceblue"},
 		{X11Colours, "alice blue"},
 		{X11Colours, "aliceblue"},
+		{HTMLColours, "aliceblue"},
 	},
 	0xf0fff0: {
-		{HTMLColours, "honeydew"},
-		{X11Colours, "honeydew1"},
 		{X11Colours, "honeydew"},
+		{X11Colours, "honeydew1"},
+		{HTMLColours, "honeydew"},
 	},
 	0xf0ffff: {
-		{HTMLColours, "azure"},
 		{X11Colours, "azure"},
 		{X11Colours, "azure1"},
+		{HTMLColours, "azure"},
 	},
 	0xf18aad: {
 		{PantoneColours, "sachet pink"},
@@ -7995,8 +7995,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "snow white"},
 	},
 	0xf2f2f2: {
-		{X11Colours, "grey95"},
 		{X11Colours, "gray95"},
+		{X11Colours, "grey95"},
 	},
 	0xf35b53: {
 		{PantoneColours, "hot coral"},
@@ -8065,9 +8065,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "iceland poppy"},
 	},
 	0xf4a460: {
-		{HTMLColours, "sandybrown"},
-		{X11Colours, "sandybrown"},
 		{X11Colours, "sandy brown"},
+		{X11Colours, "sandybrown"},
+		{HTMLColours, "sandybrown"},
 	},
 	0xf4ba94: {
 		{PantoneColours, "caramel cream"},
@@ -8145,8 +8145,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "apricot gelato"},
 	},
 	0xf5deb3: {
-		{HTMLColours, "wheat"},
 		{X11Colours, "wheat"},
+		{HTMLColours, "wheat"},
 	},
 	0xf5e3e2: {
 		{PantoneColours, "delicacy"},
@@ -8158,20 +8158,20 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "papyrus"},
 	},
 	0xf5f5dc: {
-		{HTMLColours, "beige"},
 		{X11Colours, "beige"},
+		{HTMLColours, "beige"},
 	},
 	0xf5f5f5: {
-		{HTMLColours, "whitesmoke"},
 		{X11Colours, "gray96"},
 		{X11Colours, "grey96"},
-		{X11Colours, "whitesmoke"},
 		{X11Colours, "white smoke"},
+		{X11Colours, "whitesmoke"},
+		{HTMLColours, "whitesmoke"},
 	},
 	0xf5fffa: {
-		{HTMLColours, "mintcream"},
 		{X11Colours, "mint cream"},
 		{X11Colours, "mintcream"},
+		{HTMLColours, "mintcream"},
 	},
 	0xf6745f: {
 		{PantoneColours, "camellia"},
@@ -8249,8 +8249,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "creole pink"},
 	},
 	0xf7f7f7: {
-		{X11Colours, "grey97"},
 		{X11Colours, "gray97"},
+		{X11Colours, "grey97"},
 	},
 	0xf88180: {
 		{PantoneColours, "shell pink"},
@@ -8289,9 +8289,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "rose water"},
 	},
 	0xf8f8ff: {
-		{HTMLColours, "ghostwhite"},
-		{X11Colours, "ghostwhite"},
 		{X11Colours, "ghost white"},
+		{X11Colours, "ghostwhite"},
+		{HTMLColours, "ghostwhite"},
 	},
 	0xf9633b: {
 		{PantoneColours, "vermillion orange"},
@@ -8327,8 +8327,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "orange peel"},
 	},
 	0xfa8072: {
-		{HTMLColours, "salmon"},
 		{X11Colours, "salmon"},
+		{HTMLColours, "salmon"},
 	},
 	0xfa9a85: {
 		{PantoneColours, "peach pink"},
@@ -8364,22 +8364,22 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "pale banana"},
 	},
 	0xfaebd7: {
-		{HTMLColours, "antiquewhite"},
 		{X11Colours, "antique white"},
 		{X11Colours, "antiquewhite"},
+		{HTMLColours, "antiquewhite"},
 	},
 	0xfaf0e6: {
-		{HTMLColours, "linen"},
 		{X11Colours, "linen"},
+		{HTMLColours, "linen"},
 	},
 	0xfafad2: {
-		{HTMLColours, "lightgoldenrodyellow"},
-		{X11Colours, "lightgoldenrodyellow"},
 		{X11Colours, "light goldenrod yellow"},
+		{X11Colours, "lightgoldenrodyellow"},
+		{HTMLColours, "lightgoldenrodyellow"},
 	},
 	0xfafafa: {
-		{X11Colours, "grey98"},
 		{X11Colours, "gray98"},
+		{X11Colours, "grey98"},
 	},
 	0xfb8b23: {
 		{PantoneColours, "flame orange"},
@@ -8452,9 +8452,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "lemon drop"},
 	},
 	0xfdf5e6: {
-		{HTMLColours, "oldlace"},
-		{X11Colours, "oldlace"},
 		{X11Colours, "old lace"},
+		{X11Colours, "oldlace"},
+		{HTMLColours, "oldlace"},
 	},
 	0xfe6347: {
 		{PantoneColours, "nasturtium"},
@@ -8498,24 +8498,24 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 	0xff0000: {
 		{WebColours, "red"},
 		{CGAColours, "high red"},
-		{HTMLColours, "red"},
 		{X11Colours, "red"},
 		{X11Colours, "red1"},
+		{HTMLColours, "red"},
 	},
 	0xff00ff: {
 		{WebColours, "fuchsia"},
 		{CGAColours, "high magenta"},
 		{CGAColours, "magenta"},
-		{HTMLColours, "magenta"},
-		{HTMLColours, "fuchsia"},
-		{X11Colours, "magenta1"},
 		{X11Colours, "magenta"},
+		{X11Colours, "magenta1"},
+		{HTMLColours, "fuchsia"},
+		{HTMLColours, "magenta"},
 	},
 	0xff1493: {
-		{HTMLColours, "deeppink"},
-		{X11Colours, "deeppink1"},
-		{X11Colours, "deeppink"},
 		{X11Colours, "deep pink"},
+		{X11Colours, "deeppink"},
+		{X11Colours, "deeppink1"},
+		{HTMLColours, "deeppink"},
 	},
 	0xff3030: {
 		{X11Colours, "firebrick1"},
@@ -8530,20 +8530,20 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{X11Colours, "brown1"},
 	},
 	0xff4500: {
-		{HTMLColours, "orangered"},
+		{X11Colours, "orange red"},
 		{X11Colours, "orangered"},
 		{X11Colours, "orangered1"},
-		{X11Colours, "orange red"},
+		{HTMLColours, "orangered"},
 	},
 	0xff6347: {
-		{HTMLColours, "tomato"},
-		{X11Colours, "tomato1"},
 		{X11Colours, "tomato"},
+		{X11Colours, "tomato1"},
+		{HTMLColours, "tomato"},
 	},
 	0xff69b4: {
-		{HTMLColours, "hotpink"},
-		{X11Colours, "hotpink"},
 		{X11Colours, "hot pink"},
+		{X11Colours, "hotpink"},
+		{HTMLColours, "hotpink"},
 	},
 	0xff6a6a: {
 		{X11Colours, "indianred1"},
@@ -8570,8 +8570,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{X11Colours, "chocolate1"},
 	},
 	0xff7f50: {
-		{HTMLColours, "coral"},
 		{X11Colours, "coral"},
+		{HTMLColours, "coral"},
 	},
 	0xff7f6a: {
 		{PantoneColours, "fresh salmon"},
@@ -8595,9 +8595,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "autumn glory"},
 	},
 	0xff8c00: {
-		{HTMLColours, "darkorange"},
-		{X11Colours, "darkorange"},
 		{X11Colours, "dark orange"},
+		{X11Colours, "darkorange"},
+		{HTMLColours, "darkorange"},
 	},
 	0xff8c55: {
 		{PantoneColours, "bird of paradise"},
@@ -8618,10 +8618,10 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "zinnia"},
 	},
 	0xffa07a: {
-		{HTMLColours, "lightsalmon"},
-		{X11Colours, "lightsalmon1"},
 		{X11Colours, "light salmon"},
 		{X11Colours, "lightsalmon"},
+		{X11Colours, "lightsalmon1"},
+		{HTMLColours, "lightsalmon"},
 	},
 	0xffa177: {
 		{PantoneColours, "cantaloupe"},
@@ -8630,9 +8630,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "mock orange"},
 	},
 	0xffa500: {
-		{HTMLColours, "orange"},
-		{X11Colours, "orange1"},
 		{X11Colours, "orange"},
+		{X11Colours, "orange1"},
+		{HTMLColours, "orange"},
 		{PantoneColours, "saffron"},
 	},
 	0xffa54f: {
@@ -8660,9 +8660,9 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{X11Colours, "pink1"},
 	},
 	0xffb6c1: {
-		{HTMLColours, "lightpink"},
 		{X11Colours, "light pink"},
 		{X11Colours, "lightpink"},
+		{HTMLColours, "lightpink"},
 	},
 	0xffb865: {
 		{PantoneColours, "warm apricot"},
@@ -8683,8 +8683,8 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "peach fuzz"},
 	},
 	0xffc0cb: {
-		{HTMLColours, "pink"},
 		{X11Colours, "pink"},
+		{HTMLColours, "pink"},
 	},
 	0xffc125: {
 		{X11Colours, "goldenrod1"},
@@ -8726,122 +8726,122 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "aspen gold"},
 	},
 	0xffd700: {
-		{HTMLColours, "gold"},
 		{X11Colours, "gold"},
 		{X11Colours, "gold1"},
+		{HTMLColours, "gold"},
 	},
 	0xffda29: {
 		{PantoneColours, "vibrant yellow"},
 	},
 	0xffdab9: {
-		{HTMLColours, "peachpuff"},
-		{X11Colours, "peachpuff"},
 		{X11Colours, "peach puff"},
+		{X11Colours, "peachpuff"},
 		{X11Colours, "peachpuff1"},
+		{HTMLColours, "peachpuff"},
 	},
 	0xffdead: {
-		{HTMLColours, "navajowhite"},
-		{X11Colours, "navajowhite1"},
-		{X11Colours, "navajowhite"},
 		{X11Colours, "navajo white"},
+		{X11Colours, "navajowhite"},
+		{X11Colours, "navajowhite1"},
+		{HTMLColours, "navajowhite"},
 	},
 	0xffe1ff: {
 		{X11Colours, "thistle1"},
 	},
 	0xffe4b5: {
-		{HTMLColours, "moccasin"},
 		{X11Colours, "moccasin"},
+		{HTMLColours, "moccasin"},
 	},
 	0xffe4c4: {
-		{HTMLColours, "bisque"},
 		{X11Colours, "bisque"},
 		{X11Colours, "bisque1"},
+		{HTMLColours, "bisque"},
 	},
 	0xffe4e1: {
-		{HTMLColours, "mistyrose"},
-		{X11Colours, "mistyrose1"},
-		{X11Colours, "mistyrose"},
 		{X11Colours, "misty rose"},
+		{X11Colours, "mistyrose"},
+		{X11Colours, "mistyrose1"},
+		{HTMLColours, "mistyrose"},
 	},
 	0xffe7ba: {
 		{X11Colours, "wheat1"},
 	},
 	0xffebcd: {
-		{HTMLColours, "blanchedalmond"},
 		{X11Colours, "blanched almond"},
 		{X11Colours, "blanchedalmond"},
+		{HTMLColours, "blanchedalmond"},
 	},
 	0xffec8b: {
 		{X11Colours, "lightgoldenrod1"},
 	},
 	0xffefd5: {
-		{HTMLColours, "papayawhip"},
 		{X11Colours, "papaya whip"},
 		{X11Colours, "papayawhip"},
+		{HTMLColours, "papayawhip"},
 	},
 	0xffefdb: {
 		{X11Colours, "antiquewhite1"},
 	},
 	0xfff0f5: {
-		{HTMLColours, "lavenderblush"},
 		{X11Colours, "lavender blush"},
 		{X11Colours, "lavenderblush"},
 		{X11Colours, "lavenderblush1"},
+		{HTMLColours, "lavenderblush"},
 	},
 	0xfff5ee: {
-		{HTMLColours, "seashell"},
-		{X11Colours, "seashell1"},
 		{X11Colours, "seashell"},
+		{X11Colours, "seashell1"},
+		{HTMLColours, "seashell"},
 	},
 	0xfff68f: {
 		{X11Colours, "khaki1"},
 	},
 	0xfff8dc: {
-		{HTMLColours, "cornsilk"},
 		{X11Colours, "cornsilk"},
 		{X11Colours, "cornsilk1"},
+		{HTMLColours, "cornsilk"},
 	},
 	0xfffacd: {
-		{HTMLColours, "lemonchiffon"},
+		{X11Colours, "lemon chiffon"},
 		{X11Colours, "lemonchiffon"},
 		{X11Colours, "lemonchiffon1"},
-		{X11Colours, "lemon chiffon"},
+		{HTMLColours, "lemonchiffon"},
 	},
 	0xfffaf0: {
-		{HTMLColours, "floralwhite"},
 		{X11Colours, "floral white"},
 		{X11Colours, "floralwhite"},
+		{HTMLColours, "floralwhite"},
 	},
 	0xfffafa: {
-		{HTMLColours, "snow"},
 		{X11Colours, "snow"},
 		{X11Colours, "snow1"},
+		{HTMLColours, "snow"},
 	},
 	0xffff00: {
 		{WebColours, "yellow"},
 		{CGAColours, "yellow"},
-		{HTMLColours, "yellow"},
-		{X11Colours, "yellow1"},
 		{X11Colours, "yellow"},
+		{X11Colours, "yellow1"},
+		{HTMLColours, "yellow"},
 	},
 	0xffffe0: {
-		{HTMLColours, "lightyellow"},
+		{X11Colours, "light yellow"},
 		{X11Colours, "lightyellow"},
 		{X11Colours, "lightyellow1"},
-		{X11Colours, "light yellow"},
+		{HTMLColours, "lightyellow"},
 	},
 	0xfffff0: {
-		{HTMLColours, "ivory"},
 		{X11Colours, "ivory"},
 		{X11Colours, "ivory1"},
+		{HTMLColours, "ivory"},
 	},
 	0xffffff: {
 		{WebColours, "white"},
 		{CGAColours, "white"},
-		{HTMLColours, "white"},
 		{X11Colours, "gray100"},
-		{X11Colours, "white"},
 		{X11Colours, "grey100"},
+		{X11Colours, "white"},
+		{HTMLColours, "white"},
 	},
 	// END:makeReverseColourMap
 }
