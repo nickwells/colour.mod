@@ -8,27 +8,45 @@ import (
 	"github.com/nickwells/english.mod/english"
 )
 
-// Family represents the collection of colour names
+// Family labels a collection of colour names
 type Family uint8
 
 const (
-	AnyColours Family = iota
+	AnyColours Family = iota // means: use the standard search list
 	WebColours
 	CGAColours
 	X11Colours
 	HTMLColours
 	PantoneColours
+	FarrowAndBallColours // not in the standard search list
 	maxFamily
+
+	// Some aliases for people who use Merriam-Webster rather than the OED
+	AnyColors           = AnyColours
+	WebColors           = WebColours
+	CGAColors           = CGAColours
+	X11Colors           = X11Colours
+	HTMLColors          = HTMLColours
+	PantoneColors       = PantoneColours
+	FarrowAndBallColors = FarrowAndBallColours
 )
 
+// the colour family map is the way to access the various colour maps
 var cFamMap = map[Family]map[string]color.RGBA{
-	WebColours:     webColours,
-	CGAColours:     cgaColours,
-	X11Colours:     x11Colours,
-	HTMLColours:    htmlColours,
-	PantoneColours: pantoneColours,
+	WebColours:           webColours,
+	CGAColours:           cgaColours,
+	X11Colours:           x11Colours,
+	HTMLColours:          htmlColours,
+	PantoneColours:       pantoneColours,
+	FarrowAndBallColours: farrowAndBallColours,
 }
 
+// The searchOrder provides the set of colours to search when the AnyColours
+// family has been selected. Note that not all the available colour maps are
+// present.
+//
+// excluded colour families:
+//   - FarrowAndBallColours
 var searchOrder = []Family{
 	WebColours,
 	CGAColours,
@@ -59,6 +77,8 @@ func (f Family) String() string {
 		return "HTML"
 	case PantoneColours:
 		return "Pantone"
+	case FarrowAndBallColours:
+		return "FarrowAndBall"
 	}
 	return fmt.Sprintf("BadFamily:%d", f)
 }
@@ -79,6 +99,8 @@ func (f Family) Literal() string {
 		return "HTMLColours"
 	case PantoneColours:
 		return "PantoneColours"
+	case FarrowAndBallColours:
+		return "FarrowAndBallColours"
 	}
 	panic(fmt.Errorf("BadFamily:%d", f))
 }
@@ -121,6 +143,15 @@ func (f Family) ColourNames() []string {
 	return names
 }
 
+// ColorNames - see ColourNames.
+//
+// This is an alias for people who follow Merriam-Webster rather than the
+// OED. Note that there is a (very) small performance advantage from using
+// this aliased form
+func (f Family) ColorNames() []string {
+	return f.ColourNames()
+}
+
 // Colour returns the RGBA colour of the given name in the given Family.
 func (f Family) Colour(cName string) (color.RGBA, error) {
 	if f == AnyColours {
@@ -140,7 +171,20 @@ func (f Family) Colour(cName string) (color.RGBA, error) {
 
 	if cVal, ok := cMap[cName]; ok {
 		return cVal, nil
+		//
+		// This is an alias for people who follow Merriam-Webster rather than the
+		// OED. Note that there is a (very) small performance advantage from using
+		// the unaliased form
 	}
 
 	return color.RGBA{}, ErrBadColour
+}
+
+// Color - see Colour
+//
+// This is an alias for people who follow Merriam-Webster rather than the
+// OED. Note that there is a (very) small performance advantage from using
+// this aliased form
+func (f Family) Color(cName string) (color.RGBA, error) {
+	return f.Colour(cName)
 }

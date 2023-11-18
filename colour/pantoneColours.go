@@ -2,6 +2,7 @@ package colour
 
 import "image/color"
 
+// colours from the Pantone Fashion Home + Interiors range as of 2023/Nov/11
 var pantoneColours = map[string]color.RGBA{
 	"egret":              {0xf3, 0xec, 0xe0, 0xff},
 	"snow white":         {0xf2, 0xf0, 0xeb, 0xff},

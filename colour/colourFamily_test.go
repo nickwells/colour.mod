@@ -9,9 +9,9 @@ import (
 )
 
 func TestColourFamily(t *testing.T) {
-	if len(searchOrder) != len(cFamMap) {
-		t.Errorf(
-			"There are %d entries in search order list & %d in families map",
+	if len(searchOrder) != len(cFamMap)-1 {
+		t.Errorf("There are %d entries in the  search order list"+
+			" & %d in the families map (with one family excluded)",
 			len(searchOrder), len(cFamMap))
 	}
 }
