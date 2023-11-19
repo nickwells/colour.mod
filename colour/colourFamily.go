@@ -171,10 +171,6 @@ func (f Family) Colour(cName string) (color.RGBA, error) {
 
 	if cVal, ok := cMap[cName]; ok {
 		return cVal, nil
-		//
-		// This is an alias for people who follow Merriam-Webster rather than the
-		// OED. Note that there is a (very) small performance advantage from using
-		// the unaliased form
 	}
 
 	return color.RGBA{}, ErrBadColour
