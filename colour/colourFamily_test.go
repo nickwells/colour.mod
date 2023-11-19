@@ -9,9 +9,9 @@ import (
 )
 
 func TestColourFamily(t *testing.T) {
-	if len(searchOrder) != len(cFamMap)-1 {
+	if len(searchOrder) != len(cFamMap)-2 {
 		t.Errorf("There are %d entries in the  search order list"+
-			" & %d in the families map (with one family excluded)",
+			" & %d in the families map (with two families excluded)",
 			len(searchOrder), len(cFamMap))
 	}
 }
@@ -189,7 +189,7 @@ func TestFamilyNames(t *testing.T) {
 		t.Logf("\t: the number of distinct names is: %d\n", len(names))
 		t.Logf("\t:                            diff: %d\n",
 			len(names)-anyCount)
-		t.Error("full set of colour names should be <= than it's constituents")
+		t.Error("full set of colour names should be <= it's constituents")
 	}
 }
 

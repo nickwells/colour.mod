@@ -19,6 +19,7 @@ const (
 	HTMLColours
 	PantoneColours
 	FarrowAndBallColours // not in the standard search list
+	CrayolaColours       // not in the standard search list
 	maxFamily
 
 	// Some aliases for people who use Merriam-Webster rather than the OED
@@ -29,6 +30,7 @@ const (
 	HTMLColors          = HTMLColours
 	PantoneColors       = PantoneColours
 	FarrowAndBallColors = FarrowAndBallColours
+	CrayolaColors       = CrayolaColours
 )
 
 // the colour family map is the way to access the various colour maps
@@ -39,6 +41,7 @@ var cFamMap = map[Family]map[string]color.RGBA{
 	HTMLColours:          htmlColours,
 	PantoneColours:       pantoneColours,
 	FarrowAndBallColours: farrowAndBallColours,
+	CrayolaColours:       crayolaColours,
 }
 
 // The searchOrder provides the set of colours to search when the AnyColours
@@ -47,6 +50,7 @@ var cFamMap = map[Family]map[string]color.RGBA{
 //
 // excluded colour families:
 //   - FarrowAndBallColours
+//   - CrayolaColours
 var searchOrder = []Family{
 	WebColours,
 	CGAColours,
@@ -79,6 +83,8 @@ func (f Family) String() string {
 		return "Pantone"
 	case FarrowAndBallColours:
 		return "FarrowAndBall"
+	case CrayolaColours:
+		return "Crayola"
 	}
 	return fmt.Sprintf("BadFamily:%d", f)
 }
@@ -101,6 +107,8 @@ func (f Family) Literal() string {
 		return "PantoneColours"
 	case FarrowAndBallColours:
 		return "FarrowAndBallColours"
+	case CrayolaColours:
+		return "CrayolaColours"
 	}
 	panic(fmt.Errorf("BadFamily:%d", f))
 }
@@ -124,8 +132,8 @@ func (f Family) ColourNames() []string {
 	var names []string
 	nameMap := map[string]bool{}
 	if f == AnyColours {
-		for _, m := range cFamMap {
-			for n := range m {
+		for _, acFam := range searchOrder {
+			for n := range cFamMap[acFam] {
 				nameMap[n] = true
 			}
 		}
