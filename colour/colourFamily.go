@@ -86,6 +86,7 @@ func (f Family) String() string {
 	case CrayolaColours:
 		return "Crayola"
 	}
+
 	return fmt.Sprintf("BadFamily:%d", f)
 }
 
@@ -110,6 +111,7 @@ func (f Family) Literal() string {
 	case CrayolaColours:
 		return "CrayolaColours"
 	}
+
 	panic(fmt.Errorf("BadFamily:%d", f))
 }
 
@@ -119,6 +121,7 @@ func familyList(fl []Family) string {
 	for _, f := range fl {
 		fNames = append(fNames, f.String())
 	}
+
 	return english.Join(fNames, ", ", " and ")
 }
 
@@ -130,7 +133,9 @@ func (f Family) IsValid() bool {
 // ColourNames returns the names of colours in the given Family.
 func (f Family) ColourNames() []string {
 	var names []string
+
 	nameMap := map[string]bool{}
+
 	if f == AnyColours {
 		for _, acFam := range searchOrder {
 			for n := range cFamMap[acFam] {
@@ -148,6 +153,7 @@ func (f Family) ColourNames() []string {
 	for n := range nameMap {
 		names = append(names, n)
 	}
+
 	return names
 }
 
@@ -169,6 +175,7 @@ func (f Family) Colour(cName string) (color.RGBA, error) {
 				return cVal, nil
 			}
 		}
+
 		return color.RGBA{}, ErrBadColour
 	}
 

@@ -4,6 +4,8 @@ import (
 	"image/color"
 )
 
+const bitsPerByte = 8
+
 // IndexFamilyName holds the index value calculated from the RGBA value and
 // the corresponding family name and colour name.
 type IndexFamilyName struct {
@@ -17,6 +19,7 @@ type IndexFamilyName struct {
 // family.
 func NamesByIndex() []IndexFamilyName {
 	coloursByIdx := []IndexFamilyName{}
+
 	for _, f := range searchOrder {
 		for cName, c := range cFamMap[f] {
 			coloursByIdx = append(coloursByIdx,
@@ -27,6 +30,7 @@ func NamesByIndex() []IndexFamilyName {
 				})
 		}
 	}
+
 	return coloursByIdx
 }
 
@@ -35,7 +39,7 @@ func NamesByIndex() []IndexFamilyName {
 // from its RGBA value. Note that the Alpha component of the colour is
 // ignored.
 func colourIndex(c color.RGBA) uint32 {
-	return (((uint32(c.R) << 8) +
-		uint32(c.G)) << 8) +
+	return (((uint32(c.R) << bitsPerByte) +
+		uint32(c.G)) << bitsPerByte) +
 		uint32(c.B)
 }

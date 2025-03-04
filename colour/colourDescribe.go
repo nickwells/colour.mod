@@ -36,12 +36,14 @@ func Describe(c color.RGBA) string {
 	}
 
 	desc := []string{}
+
 	for _, k := range keys {
 		val := k + " ("
 		val += familyList(distinctNames[k])
 		val += ")"
 		desc = append(desc, val)
 	}
+
 	return english.Join(desc, ", ", " or ")
 }
 
@@ -71,23 +73,29 @@ func getDistinctNames(qNames []QualifiedColourName) (
 				familyNameJ := families[j].String()
 				lenFamilyNameI := len(familyNameI)
 				lenFamilyNameJ := len(familyNameJ)
+
 				if lenFamilyNameI < lenFamilyNameJ {
 					return true
 				}
+
 				if lenFamilyNameI == lenFamilyNameJ {
 					return familyNameI < familyNameJ
 				}
+
 				return false
 			})
+
 		distinctNames[cName] = families
 	}
 
 	sort.Slice(keys, func(i, j int) bool {
 		familyCountI := len(distinctNames[keys[i]])
 		familyCountJ := len(distinctNames[keys[j]])
+
 		if familyCountI == familyCountJ {
 			return len(keys[i]) < len(keys[j])
 		}
+
 		return familyCountI > familyCountJ
 	})
 

@@ -11,6 +11,7 @@ func TestNamesByIndex(t *testing.T) {
 	for _, f := range searchOrder {
 		colourCount += len(cFamMap[f])
 	}
+
 	nbi := NamesByIndex()
 	testhelper.DiffInt[int](t, "NamesByIndex", "colour count",
 		len(nbi), colourCount)

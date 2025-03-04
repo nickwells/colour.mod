@@ -16,6 +16,8 @@ const (
 	endComment   = "// END:makeReverseColourMap"
 )
 
+const executablePerms = 0o755
+
 // Prog holds program parameters and status
 type Prog struct {
 	exitStatus int
@@ -30,7 +32,7 @@ type Prog struct {
 func NewProg() *Prog {
 	return &Prog{
 		knownMisspellings: map[string]bool{
-			"rococco red": true, // nolint:misspell
+			"rococco red": true, //nolint:misspell
 		},
 	}
 }
@@ -54,13 +56,16 @@ func (prog *Prog) ForceExitStatus(es int) {
 // method to record the exit status and then main can exit with that status.
 func (prog *Prog) Run() {
 	var err error
-	prog.fd, err = os.OpenFile(prog.filename, os.O_RDWR, 0o755)
+
+	prog.fd, err = os.OpenFile(prog.filename, os.O_RDWR, executablePerms)
 	if err != nil {
 		fmt.Printf("Couldn't open the program file %q: %s",
 			prog.filename, err)
 		prog.SetExitStatus(1)
+
 		return
 	}
+
 	defer prog.fd.Close()
 
 	prog.PopulateMap()
@@ -85,6 +90,7 @@ func (prog *Prog) PopulateMap() {
 		prog.SetExitStatus(1)
 		fmt.Println("the start comment was not found")
 		fmt.Println("ABORTING")
+
 		return
 	}
 
@@ -93,6 +99,7 @@ func (prog *Prog) PopulateMap() {
 		prog.SetExitStatus(1)
 		fmt.Println("the end comment was not found")
 		fmt.Println("ABORTING")
+
 		return
 	}
 
@@ -101,6 +108,7 @@ func (prog *Prog) PopulateMap() {
 		prog.SetExitStatus(1)
 		fmt.Println("cannot seek to the start point: ", err)
 		fmt.Println("ABORTING")
+
 		return
 	}
 
@@ -111,6 +119,7 @@ func (prog *Prog) PopulateMap() {
 		fmt.Println("Note: the file may be corrupted")
 		fmt.Println("    : consider restoring from backups")
 		fmt.Println("ABORTING")
+
 		return
 	}
 
@@ -122,6 +131,7 @@ func (prog *Prog) PopulateMap() {
 		fmt.Println("Note: the file may be corrupted")
 		fmt.Println("    : consider restoring from backups")
 		fmt.Println("ABORTING")
+
 		return
 	}
 
@@ -132,6 +142,7 @@ func (prog *Prog) PopulateMap() {
 		fmt.Println("Note: the file may be corrupted")
 		fmt.Println("    : consider restoring from backups")
 		fmt.Println("ABORTING")
+
 		return
 	}
 
@@ -142,6 +153,7 @@ func (prog *Prog) PopulateMap() {
 		fmt.Println("Note: the file may be corrupted")
 		fmt.Println("    : consider restoring from backups")
 		fmt.Println("ABORTING")
+
 		return
 	}
 }
@@ -168,25 +180,26 @@ func (prog *Prog) writeMapContents() error {
 			if qcnVals[i].Family == qcnVals[j].Family {
 				return qcnVals[i].ColourName < qcnVals[j].ColourName
 			}
+
 			return qcnVals[i].Family < qcnVals[j].Family
 		})
 
 		for _, qcn := range qcnVals {
 			noLintComment := ""
 			if prog.knownMisspellings[qcn.ColourName] {
-				noLintComment = " // nolint:misspell"
+				noLintComment = " //nolint:misspell"
 			}
-			_, err := fmt.Fprintf(prog.fd,
-				"\t\t{%s, %q},%s\n",
-				qcn.Family.Literal(),
-				qcn.ColourName,
-				noLintComment)
+
+			_, err := fmt.Fprintf(prog.fd, "\t\t{%s, %q},%s\n",
+				qcn.Family.Literal(), qcn.ColourName, noLintComment)
 			if err != nil {
 				return err
 			}
 		}
+
 		fmt.Fprintln(prog.fd, "\t},")
 	}
+
 	return nil
 }
 
@@ -209,6 +222,7 @@ func getColoursByIdx() (map[uint32][]colour.QualifiedColourName, []uint32) {
 	for k := range cnm {
 		idxKeys = append(idxKeys, k)
 	}
+
 	sort.Slice(idxKeys, func(i, j int) bool { return idxKeys[i] < idxKeys[j] })
 
 	return cnm, idxKeys
@@ -217,28 +231,36 @@ func getColoursByIdx() (map[uint32][]colour.QualifiedColourName, []uint32) {
 // findStart finds the location of the end of the start comment
 func (prog *Prog) findStart(scanner *bufio.Scanner) (int64, bool) {
 	var startOffset int64
+
 	var startFound bool
+
 	for scanner.Scan() {
 		startOffset += int64(len(scanner.Bytes()) + 1) // add 1 for the newline
+
 		if strings.HasSuffix(scanner.Text(), startComment) {
 			startFound = true
 			break
 		}
 	}
+
 	return startOffset, startFound
 }
 
 // findEnd returns the contents of the file from the end comment
 func (prog *Prog) findEnd(scanner *bufio.Scanner) (bytes.Buffer, bool) {
 	var endBuffer bytes.Buffer
+
 	var endFound bool
+
 	for scanner.Scan() {
 		if strings.HasSuffix(scanner.Text(), endComment) {
 			endFound = true
 		}
+
 		if endFound {
 			endBuffer.WriteString(scanner.Text() + "\n")
 		}
 	}
+
 	return endBuffer, endFound
 }

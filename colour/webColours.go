@@ -76,5 +76,6 @@ func CGAColour(i int) (color.RGBA, error) {
 	if c, ok := cgaColoursByNum[i]; ok {
 		return c, nil
 	}
+
 	return color.RGBA{}, fmt.Errorf("bad CGA colour index: %d", i)
 }

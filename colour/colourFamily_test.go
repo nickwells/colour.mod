@@ -80,7 +80,9 @@ func TestFamilyMethods(t *testing.T) {
 	for _, tc := range testCases {
 		str := tc.f.String()
 		testhelper.DiffString[string](t, tc.IDStr(), "String", str, tc.expStr)
+
 		var literal string
+
 		panicked, panicVal := testhelper.PanicSafe(func() {
 			literal = tc.f.Literal()
 		})
@@ -88,6 +90,7 @@ func TestFamilyMethods(t *testing.T) {
 			testhelper.DiffString[string](t, tc.IDStr(), "Literal",
 				literal, tc.expLiteral)
 		}
+
 		testhelper.CheckExpPanicError(t, panicked, panicVal, tc)
 		isValid := tc.f.IsValid()
 		testhelper.DiffBool(t, tc.IDStr(), "Valid check", isValid, tc.isValid)

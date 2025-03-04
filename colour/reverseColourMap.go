@@ -5492,7 +5492,7 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "ski patrol"},
 	},
 	0xbb363f: {
-		{PantoneColours, "rococco red"}, // nolint:misspell
+		{PantoneColours, "rococco red"}, //nolint:misspell
 	},
 	0xbb4a4d: {
 		{PantoneColours, "cranberry"},

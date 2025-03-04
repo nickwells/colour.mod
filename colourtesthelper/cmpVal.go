@@ -22,6 +22,7 @@ func reportRGBADiff(t *testing.T, prefix, part string, exp, act uint8) {
 // error if they differ.
 func DiffRGBA(t *testing.T, id, name string, act, exp color.RGBA) bool {
 	t.Helper()
+
 	if act != exp {
 		t.Log(id)
 		t.Logf("\t: expected %s: %#v\n", name, exp)
@@ -37,7 +38,9 @@ func DiffRGBA(t *testing.T, id, name string, act, exp color.RGBA) bool {
 		reportRGBADiff(t, intro, "alpha", exp.A, act.A)
 
 		t.Errorf("\t: %s is incorrect\n", name)
+
 		return true
 	}
+
 	return false
 }
