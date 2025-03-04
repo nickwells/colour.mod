@@ -1,6 +1,6 @@
 module github.com/nickwells/colour.mod
 
-go 1.21.0
+go 1.24
 
 require (
 	github.com/nickwells/english.mod v1.1.5
