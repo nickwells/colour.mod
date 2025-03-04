@@ -1,6 +1,6 @@
-github.com/nickwells/english.mod v1.1.5 h1:OFmYaQ83fguWAJs3mFUcUYKILKYE4qJRiNDNnuXwp4s=
-github.com/nickwells/english.mod v1.1.5/go.mod h1:CEoMsqNbwx3J9NpMm94O1x1OW266Tj7osHmwJkQ4y/4=
-github.com/nickwells/testhelper.mod/v2 v2.3.0 h1:b/EpnHiYr8dnr6C0a6zW2KAyHgfQ72pVw3cNklSzwxs=
-github.com/nickwells/testhelper.mod/v2 v2.3.0/go.mod h1:pdhf+XHRINEUH6a0OcwC98ETD3ZluAXKA5xOhC2I2Qk=
-golang.org/x/exp v0.0.0-20231006140011-7918f672742d h1:jtJma62tbqLibJ5sFQz8bKtEM8rJBtfilJ2qTU199MI=
-golang.org/x/exp v0.0.0-20231006140011-7918f672742d/go.mod h1:ldy0pHrwJyGW56pPQzzkH36rKxoZW1tw7ZJpeKx+hdo=
+github.com/nickwells/english.mod v1.1.6 h1:dDWM1+YLZ5CxAgWkYfjXe9cV5MgHlCYY15Dk98zoK5c=
+github.com/nickwells/english.mod v1.1.6/go.mod h1:TZeDDSzQc+c7w0xT/MhrXrG/4tD3N10vwsxzDhJDlD4=
+github.com/nickwells/testhelper.mod/v2 v2.3.1 h1:+MoIM5+l+rS6koT4YWxhD6mA9sdzYT5DgYrf/4d/j/s=
+github.com/nickwells/testhelper.mod/v2 v2.3.1/go.mod h1:sqfsJGl4kHsjaFeHMnitr54GVR5GWX6RN693zSPonOg=
+golang.org/x/exp v0.0.0-20250228200357-dead58393ab7 h1:aWwlzYV971S4BXRS9AmqwDLAD85ouC6X+pocatKY58c=
+golang.org/x/exp v0.0.0-20250228200357-dead58393ab7/go.mod h1:BHOTPb3L19zxehTsLoJXVaTktb06DFgmdW6Wb9s8jqk=
