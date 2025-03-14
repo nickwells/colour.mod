@@ -4,7 +4,9 @@ import (
 	"bufio"
 	"bytes"
 	"fmt"
+	"maps"
 	"os"
+	"slices"
 	"sort"
 	"strings"
 
@@ -218,14 +220,7 @@ func getColoursByIdx() (map[uint32][]colour.QualifiedColourName, []uint32) {
 		cnm[ifn.Idx] = v
 	}
 
-	idxKeys := []uint32{}
-	for k := range cnm {
-		idxKeys = append(idxKeys, k)
-	}
-
-	sort.Slice(idxKeys, func(i, j int) bool { return idxKeys[i] < idxKeys[j] })
-
-	return cnm, idxKeys
+	return cnm, slices.Sorted(maps.Keys(cnm))
 }
 
 // findStart finds the location of the end of the start comment

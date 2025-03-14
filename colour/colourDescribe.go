@@ -1,8 +1,11 @@
 package colour
 
 import (
+	"cmp"
 	"fmt"
 	"image/color"
+	"maps"
+	"slices"
 	"sort"
 	"strings"
 
@@ -10,7 +13,7 @@ import (
 )
 
 // Describe returns a string representation of the colour. If it is not found
-// in the colour to name map then the RGB values are show. Otherwise the
+// in the colour to name map then the RGB values are shown. Otherwise the
 // shortest name for the colour in each family is used and if only one name
 // is found then that is returned without any Family-qualification.
 func Describe(c color.RGBA) string {
@@ -61,11 +64,6 @@ func getDistinctNames(qNames []QualifiedColourName) (
 		distinctNames[qn.ColourName] = v
 	}
 
-	keys := []string{}
-	for k := range distinctNames {
-		keys = append(keys, k)
-	}
-
 	for cName, families := range distinctNames {
 		sort.Slice(families,
 			func(i, j int) bool {
@@ -88,15 +86,15 @@ func getDistinctNames(qNames []QualifiedColourName) (
 		distinctNames[cName] = families
 	}
 
-	sort.Slice(keys, func(i, j int) bool {
-		familyCountI := len(distinctNames[keys[i]])
-		familyCountJ := len(distinctNames[keys[j]])
+	keys := slices.SortedFunc(maps.Keys(distinctNames), func(a, b string) int {
+		familyCountA := len(distinctNames[a])
+		familyCountB := len(distinctNames[b])
 
-		if familyCountI == familyCountJ {
-			return len(keys[i]) < len(keys[j])
+		if familyCountA == familyCountB {
+			return cmp.Compare(len(a), len(b))
 		}
 
-		return familyCountI > familyCountJ
+		return cmp.Compare(familyCountB, familyCountA)
 	})
 
 	return distinctNames, keys
