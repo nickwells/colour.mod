@@ -11,6 +11,7 @@ import (
 // Family labels a collection of colour names
 type Family uint8
 
+// These represent the various families of colour names.
 const (
 	AnyColours Family = iota // means: use the standard search list
 	WebColours
@@ -21,8 +22,10 @@ const (
 	FarrowAndBallColours // not in the standard search list
 	CrayolaColours       // not in the standard search list
 	maxFamily
+)
 
-	// Some aliases for people who use Merriam-Webster rather than the OED
+// Some aliases for people who use Merriam-Webster rather than the OED
+const (
 	AnyColors           = AnyColours
 	WebColors           = WebColours
 	CGAColors           = CGAColours
@@ -60,9 +63,15 @@ var searchOrder = []Family{
 }
 
 var (
+	// ErrBadFamily is the standard error returned when a bad colour family
+	// value is passed
 	ErrBadFamily = errors.New("bad colour family")
+	// ErrBadColour is the standard error returned when a bad colour name is
+	// passsed
 	ErrBadColour = errors.New("bad colour name")
-	ErrBadColor  = ErrBadColour
+	// ErrBadColor is an alternative value for people who use Merriam-Webster
+	// rather than the OED
+	ErrBadColor = ErrBadColour
 )
 
 // String returns a string representing the given Family or a value
