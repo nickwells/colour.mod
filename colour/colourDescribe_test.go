@@ -53,7 +53,7 @@ func TestDescribeColour(t *testing.T) {
 
 	for _, tc := range testCases {
 		str := colour.Describe(tc.c)
-		testhelper.DiffString[string](t, tc.IDStr(), "description",
+		testhelper.DiffString(t, tc.IDStr(), "description",
 			str, tc.expStr)
 	}
 }

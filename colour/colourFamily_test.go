@@ -79,7 +79,7 @@ func TestFamilyMethods(t *testing.T) {
 
 	for _, tc := range testCases {
 		str := tc.f.String()
-		testhelper.DiffString[string](t, tc.IDStr(), "String", str, tc.expStr)
+		testhelper.DiffString(t, tc.IDStr(), "String", str, tc.expStr)
 
 		var literal string
 
@@ -87,7 +87,7 @@ func TestFamilyMethods(t *testing.T) {
 			literal = tc.f.Literal()
 		})
 		if !panicked {
-			testhelper.DiffString[string](t, tc.IDStr(), "Literal",
+			testhelper.DiffString(t, tc.IDStr(), "Literal",
 				literal, tc.expLiteral)
 		}
 
@@ -125,7 +125,7 @@ func TestFamilyList(t *testing.T) {
 
 	for _, tc := range testCases {
 		str := familyList(tc.fl)
-		testhelper.DiffString[string](t, tc.IDStr(), "family list",
+		testhelper.DiffString(t, tc.IDStr(), "family list",
 			str, tc.expStr)
 	}
 }
@@ -178,7 +178,7 @@ func TestFamilyNames(t *testing.T) {
 
 	for _, tc := range testCases {
 		names := tc.f.ColourNames()
-		testhelper.DiffInt[int](t, tc.IDStr(), "number of colour names",
+		testhelper.DiffInt(t, tc.IDStr(), "number of colour names",
 			len(names), tc.expNameCount)
 	}
 

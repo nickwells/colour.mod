@@ -13,6 +13,6 @@ func TestNamesByIndex(t *testing.T) {
 	}
 
 	nbi := NamesByIndex()
-	testhelper.DiffInt[int](t, "NamesByIndex", "colour count",
+	testhelper.DiffInt(t, "NamesByIndex", "colour count",
 		len(nbi), colourCount)
 }
