@@ -1,11 +1,11 @@
 package colour
 
-import "image/color"
+import "image/color" //nolint:misspell
 
 // Contrast calculates a colour that has a high contrast with the supplied
 // colour
-func Contrast(c color.RGBA) color.RGBA {
-	return color.RGBA{
+func Contrast(c color.RGBA) color.RGBA { //nolint:misspell
+	return color.RGBA{ //nolint:misspell
 		R: colourCounterpart(c.R),
 		G: colourCounterpart(c.G),
 		B: colourCounterpart(c.B),

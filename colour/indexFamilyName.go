@@ -1,7 +1,7 @@
 package colour
 
 import (
-	"image/color"
+	"image/color" //nolint:misspell
 )
 
 const bitsPerByte = 8
@@ -38,7 +38,9 @@ func NamesByIndex() []IndexFamilyName {
 // color.RGBA value. This is used internally to find the names of a colour
 // from its RGBA value. Note that the Alpha component of the colour is
 // ignored.
-func colourIndex(c color.RGBA) uint32 {
+//
+//nolint:misspell
+func colourIndex(c color.RGBA) uint32 { //nolint:misspell
 	return (((uint32(c.R) << bitsPerByte) +
 		uint32(c.G)) << bitsPerByte) +
 		uint32(c.B)

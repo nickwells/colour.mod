@@ -3,7 +3,7 @@ package colour
 import (
 	"cmp"
 	"fmt"
-	"image/color"
+	"image/color" //nolint:misspell
 	"maps"
 	"slices"
 	"sort"
@@ -16,7 +16,7 @@ import (
 // in the colour to name map then the RGB values are shown. Otherwise the
 // shortest name for the colour in each family is used and if only one name
 // is found then that is returned without any Family-qualification.
-func Describe(c color.RGBA) string {
+func Describe(c color.RGBA) string { //nolint:misspell
 	qNames, ok := colourToNameMap[colourIndex(c)]
 	if !ok {
 		return fmt.Sprintf("%#v", c)

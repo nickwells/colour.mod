@@ -1,7 +1,7 @@
 package colour
 
 import (
-	"image/color"
+	"image/color" //nolint:misspell
 	"testing"
 
 	"github.com/nickwells/colour.mod/colourtesthelper"
@@ -202,46 +202,46 @@ func TestColourByName(t *testing.T) {
 		testhelper.ExpErr
 		f         Family
 		cName     string
-		expColour color.RGBA
+		expColour color.RGBA //nolint:misspell
 	}{
 		{
 			ID:        testhelper.MkID("green"),
 			f:         AnyColours,
 			cName:     "green",
-			expColour: color.RGBA{0x00, 0x80, 0x00, 0xff},
+			expColour: color.RGBA{0x00, 0x80, 0x00, 0xff}, //nolint:misspell
 		},
 		{
 			ID:        testhelper.MkID("lime"),
 			f:         AnyColours,
 			cName:     "lime",
-			expColour: color.RGBA{0x00, 0xff, 0x00, 0xff},
+			expColour: color.RGBA{0x00, 0xff, 0x00, 0xff}, //nolint:misspell
 		},
 		{
 			ID:        testhelper.MkID("lime"),
 			f:         HTMLColours,
 			cName:     "lime",
-			expColour: color.RGBA{0x00, 0xff, 0x00, 0xff},
+			expColour: color.RGBA{0x00, 0xff, 0x00, 0xff}, //nolint:misspell
 		},
 		{
 			ID:        testhelper.MkID("bad family"),
 			ExpErr:    testhelper.MkExpErr(ErrBadFamily.Error()),
 			f:         Family(99),
 			cName:     "lime",
-			expColour: color.RGBA{0x00, 0x00, 0x00, 0x00},
+			expColour: color.RGBA{0x00, 0x00, 0x00, 0x00}, //nolint:misspell
 		},
 		{
 			ID:        testhelper.MkID("bad colour (WebColours)"),
 			ExpErr:    testhelper.MkExpErr(ErrBadColour.Error()),
 			f:         WebColours,
 			cName:     "NO SUCH COLOUR",
-			expColour: color.RGBA{0x00, 0x00, 0x00, 0x00},
+			expColour: color.RGBA{0x00, 0x00, 0x00, 0x00}, //nolint:misspell
 		},
 		{
 			ID:        testhelper.MkID("bad colour (AnyColours)"),
 			ExpErr:    testhelper.MkExpErr(ErrBadColour.Error()),
 			f:         AnyColours,
 			cName:     "NO SUCH COLOUR",
-			expColour: color.RGBA{0x00, 0x00, 0x00, 0x00},
+			expColour: color.RGBA{0x00, 0x00, 0x00, 0x00}, //nolint:misspell
 		},
 	}
 

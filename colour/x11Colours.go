@@ -1,8 +1,8 @@
 package colour
 
-import "image/color"
+import "image/color" //nolint:misspell
 
-var x11Colours = map[string]color.RGBA{
+var x11Colours = map[string]color.RGBA{ //nolint:misspell
 	"snow":                   {255, 250, 250, 0xFF},
 	"ghost white":            {248, 248, 255, 0xFF},
 	"ghostwhite":             {248, 248, 255, 0xFF},

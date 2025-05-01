@@ -3,7 +3,7 @@ package colour
 import (
 	"errors"
 	"fmt"
-	"image/color"
+	"image/color" //nolint:misspell
 
 	"github.com/nickwells/english.mod/english"
 )
@@ -37,7 +37,7 @@ const (
 )
 
 // the colour family map is the way to access the various colour maps
-var cFamMap = map[Family]map[string]color.RGBA{
+var cFamMap = map[Family]map[string]color.RGBA{ //nolint:misspell
 	WebColours:           webColours,
 	CGAColours:           cgaColours,
 	X11Colours:           x11Colours,
@@ -176,7 +176,7 @@ func (f Family) ColorNames() []string {
 }
 
 // Colour returns the RGBA colour of the given name in the given Family.
-func (f Family) Colour(cName string) (color.RGBA, error) {
+func (f Family) Colour(cName string) (color.RGBA, error) { //nolint:misspell
 	if f == AnyColours {
 		for _, cf := range searchOrder {
 			cMap := cFamMap[cf]
@@ -185,26 +185,28 @@ func (f Family) Colour(cName string) (color.RGBA, error) {
 			}
 		}
 
-		return color.RGBA{}, ErrBadColour
+		return color.RGBA{}, ErrBadColour //nolint:misspell
 	}
 
 	cMap, ok := cFamMap[f]
 	if !ok {
-		return color.RGBA{}, ErrBadFamily
+		return color.RGBA{}, ErrBadFamily //nolint:misspell
 	}
 
 	if cVal, ok := cMap[cName]; ok {
 		return cVal, nil
 	}
 
-	return color.RGBA{}, ErrBadColour
+	return color.RGBA{}, ErrBadColour //nolint:misspell
 }
 
 // Color - see Colour
 //
 // This is an alias for people who follow Merriam-Webster rather than the
 // OED. Note that there is a (very) small performance advantage from using
-// this aliased form
-func (f Family) Color(cName string) (color.RGBA, error) {
+// this aliased form which the compiler might optimize away
+//
+//nolint:misspell
+func (f Family) Color(cName string) (color.RGBA, error) { //nolint:misspell
 	return f.Colour(cName)
 }

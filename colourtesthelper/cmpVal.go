@@ -1,7 +1,7 @@
 package colourtesthelper
 
 import (
-	"image/color"
+	"image/color" //nolint:misspell
 	"strings"
 	"testing"
 )
@@ -20,7 +20,10 @@ func reportRGBADiff(t *testing.T, prefix, part string, exp, act uint8) {
 
 // DiffRGBA compares the actual against the expected value and reports an
 // error if they differ.
-func DiffRGBA(t *testing.T, id, name string, act, exp color.RGBA) bool {
+func DiffRGBA(t *testing.T,
+	id, name string,
+	act, exp color.RGBA, //nolint:misspell
+) bool {
 	t.Helper()
 
 	if act != exp {

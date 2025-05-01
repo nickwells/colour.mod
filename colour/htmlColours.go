@@ -1,8 +1,8 @@
 package colour
 
-import "image/color"
+import "image/color" //nolint:misspell
 
-var htmlColours = map[string]color.RGBA{
+var htmlColours = map[string]color.RGBA{ //nolint:misspell
 	// Pink Colours
 	"mediumvioletred": {0xC7, 0x15, 0x85, 0xFF},
 	"deeppink":        {0xFF, 0x14, 0x93, 0xFF},

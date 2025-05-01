@@ -1,10 +1,10 @@
 package colour
 
 import (
-	"image/color"
+	"image/color" //nolint:misspell
 )
 
-var crayolaColours = map[string]color.RGBA{
+var crayolaColours = map[string]color.RGBA{ //nolint:misspell
 	"red":                       {0xED, 0x0A, 0x3F, 0xFF},
 	"maroon":                    {0xC3, 0x21, 0x48, 0xFF},
 	"dark red":                  {0xC3, 0x21, 0x48, 0xFF},

@@ -1,7 +1,7 @@
 package colour_test
 
 import (
-	"image/color"
+	"image/color" //nolint:misspell
 	"testing"
 
 	"github.com/nickwells/colour.mod/colour"
@@ -14,23 +14,23 @@ func TestCGACololur(t *testing.T) {
 		testhelper.ID
 		testhelper.ExpErr
 		i         int
-		expColour color.RGBA
+		expColour color.RGBA //nolint:misspell
 	}{
 		{
 			ID:        testhelper.MkID("0 (black)"),
 			i:         0,
-			expColour: color.RGBA{0, 0, 0, 0xff},
+			expColour: color.RGBA{0, 0, 0, 0xff}, //nolint:misspell
 		},
 		{
 			ID:        testhelper.MkID("15 (white)"),
 			i:         15,
-			expColour: color.RGBA{0xff, 0xff, 0xff, 0xff},
+			expColour: color.RGBA{0xff, 0xff, 0xff, 0xff}, //nolint:misspell
 		},
 		{
 			ID:        testhelper.MkID("bad index:99"),
 			ExpErr:    testhelper.MkExpErr("bad CGA colour index: 99"),
 			i:         99,
-			expColour: color.RGBA{0, 0, 0, 0},
+			expColour: color.RGBA{0, 0, 0, 0}, //nolint:misspell
 		},
 	}
 

@@ -2,11 +2,11 @@ package colour
 
 import (
 	"fmt"
-	"image/color"
+	"image/color" //nolint:misspell
 )
 
 var (
-	webColours = map[string]color.RGBA{
+	webColours = map[string]color.RGBA{ //nolint:misspell
 		"white":   {0xFF, 0xFF, 0xFF, 0xFF},
 		"silver":  {0xC0, 0xC0, 0xC0, 0xFF},
 		"gray":    {0x80, 0x80, 0x80, 0xFF},
@@ -26,7 +26,7 @@ var (
 		"purple":  {0x80, 0x00, 0x80, 0xFF},
 	}
 
-	cgaColours = map[string]color.RGBA{
+	cgaColours = map[string]color.RGBA{ //nolint:misspell
 		"white":        {0xFF, 0xFF, 0xFF, 0xFF},
 		"light gray":   {0xC0, 0xC0, 0xC0, 0xFF},
 		"light grey":   {0xC0, 0xC0, 0xC0, 0xFF},
@@ -50,7 +50,7 @@ var (
 		"low magenta":  {0x80, 0x00, 0x80, 0xFF},
 	}
 
-	cgaColoursByNum = map[int]color.RGBA{
+	cgaColoursByNum = map[int]color.RGBA{ //nolint:misspell
 		15: {0xFF, 0xFF, 0xFF, 0xFF},
 		7:  {0xC0, 0xC0, 0xC0, 0xFF},
 		8:  {0x80, 0x80, 0x80, 0xFF},
@@ -72,10 +72,11 @@ var (
 
 // CGAColour returns the CGA colour corresponding to the given int. If the
 // colour is not found then a non-nil error is returned.
-func CGAColour(i int) (color.RGBA, error) {
+func CGAColour(i int) (color.RGBA, error) { //nolint:misspell
 	if c, ok := cgaColoursByNum[i]; ok {
 		return c, nil
 	}
 
-	return color.RGBA{}, fmt.Errorf("bad CGA colour index: %d", i)
+	return color.RGBA{}, //nolint:misspell
+		fmt.Errorf("bad CGA colour index: %d", i)
 }

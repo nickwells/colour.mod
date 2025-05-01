@@ -1,9 +1,9 @@
 package colour
 
-import "image/color"
+import "image/color" //nolint:misspell
 
 // colours from the Farrow & Ball colour range as of 2023/Nov/17
-var farrowAndBallColours = map[string]color.RGBA{
+var farrowAndBallColours = map[string]color.RGBA{ //nolint:misspell
 	"wevet":                {0xee, 0xe9, 0xe7, 0xff},
 	"ammonite":             {0xdd, 0xd8, 0xcf, 0xff},
 	"purbeck stone":        {0xc4, 0xbe, 0xb4, 0xff},
