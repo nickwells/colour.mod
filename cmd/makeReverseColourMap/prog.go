@@ -34,7 +34,22 @@ type Prog struct {
 func NewProg() *Prog {
 	return &Prog{
 		knownMisspellings: map[string]bool{
+			"aluminum": true, //nolint:misspell
+
+			"beveled glass": true, //nolint:misspell
+
+			"chili":        true, //nolint:misspell
+			"chili oil":    true, //nolint:misspell
+			"chili pepper": true, //nolint:misspell
+
+			"harbor blue":  true, //nolint:misspell
+			"harbor gray":  true, //nolint:misspell
+			"harbor mist":  true, //nolint:misspell
+			"quiet harbor": true, //nolint:misspell
+
 			"rococco red": true, //nolint:misspell
+
+			"vapor blue": true, //nolint:misspell
 		},
 	}
 }
