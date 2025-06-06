@@ -99,6 +99,7 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 	},
 	0x00656e: {
 		{PantoneColours, "harbor blue"}, //nolint:misspell
+		{PantoneColours, "harbour blue"},
 	},
 	0x00675b: {
 		{PantoneColours, "cadmium green"},
@@ -1910,6 +1911,7 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 	},
 	0x5a789a: {
 		{PantoneColours, "quiet harbor"}, //nolint:misspell
+		{PantoneColours, "quiet harbour"},
 	},
 	0x5b3644: {
 		{PantoneColours, "mauve wine"},
@@ -2961,6 +2963,7 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 	},
 	0x7accb8: {
 		{PantoneColours, "beveled glass"}, //nolint:misspell
+		{PantoneColours, "bevelled glass"},
 	},
 	0x7b3539: {
 		{PantoneColours, "red pear"},
@@ -3771,6 +3774,7 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 	},
 	0x8e3c36: {
 		{PantoneColours, "chili oil"}, //nolint:misspell
+		{PantoneColours, "chilli oil"},
 	},
 	0x8e4483: {
 		{PantoneColours, "willowherb"},
@@ -4252,6 +4256,7 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 	},
 	0x9b1b30: {
 		{PantoneColours, "chili pepper"}, //nolint:misspell
+		{PantoneColours, "chilli pepper"},
 	},
 	0x9b30ff: {
 		{X11Colours, "purple1"},
@@ -4391,6 +4396,7 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 		{PantoneColours, "sand verbena"},
 	},
 	0x9f9586: {
+		{PantoneColours, "aluminium"},
 		{PantoneColours, "aluminum"}, //nolint:misspell
 	},
 	0x9f99aa: {
@@ -4767,6 +4773,7 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 	},
 	0xa8c0bb: {
 		{PantoneColours, "harbor gray"}, //nolint:misspell
+		{PantoneColours, "harbour grey"},
 	},
 	0xa9568c: {
 		{PantoneColours, "meadow mauve"},
@@ -5003,6 +5010,7 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 	},
 	0xafb1b4: {
 		{PantoneColours, "harbor mist"}, //nolint:misspell
+		{PantoneColours, "harbour mist"},
 	},
 	0xafcb80: {
 		{PantoneColours, "sap green"},
@@ -5642,6 +5650,7 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 	},
 	0xbe5141: {
 		{PantoneColours, "chili"}, //nolint:misspell
+		{PantoneColours, "chilli"},
 	},
 	0xbe752d: {
 		{PantoneColours, "golden oak"},
@@ -5663,6 +5672,7 @@ var colourToNameMap = map[uint32][]QualifiedColourName{
 	},
 	0xbebdbd: {
 		{PantoneColours, "vapor blue"}, //nolint:misspell
+		{PantoneColours, "vapour blue"},
 	},
 	0xbebebe: {
 		{X11Colours, "gray"},
