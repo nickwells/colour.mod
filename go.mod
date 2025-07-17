@@ -1,4 +1,4 @@
-module github.com/nickwells/colour.mod
+module github.com/nickwells/colour.mod/v2
 
 go 1.24
 

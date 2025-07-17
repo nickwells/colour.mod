@@ -1,48 +1,64 @@
 package colour
 
 import (
-	"cmp"
 	"fmt"
 	"image/color" //nolint:misspell
-	"maps"
 	"slices"
-	"sort"
 	"strings"
 
 	"github.com/nickwells/english.mod/english"
 )
 
-// Describe returns a string representation of the colour. If it is not found
-// in the colour to name map then the RGB values are shown. Otherwise the
-// shortest name for the colour in each family is used and if only one name
-// is found then that is returned without any Family-qualification.
+// qualifiedColourName holds a colour name and the families having that name
+// for the colour.
+type qualifiedColourName struct {
+	families Families
+	cName    string
+}
+
+// Describe returns a string representation of the colour. If an exact match
+// is not found then the RGB values are shown. Otherwise the shortest name
+// for the colour in each family is used and if only one name is found then
+// that is returned without any Family-qualification. It searches in the
+// standard families. See [Families.Describe] .
 func Describe(c color.RGBA) string { //nolint:misspell
-	qNames, ok := colourToNameMap[colourIndex(c)]
-	if !ok {
-		return fmt.Sprintf("%#v", c)
+	return standardFamilies.Describe(c)
+}
+
+// Describe returns a string representation of the colour. If an exact match
+// is not found then the RGB value is shown. Otherwise the shortest name for
+// the colour in each family is used and if only one name is found then that
+// is returned without any Family-qualification
+func (fl Families) Describe(c color.RGBA) string { //nolint:misspell
+	colours, err := fl.ClosestWithin(c, 0)
+	if err != nil {
+		return err.Error()
 	}
 
-	if len(qNames) == 1 {
-		return qNames[0].ColourName
+	if len(colours) == 0 {
+		return fmt.Sprintf("%#4.2v", c)
 	}
 
-	qNames = getUniqueNames(qNames)
+	if len(colours) == 1 {
+		cName := colours[0].CNames[0]
+		for _, altCName := range colours[0].CNames[1:] {
+			cName = preferredName(cName, altCName)
+		}
 
-	if len(qNames) == 1 {
-		return qNames[0].ColourName
+		return cName
 	}
 
-	distinctNames, keys := getDistinctNames(qNames)
+	qcns := getFamilyNames(colours)
 
-	if len(distinctNames) == 1 {
-		return qNames[0].ColourName
+	if len(qcns) == 1 {
+		return qcns[0].cName
 	}
 
 	desc := []string{}
 
-	for _, k := range keys {
-		val := k + " ("
-		val += familyList(distinctNames[k])
+	for _, qcn := range qcns {
+		val := qcn.cName + " ("
+		val += qcn.families.Text()
 		val += ")"
 		desc = append(desc, val)
 	}
@@ -50,117 +66,76 @@ func Describe(c color.RGBA) string { //nolint:misspell
 	return english.Join(desc, ", ", " or ")
 }
 
-// getDistinctNames gathers all the qualified names with the same name and
-// associates them with the list of Families they belong to. Then it
-// generates a list of keys which is sorted so that the list with the most
-// Families come first. duplicates are sorted by length of colour name.
-func getDistinctNames(qNames []QualifiedColourName) (
-	map[string][]Family, []string,
-) {
-	distinctNames := map[string][]Family{}
-	for _, qn := range qNames {
-		v := distinctNames[qn.ColourName]
-		v = append(v, qn.Family)
-		distinctNames[qn.ColourName] = v
-	}
+// getFamilyNames returns a list of qualifiedColourName values in order of,
+// firstly number of families having the colour name, secondly by the length
+// of the name and finally by the lexical order of the colour name.
+func getFamilyNames(colours []FamilyColour) []qualifiedColourName {
+	familiesByColour := map[string]Families{}
+	qcns := []qualifiedColourName{}
 
-	for cName, families := range distinctNames {
-		sort.Slice(families,
-			func(i, j int) bool {
-				familyNameI := families[i].String()
-				familyNameJ := families[j].String()
-				lenFamilyNameI := len(familyNameI)
-				lenFamilyNameJ := len(familyNameJ)
-
-				if lenFamilyNameI < lenFamilyNameJ {
-					return true
-				}
-
-				if lenFamilyNameI == lenFamilyNameJ {
-					return familyNameI < familyNameJ
-				}
-
-				return false
-			})
-
-		distinctNames[cName] = families
-	}
-
-	keys := slices.SortedFunc(maps.Keys(distinctNames), func(a, b string) int {
-		familyCountA := len(distinctNames[a])
-		familyCountB := len(distinctNames[b])
-
-		if familyCountA == familyCountB {
-			return cmp.Compare(len(a), len(b))
+	for _, cd := range colours {
+		cName := cd.CNames[0]
+		for _, altCName := range cd.CNames[1:] {
+			cName = preferredName(cName, altCName)
 		}
 
-		return cmp.Compare(familyCountB, familyCountA)
+		familiesByColour[cName] = append(familiesByColour[cName], cd.Family)
+	}
+
+	for cn, fl := range familiesByColour {
+		qcns = append(qcns, qualifiedColourName{cName: cn, families: fl})
+	}
+
+	slices.SortFunc(qcns, func(a, b qualifiedColourName) int {
+		rval := len(b.families) - len(a.families)
+		if rval == 0 {
+			rval = len(a.cName) - len(b.cName)
+		}
+
+		if rval == 0 {
+			if a.cName < b.cName {
+				return 1
+			}
+
+			return -1
+		}
+
+		return rval
 	})
 
-	return distinctNames, keys
-}
-
-// getUniqueNames takes the set of colour names and removes synonyms -
-// multiple names from the same Family for the same colour. It prefers
-// shorter names over longer ones and, for X11 names, it prefers names
-// without digits over names with (so black over grey0).
-func getUniqueNames(qNames []QualifiedColourName) []QualifiedColourName {
-	uniqueNames := map[Family]QualifiedColourName{}
-
-	for _, qn := range qNames {
-		crnt, ok := uniqueNames[qn.Family]
-		if ok {
-			qn = preferredName(qn, crnt)
-		}
-
-		uniqueNames[qn.Family] = qn
-	}
-
-	if len(uniqueNames) < len(qNames) {
-		qNames = []QualifiedColourName{}
-		for _, qn := range uniqueNames {
-			qNames = append(qNames, qn)
-		}
-	}
-
-	return qNames
+	return qcns
 }
 
 // preferredName returns the preferred name. We prefer shorter names over
 // longer; names without digits over names with; names coming earlier in
 // lexical order over names coming later.
-func preferredName(newQCN, currentQCN QualifiedColourName) QualifiedColourName {
+func preferredName(cName1, cName2 string) string {
 	const digits = "1234567890"
 
-	var (
-		newName  = newQCN.ColourName
-		crntName = currentQCN.ColourName
-	)
-
-	if len(crntName) < len(newName) {
-		return currentQCN // prefer shorter names
+	if len(cName2) < len(cName1) {
+		return cName2 // prefer shorter names
 	}
 
-	if len(crntName) > len(newName) {
-		return newQCN // prefer shorter names
+	if len(cName2) > len(cName1) {
+		return cName1 // prefer shorter names
 	}
 
 	var (
-		newHasDigits  = strings.ContainsAny(newName, digits)
-		crntHasDigits = strings.ContainsAny(crntName, digits)
+		cn1HasDigits = strings.ContainsAny(cName1, digits)
+		cn2HasDigits = strings.ContainsAny(cName2, digits)
 	)
 
-	if newHasDigits && !crntHasDigits {
-		return currentQCN // prefer names without digits
+	if cn1HasDigits && !cn2HasDigits {
+		return cName2 // prefer names without digits
 	}
 
-	if !newHasDigits && crntHasDigits {
-		return newQCN // prefer names without digits
+	if !cn1HasDigits && cn2HasDigits {
+		return cName1 // prefer names without digits
 	}
 
-	if crntName < newName {
-		return currentQCN // prefer name coming 1st in lexical order
+	if cName2 < cName1 {
+		return cName2 // prefer name coming 1st in lexical order
 	}
 
-	return newQCN
+	return cName1
 }

@@ -1,11 +1,9 @@
-package colour_test
+package colour
 
 import (
-	"image/color" //nolint:misspell
 	"testing"
 
-	"github.com/nickwells/colour.mod/colour"
-	"github.com/nickwells/colour.mod/colourtesthelper"
+	"github.com/nickwells/colour.mod/v2/colourtesthelper"
 	"github.com/nickwells/testhelper.mod/v2/testhelper"
 )
 
@@ -14,28 +12,28 @@ func TestCGACololur(t *testing.T) {
 		testhelper.ID
 		testhelper.ExpErr
 		i         int
-		expColour color.RGBA //nolint:misspell
+		expColour rgba
 	}{
 		{
 			ID:        testhelper.MkID("0 (black)"),
 			i:         0,
-			expColour: color.RGBA{0, 0, 0, 0xff}, //nolint:misspell
+			expColour: rgba{R: 0, G: 0, B: 0, A: 0xff},
 		},
 		{
 			ID:        testhelper.MkID("15 (white)"),
 			i:         15,
-			expColour: color.RGBA{0xff, 0xff, 0xff, 0xff}, //nolint:misspell
+			expColour: rgba{R: 0xff, G: 0xff, B: 0xff, A: 0xff},
 		},
 		{
 			ID:        testhelper.MkID("bad index:99"),
 			ExpErr:    testhelper.MkExpErr("bad CGA colour index: 99"),
 			i:         99,
-			expColour: color.RGBA{0, 0, 0, 0}, //nolint:misspell
+			expColour: rgba{R: 0, G: 0, B: 0, A: 0},
 		},
 	}
 
 	for _, tc := range testCases {
-		c, err := colour.CGAColour(tc.i)
+		c, err := CGAColour(tc.i)
 		testhelper.CheckExpErr(t, err, tc)
 		colourtesthelper.DiffRGBA(t, tc.IDStr(), "CGA by number",
 			c, tc.expColour)
