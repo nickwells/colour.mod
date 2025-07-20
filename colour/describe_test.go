@@ -42,12 +42,12 @@ func TestDescribeColour(t *testing.T) {
 		{
 			ID:     testhelper.MkID("many matches, different names"),
 			c:      rgba{R: 0xc0, G: 0xc0, B: 0xc0, A: 0xff},
-			expStr: "silver (Web and HTML) or light gray (CGA)",
+			expStr: `"Web:silver", "HTML:silver" or "CGA:light gray"`,
 		},
 		{
 			ID:     testhelper.MkID("many values, different names"),
 			c:      rgba{R: 0x00, G: 0xff, B: 0x00, A: 0xff},
-			expStr: "lime (Web and HTML) or green (CGA and X11)",
+			expStr: `"Web:lime", "HTML:lime", "CGA:green" or "X11:green"`,
 		},
 	}
 

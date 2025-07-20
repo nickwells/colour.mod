@@ -57,10 +57,10 @@ func (fl Families) Describe(c color.RGBA) string { //nolint:misspell
 	desc := []string{}
 
 	for _, qcn := range qcns {
-		val := qcn.cName + " ("
-		val += qcn.families.Text()
-		val += ")"
-		desc = append(desc, val)
+		for _, f := range qcn.families {
+			val := fmt.Sprintf("%q", f.String()+":"+qcn.cName)
+			desc = append(desc, val)
+		}
 	}
 
 	return english.Join(desc, ", ", " or ")
