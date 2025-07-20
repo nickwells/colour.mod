@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"image/color" //nolint:misspell
 	"strings"
-
-	"github.com/nickwells/english.mod/english"
 )
 
 // rgba is a local type alias for color.RGBA so we don't have to have
@@ -52,18 +50,6 @@ const (
 	XKCDColors          = XKCDColours
 )
 
-// Families represents a collection of Family values
-type Families []Family
-
-// standardFamilies is the collection of families which are searched by default
-var standardFamilies = Families{
-	WebColours,
-	CGAColours,
-	HTMLColours,
-	X11Colours,
-	PantoneColours,
-}
-
 // colourNameToRGBA is the type of the structures mapping the text names to
 // the RGBA values
 type colourNameToRGBA map[string]rgba
@@ -89,7 +75,7 @@ var allFamilies = map[string]familyInfo{
 		id:   StandardColours,
 		name: StandardColours.Name(),
 		description: "any of the 'standard' colour families: " +
-			standardFamilies.TextByName(),
+			standardFamilies.ByName(),
 		colours: standardFamilies.familyColours(),
 	},
 	WebColours.Name(): {
@@ -145,32 +131,16 @@ var allFamilies = map[string]familyInfo{
 	},
 }
 
-// familyColours returns a list of familyColours for each family in the list.
-func (fl Families) familyColours() []familyColours {
-	fcs := []familyColours{}
-
-	for _, f := range fl {
-		switch f {
-		case WebColours:
-			fcs = append(fcs, familyColours{f, webColours})
-		case CGAColours:
-			fcs = append(fcs, familyColours{f, cgaColours})
-		case HTMLColours:
-			fcs = append(fcs, familyColours{f, htmlColours})
-		case X11Colours:
-			fcs = append(fcs, familyColours{f, x11Colours})
-		case PantoneColours:
-			fcs = append(fcs, familyColours{f, pantoneColours})
-		case FarrowAndBallColours:
-			fcs = append(fcs, familyColours{f, farrowAndBallColours})
-		case CrayolaColours:
-			fcs = append(fcs, familyColours{f, crayolaColours})
-		case XKCDColours:
-			fcs = append(fcs, familyColours{f, xkcdColours})
-		}
+// GetFamily returns the Family for the given family name. If the family name
+// is not recognised a BadFamily error is returned.
+func GetFamily(fName string) (Family, error) {
+	if fi, ok := allFamilies[fName]; ok {
+		return fi.id, nil
 	}
 
-	return fcs
+	badFamily := Family(fName)
+
+	return badFamily, badFamilyErr(badFamily)
 }
 
 // info returns the familyInfo details for the given family
@@ -199,31 +169,15 @@ func AllowedFamilies() map[string]string {
 	return af
 }
 
-// Text returns the list of family IDs as a string
-func (fl Families) Text() string {
-	fNames := []string{}
-	for _, f := range fl {
-		fNames = append(fNames, string(f))
-	}
-
-	return english.Join(fNames, ", ", " and ")
-}
-
-// TextByName returns the list of family names (the Family value cast to
-// lowercase) as a string, see [Family.Name].
-func (fl Families) TextByName() string {
-	fNames := []string{}
-	for _, f := range fl {
-		fNames = append(fNames, f.Name())
-	}
-
-	return english.Join(fNames, ", ", " and ")
-}
-
 // Name returns the 'name'-form of the Family - this is the value converted
 // to a string and mapped to lower case.
 func (f Family) Name() string {
 	return strings.ToLower(string(f))
+}
+
+// String returns the Family cast to a string.
+func (f Family) String() string {
+	return string(f)
 }
 
 // IsValid returns true if f is a recognised colour Family, false otherwise.
