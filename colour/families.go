@@ -2,6 +2,7 @@ package colour
 
 import (
 	"fmt"
+	"image/color" //nolint:misspell
 	"slices"
 
 	"github.com/nickwells/english.mod/english"
@@ -103,4 +104,33 @@ func (fl Families) Check() error {
 	}
 
 	return nil
+}
+
+// AllColours returns a slice containing all the colours in each of the given
+// Family elements in the list. The returned value has distinct entries (no
+// colour appears twice) but in a random order. A non-nil error is returned
+// if any Familly in the list is not recognised.
+func (fl Families) AllColours() ([]color.RGBA, error) { //nolint:misspell
+	var colours []rgba
+
+	colourMap := map[rgba]bool{}
+
+	for _, f := range fl {
+		fi, ok := f.info()
+		if !ok {
+			return colours, badFamilyErr(f)
+		}
+
+		for _, m := range fi.colours {
+			for _, c := range m.cMap {
+				colourMap[c] = true
+			}
+		}
+	}
+
+	for c := range colourMap {
+		colours = append(colours, c)
+	}
+
+	return colours, nil
 }

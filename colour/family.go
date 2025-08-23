@@ -218,26 +218,7 @@ func (f Family) ColourNames() ([]string, error) {
 // Family. The returned value has distinct entries (no colour appears twice)
 // but in a random order.
 func (f Family) AllColours() ([]color.RGBA, error) { //nolint:misspell
-	var colours []rgba
-
-	fi, ok := f.info()
-	if !ok {
-		return colours, badFamilyErr(f)
-	}
-
-	colourMap := map[rgba]bool{}
-
-	for _, m := range fi.colours {
-		for _, c := range m.cMap {
-			colourMap[c] = true
-		}
-	}
-
-	for c := range colourMap {
-		colours = append(colours, c)
-	}
-
-	return colours, nil
+	return Families{f}.AllColours()
 }
 
 // ColorNames - see [Family.ColourNames]
