@@ -14,8 +14,8 @@ func reportRGBADiff(t *testing.T, prefix, part string, exp, act uint8) {
 		return
 	}
 
-	t.Logf("\t: %s:   expected %s: 0x%02x\n", prefix, part, exp)
-	t.Logf("\t: %s:     actual %s: 0x%02x\n", prefix, part, act)
+	t.Logf("\t: %s:   expected %s: %#02x\n", prefix, part, exp)
+	t.Logf("\t: %s:     actual %s: %#02x\n", prefix, part, act)
 }
 
 // DiffRGBA compares the actual against the expected value and reports an

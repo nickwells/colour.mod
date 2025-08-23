@@ -16,7 +16,7 @@ func cmpColourPart(p1, p2 uint8, precision int, name string) string {
 
 	if d2 > epsilon {
 		return fmt.Sprintf(
-			"c1.%s(0x%02x) and c2.%s(0x%02x) differ by more than %d",
+			"c1.%s(%#02x) and c2.%s(%#02x) differ by more than %d",
 			name, p1, name, p2, precision)
 	}
 
