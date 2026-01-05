@@ -53,7 +53,9 @@ func Compare(c1, c2 color.RGBA, precision uint8) error { //nolint:misspell
 }
 
 // WithinDist returns true if the two colours have a Euclidean distance less
-// than the limit value.
+// than the limit value. Note that the maximum range of the dimensions is
+// [0,255] and so the maximum distance is the square root of 3 times 255
+// squared or slightly more than 441.
 func WithinDist(c1, c2 color.RGBA, limit float64) bool { //nolint:misspell
 	limit *= limit
 
