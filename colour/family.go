@@ -180,6 +180,79 @@ func (f Family) String() string {
 	return string(f)
 }
 
+// Description returns the description of the colour Family.
+//
+// The error is non-nil if the Family is not valid, that is if it is not in
+// the collection of known colour families. It is advisable to use the Family
+// consts given in this package.
+func (f Family) Description() (string, error) {
+	fi, ok := allFamilies[f.Name()]
+
+	if !ok {
+		return "", fmt.Errorf("%s: %q", BadFamily, f)
+	}
+
+	return fi.description, nil
+}
+
+// ColourNameCount returns the number of names of colours in the colour
+// Family. Note that this number does not represent the number of distinct
+// colours available as there can be multiple names for the same colour.
+//
+// The error is non-nil if the Family is not valid, that is if it is not in
+// the collection of known colour families. It is advisable to use the Family
+// consts given in this package.
+func (f Family) ColourNameCount() (int, error) {
+	fi, ok := allFamilies[f.Name()]
+
+	if !ok {
+		return 0, badFamilyErr(f)
+	}
+
+	colourCount := 0
+	for _, fc := range fi.colours {
+		colourCount += len(fc.cMap)
+	}
+
+	return colourCount, nil
+}
+
+// ColorNameCount is an alias for ColourNameCount using the alternative
+// (American) spelling.
+func (f Family) ColorNameCount() (int, error) {
+	return f.ColourNameCount()
+}
+
+// DistinctColourCount returns the number of distinct colours in the colour
+// Family.
+//
+// The error is non-nil if the Family is not valid, that is if it is not in
+// the collection of known colour families. It is advisable to use the Family
+// consts given in this package.
+func (f Family) DistinctColourCount() (int, error) {
+	fi, ok := allFamilies[f.Name()]
+
+	if !ok {
+		return 0, badFamilyErr(f)
+	}
+
+	distinctColours := map[rgba]bool{}
+
+	for _, fc := range fi.colours {
+		for _, c := range fc.cMap {
+			distinctColours[c] = true
+		}
+	}
+
+	return len(distinctColours), nil
+}
+
+// DistinctColorCount is an alias for DistinctColourCount using the
+// alternative (American) spelling.
+func (f Family) DistinctColorCount() (int, error) {
+	return f.DistinctColourCount()
+}
+
 // IsValid returns true if f is a recognised colour Family, false otherwise.
 func (f Family) IsValid() bool {
 	key := f.Name()
