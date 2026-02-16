@@ -1,7 +1,7 @@
 package colour
 
 //nolint:mnd
-var htmlColours = colourNameToRGBA{
+var htmlColours = withAliases(colourNameToRGBA{
 	// Pink Colours
 	"mediumvioletred": {R: 0xC7, G: 0x15, B: 0x85, A: 0xFF},
 	"deeppink":        {R: 0xFF, G: 0x14, B: 0x93, A: 0xFF},
@@ -160,4 +160,4 @@ var htmlColours = colourNameToRGBA{
 	"lightgray":      {R: 0xD3, G: 0xD3, B: 0xD3, A: 0xFF},
 	"lightgrey":      {R: 0xD3, G: 0xD3, B: 0xD3, A: 0xFF},
 	"gainsboro":      {R: 0xDC, G: 0xDC, B: 0xDC, A: 0xFF},
-}
+})

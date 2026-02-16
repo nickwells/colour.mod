@@ -3,7 +3,7 @@ package colour
 // colours from the Farrow & Ball colour range as of 2023/Nov/17
 //
 //nolint:mnd
-var farrowAndBallColours = colourNameToRGBA{
+var farrowAndBallColours = withAliases(colourNameToRGBA{
 	"wevet":                {R: 0xee, G: 0xe9, B: 0xe7, A: 0xff},
 	"ammonite":             {R: 0xdd, G: 0xd8, B: 0xcf, A: 0xff},
 	"purbeck stone":        {R: 0xc4, G: 0xbe, B: 0xb4, A: 0xff},
@@ -24,7 +24,7 @@ var farrowAndBallColours = colourNameToRGBA{
 	"dimity":               {R: 0xee, G: 0xe3, B: 0xd3, A: 0xff},
 	"joa's white":          {R: 0xde, G: 0xcf, B: 0xb9, A: 0xff},
 	"oxford stone":         {R: 0xd6, G: 0xc2, B: 0xac, A: 0xff},
-	"slipper satin ":       {R: 0xe8, G: 0xe0, B: 0xd1, A: 0xff},
+	"slipper satin":        {R: 0xe8, G: 0xe0, B: 0xd1, A: 0xff},
 	"lime white":           {R: 0xe8, G: 0xde, B: 0xc9, A: 0xff},
 	"off-white":            {R: 0xe0, G: 0xd5, B: 0xbe, A: 0xff},
 	"old white":            {R: 0xcf, G: 0xc3, B: 0xad, A: 0xff},
@@ -136,4 +136,4 @@ var farrowAndBallColours = colourNameToRGBA{
 	"yellow ground":        {R: 0xf2, G: 0xcf, B: 0x86, A: 0xff},
 	"babouche":             {R: 0xec, G: 0xc3, B: 0x63, A: 0xff},
 	"india yellow":         {R: 0xcb, G: 0x9e, B: 0x59, A: 0xff},
-}
+})

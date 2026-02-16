@@ -3,7 +3,7 @@ package colour
 // colours from the Pantone Fashion Home + Interiors range as of 2023/Nov/11
 //
 //nolint:mnd
-var pantoneColours = colourNameToRGBA{
+var pantoneColours = withAliases(colourNameToRGBA{
 	"egret":              {R: 0xf3, G: 0xec, B: 0xe0, A: 0xff},
 	"snow white":         {R: 0xf2, G: 0xf0, B: 0xeb, A: 0xff},
 	"bright white":       {R: 0xf4, G: 0xf5, B: 0xf0, A: 0xff},
@@ -2310,4 +2310,4 @@ var pantoneColours = colourNameToRGBA{
 	"sea moss":           {R: 0x25, G: 0x44, B: 0x45, A: 0xff},
 	"forest biome":       {R: 0x18, G: 0x4a, B: 0x45, A: 0xff},
 	"rain forest":        {R: 0x15, G: 0x46, B: 0x3e, A: 0xff},
-}
+})

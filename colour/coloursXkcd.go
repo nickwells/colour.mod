@@ -6,7 +6,7 @@ package colour
 // The colour names are NSFW (mildly) and should be treated with caution.
 //
 //nolint:mnd
-var xkcdColours = colourNameToRGBA{
+var xkcdColours = withAliases(colourNameToRGBA{
 	"cloudy blue":                {R: 0xac, G: 0xc2, B: 0xd9, A: 0xff},
 	"dark pastel green":          {R: 0x56, G: 0xae, B: 0x57, A: 0xff},
 	"dust":                       {R: 0xb2, G: 0x99, B: 0x6e, A: 0xff},
@@ -957,4 +957,4 @@ var xkcdColours = colourNameToRGBA{
 	"blue":                       {R: 0x03, G: 0x43, B: 0xdf, A: 0xff},
 	"green":                      {R: 0x15, G: 0xb0, B: 0x1a, A: 0xff},
 	"purple":                     {R: 0x7e, G: 0x1e, B: 0x9c, A: 0xff},
-}
+})

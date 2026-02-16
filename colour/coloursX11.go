@@ -1,7 +1,7 @@
 package colour
 
 //nolint:mnd
-var x11Colours = colourNameToRGBA{
+var x11Colours = withAliases(colourNameToRGBA{
 	"snow":                   {R: 255, G: 250, B: 250, A: 0xFF},
 	"ghost white":            {R: 248, G: 248, B: 255, A: 0xFF},
 	"ghostwhite":             {R: 248, G: 248, B: 255, A: 0xFF},
@@ -755,4 +755,4 @@ var x11Colours = colourNameToRGBA{
 	"darkred":                {R: 139, G: 0, B: 0, A: 0xFF},
 	"light green":            {R: 144, G: 238, B: 144, A: 0xFF},
 	"lightgreen":             {R: 144, G: 238, B: 144, A: 0xFF},
-}
+})

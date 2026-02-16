@@ -1,7 +1,7 @@
 package colour
 
 //nolint:mnd
-var crayolaColours = colourNameToRGBA{
+var crayolaColours = withAliases(colourNameToRGBA{
 	"red":                       {R: 0xED, G: 0x0A, B: 0x3F, A: 0xFF},
 	"maroon":                    {R: 0xC3, G: 0x21, B: 0x48, A: 0xFF},
 	"dark red":                  {R: 0xC3, G: 0x21, B: 0x48, A: 0xFF},
@@ -213,4 +213,4 @@ var crayolaColours = colourNameToRGBA{
 	"cool mint":                 {R: 0xDD, G: 0xEB, B: 0xEC, A: 0xFF},
 	"oatmeal":                   {R: 0xD9, G: 0xDA, B: 0xD2, A: 0xFF},
 	"powder blue":               {R: 0xC0, G: 0xD5, B: 0xF0, A: 0xFF},
-}
+})
