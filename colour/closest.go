@@ -4,19 +4,25 @@ import (
 	"errors"
 	"image/color" //nolint:misspell
 	"math"
+	"slices"
 	"sort"
 )
 
-var maxProximity = math.Sqrt(3) * math.MaxUint8 //nolint:mnd
+// MaxColourProximity is the maximum effective value of the proximity value.
+// Note that we add a small epsilon value to counteract inevitable numerical
+// inaccuracies in the math package
+var MaxColourProximity = (math.Sqrt(3) * math.MaxUint8) + 0.000001 //nolint:mnd
 
-// FamilyColour represents a colour in a Family
+// FamilyColour represents a colour in a Family obtained by reference to its
+// Euclidian distance (in the RGB colour cube) from some target colour.
 //
 //nolint:misspell
 type FamilyColour struct {
-	// dist is a measure of the distance between this colour and the search
+	// dist is a measure of the distance between this colour and the target
 	// colour. It is the square of the Euclidean distance from the colour in
 	// the RGB colour cube. For display purposes the square root of the dist
-	// should be used.
+	// should be used. Note that the Alpha value does not contribute to this
+	// distance.
 	dist int
 	// Family is the colour Family in which this RGB colour has the
 	// associated names
