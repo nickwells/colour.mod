@@ -34,24 +34,28 @@ type FamilyColour struct {
 	Colour color.RGBA
 }
 
-// dist returns the distance metric for the two colours. This is the sum of
-// the square of the differences between each of the red, green and blue
-// values. It is the square of the Euclidean distance in the RGB colour cube.
-func dist(sc, c rgba) int {
-	rd, gd, bd := int(c.R)-int(sc.R), int(c.G)-int(sc.G), int(c.B)-int(sc.B)
+// distSquared returns a distance metric for the two colours. This is the sum
+// of the squares of the differences between each of the red, green and blue
+// values. It is the square of the Euclidean distance in the RGB colour
+// cube. Note that the Alpha value does not contribute to this distance.
+func distSquared(target, c rgba) int {
+	rd := int(c.R) - int(target.R)
+	gd := int(c.G) - int(target.G)
+	bd := int(c.B) - int(target.B)
 
 	return rd*rd + gd*gd + bd*bd
 }
 
-// ClosestWithin returns those colours with Euclidean distance less than
-// proximity from the given colour amongst the Families. The notion of
-// 'closeness' is those colours having the smallest sum of squares of
-// differences between the red, green and blue components.
+// ClosestWithin returns those colours with Euclidean distance less than or
+// equal to the given proximity from the given colour amongst the
+// Families. The notion of 'closeness' is those colours having the smallest
+// sum of squares of differences between the red, green and blue components.
 //
-// If prox is set to zero only exact matches will be returned. If it is set
-// to 442 (255 times root 3) or more then every colour will be returned.
+// If proximity is equal to zero only exact matches will be returned. If
+// proximity is greater than or equal to MaxColourProximity all colours will
+// be returned. If it is less than zero then an error will be returned.
 func (fl Families) ClosestWithin(
-	sc color.RGBA, //nolint:misspell
+	target color.RGBA, //nolint:misspell
 	proximity float64,
 ) (
 	[]FamilyColour, error,
@@ -64,47 +68,49 @@ func (fl Families) ClosestWithin(
 		return []FamilyColour{}, badProximityErr(proximity)
 	}
 
-	if proximity >= maxProximity {
-		return []FamilyColour{}, badProximityErr(proximity)
-	}
-
-	cds := fl.getSortedDists(sc)
+	familyColours := fl.getSortedDists(target)
 
 	// square the proximity so we don't have to take square roots
-	return coloursWithin(cds, int(proximity*proximity)), nil
+	return coloursWithin(familyColours, int(proximity*proximity)), nil
 }
 
 // coloursWithin returns all entries in pc with a Dist <= dist.
-func coloursWithin(cds []FamilyColour, dist int) []FamilyColour {
+func coloursWithin(familyColours []FamilyColour, dist int) []FamilyColour {
 	results := []FamilyColour{}
-	lastCD := FamilyColour{}
+	if len(familyColours) == 0 {
+		return results
+	}
 
-	for _, cd := range cds {
-		if cd.dist > dist {
+	lastFC := FamilyColour{}
+
+	for _, fc := range familyColours {
+		if fc.dist > dist {
 			break
 		}
 
-		if lastCD.Family == "" { // we have the first of a new set
-			lastCD = cd
+		if lastFC.Family == "" { // we have the first of a new set
+			lastFC = fc
 
 			continue
 		}
 
-		if lastCD.Family == cd.Family &&
-			lastCD.Colour == cd.Colour {
+		if lastFC.Family == fc.Family &&
+			lastFC.Colour == fc.Colour {
 			// same Family and colour so add the names
-			lastCD.CNames = append(lastCD.CNames, cd.CNames...)
+			lastFC.CNames = append(lastFC.CNames, fc.CNames...)
 
 			continue
 		}
 
-		results = append(results, lastCD)
-		lastCD = cd
+		sort.Strings(lastFC.CNames)
+		results = append(results, lastFC)
+		lastFC = fc
 	}
 
-	if lastCD.dist <= dist && // not strictly needed but for clarity and safety
-		lastCD.Family != "" {
-		results = append(results, lastCD)
+	if lastFC.dist <= dist && // not strictly needed but for clarity and safety
+		lastFC.Family != "" {
+		sort.Strings(lastFC.CNames)
+		results = append(results, lastFC)
 	}
 
 	return results
@@ -113,11 +119,11 @@ func coloursWithin(cds []FamilyColour, dist int) []FamilyColour {
 // ClosestN returns up to n colours closest to the given colour amongst the
 // Families. The notion of 'closeness' is those colours having the smallest
 // sum of squares of differences between the red, green and blue components
-// of that colour and the search colour 'sc'.
+// of that colour and the target colour 'target'.
 //
 // The resulting slice may contain fewer than n entries if there are fewer
 // than n distinct colours in the collection of Families.
-func (fl Families) ClosestN(sc color.RGBA, n int) ( //nolint:misspell
+func (fl Families) ClosestN(target color.RGBA, n int) ( //nolint:misspell
 	[]FamilyColour, error,
 ) {
 	if err := fl.check(); err != nil {
@@ -132,45 +138,40 @@ func (fl Families) ClosestN(sc color.RGBA, n int) ( //nolint:misspell
 		return []FamilyColour{}, nil
 	}
 
-	cds := fl.getSortedDists(sc)
+	familyColours := fl.getSortedDists(target)
 
-	return nClosestColours(cds, n), nil
+	return nClosestColours(familyColours, n), nil
 }
 
 // nClosestColours returns the n entries in pc with the lowest distance from
-// the search colour (see Closest).
-func nClosestColours(cds []FamilyColour, n int) []FamilyColour {
+// the target colour (see ClosestN).
+func nClosestColours(familyColours []FamilyColour, n int) []FamilyColour {
 	results := []FamilyColour{}
-	lastCD := FamilyColour{}
+	if len(familyColours) == 0 || n == 0 {
+		return results
+	}
 
-	for _, cd := range cds {
-		if len(results) >= n {
-			break
-		}
+	lastFC := familyColours[0]
 
-		if lastCD.Family == "" {
-			lastCD = cd
+	for _, fc := range familyColours[1:] {
+		if lastFC.Family == fc.Family &&
+			lastFC.Colour == fc.Colour {
+			lastFC.CNames = append(lastFC.CNames, fc.CNames...)
 
 			continue
 		}
 
-		if lastCD.Family == cd.Family &&
-			lastCD.Colour == cd.Colour {
-			lastCD.CNames = append(lastCD.CNames, cd.CNames...)
-
-			continue
-		}
-
-		results = append(results, lastCD)
-		lastCD = FamilyColour{}
+		sort.Strings(lastFC.CNames)
+		results = append(results, lastFC)
+		lastFC = fc
 	}
 
-	if len(results) < n && // not strictly needed but for clarity and safety
-		lastCD.Family != "" {
-		results = append(results, lastCD)
-	}
+	sort.Strings(lastFC.CNames)
+	results = append(results, lastFC)
 
-	return results
+	n = min(n, len(results))
+
+	return results[:n]
 }
 
 // check checks that each of the members of Families is a valid Family.
@@ -184,9 +185,10 @@ func (fl Families) check() error {
 	return nil
 }
 
-// generateDists generates the proximities for all the colours in all
-// the Families. The Families should have already been checked for validity.
-func (fl Families) generateDists(sc rgba) []FamilyColour {
+// generateDists generates the proximities from the target colour for all the
+// colours in all the Families. The Families should have already been checked
+// for validity.
+func (fl Families) generateDists(target rgba) []FamilyColour {
 	results := []FamilyColour{}
 
 	for _, f := range fl {
@@ -199,7 +201,7 @@ func (fl Families) generateDists(sc rgba) []FamilyColour {
 			for name, c := range fc.cMap {
 				results = append(results,
 					FamilyColour{
-						dist:   dist(sc, c),
+						dist:   distSquared(target, c),
 						Family: fc.f,
 						CNames: []string{name},
 						Colour: c,
