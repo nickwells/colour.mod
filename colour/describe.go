@@ -67,8 +67,9 @@ func (fl Families) Describe(c color.RGBA) string { //nolint:misspell
 }
 
 // getFamilyNames returns a list of qualifiedColourName values in order of,
-// firstly number of families having the colour name, secondly by the length
-// of the name and finally by the lexical order of the colour name.
+// firstly the number of families having the colour name (most first),
+// secondly by the length of the name (shortest first) and finally by the
+// lexical order of the colour name.
 func getFamilyNames(colours []FamilyColour) []qualifiedColourName {
 	familiesByColour := map[string]Families{}
 	qcns := []qualifiedColourName{}
@@ -87,20 +88,15 @@ func getFamilyNames(colours []FamilyColour) []qualifiedColourName {
 	}
 
 	slices.SortFunc(qcns, func(a, b qualifiedColourName) int {
-		rval := len(b.families) - len(a.families)
-		if rval == 0 {
-			rval = len(a.cName) - len(b.cName)
+		if d := len(b.families) - len(a.families); d != 0 {
+			return d
 		}
 
-		if rval == 0 {
-			if a.cName < b.cName {
-				return 1
-			}
-
-			return -1
+		if d := len(a.cName) - len(b.cName); d != 0 {
+			return d
 		}
 
-		return rval
+		return strings.Compare(a.cName, b.cName)
 	})
 
 	return qcns
