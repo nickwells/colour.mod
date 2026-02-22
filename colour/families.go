@@ -21,27 +21,27 @@ var standardFamilies = Families{
 }
 
 // familyColours returns a list of familyColours for each family in the list.
-func (fl Families) familyColours() []familyColours {
-	fcs := []familyColours{}
+func (fl Families) familyColours() []familyToColourMap {
+	fcs := []familyToColourMap{}
 
 	for _, f := range fl {
 		switch f {
 		case WebColours:
-			fcs = append(fcs, familyColours{f, webColours})
+			fcs = append(fcs, familyToColourMap{f, webColours})
 		case CGAColours:
-			fcs = append(fcs, familyColours{f, cgaColours})
+			fcs = append(fcs, familyToColourMap{f, cgaColours})
 		case HTMLColours:
-			fcs = append(fcs, familyColours{f, htmlColours})
+			fcs = append(fcs, familyToColourMap{f, htmlColours})
 		case X11Colours:
-			fcs = append(fcs, familyColours{f, x11Colours})
+			fcs = append(fcs, familyToColourMap{f, x11Colours})
 		case PantoneColours:
-			fcs = append(fcs, familyColours{f, pantoneColours})
+			fcs = append(fcs, familyToColourMap{f, pantoneColours})
 		case FarrowAndBallColours:
-			fcs = append(fcs, familyColours{f, farrowAndBallColours})
+			fcs = append(fcs, familyToColourMap{f, farrowAndBallColours})
 		case CrayolaColours:
-			fcs = append(fcs, familyColours{f, crayolaColours})
+			fcs = append(fcs, familyToColourMap{f, crayolaColours})
 		case XKCDColours:
-			fcs = append(fcs, familyColours{f, xkcdColours})
+			fcs = append(fcs, familyToColourMap{f, xkcdColours})
 		}
 	}
 

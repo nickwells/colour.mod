@@ -54,8 +54,8 @@ const (
 // the RGBA values
 type colourNameToRGBA map[string]rgba
 
-// familyColours collects the Family with a map of colour names
-type familyColours struct {
+// familyToColourMap collects the Family with a map of colour names
+type familyToColourMap struct {
 	f    Family
 	cMap colourNameToRGBA
 }
@@ -65,7 +65,7 @@ type familyInfo struct {
 	id          Family
 	name        string
 	description string
-	colours     []familyColours
+	colours     []familyToColourMap
 }
 
 // allFamilies maps from a Family.Name to the associated familyInfo. There is
@@ -113,7 +113,7 @@ var allFamilies = map[string]familyInfo{
 		id:          FarrowAndBallColours,
 		name:        FarrowAndBallColours.Name(),
 		description: "Farrow And Ball paint colours",
-		colours: []familyColours{
+		colours: []familyToColourMap{
 			{FarrowAndBallColours, farrowAndBallColours},
 		},
 	},
