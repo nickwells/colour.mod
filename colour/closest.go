@@ -6,6 +6,8 @@ import (
 	"math"
 	"slices"
 	"sort"
+
+	"github.com/nickwells/english.mod/english"
 )
 
 // MaxColourProximity is the maximum effective value of the proximity value.
@@ -32,6 +34,17 @@ type FamilyColour struct {
 	CNames []string
 	// Colour is the RGB colour
 	Colour color.RGBA
+}
+
+// FullNames returns a single string giving all the possible names for this
+// colour quoted and prefixed by the Family name
+func (fc FamilyColour) FullNames() string {
+	colourNames := []string{}
+	for _, cn := range fc.CNames {
+		colourNames = append(colourNames, fc.Family.Name()+":"+cn)
+	}
+
+	return english.JoinQuoted(colourNames, ", ", " or ")
 }
 
 // distSquared returns a distance metric for the two colours. This is the sum
@@ -214,43 +227,11 @@ func (fl Families) generateDists(target rgba) []FamilyColour {
 }
 
 // getSortedDists generates the proximities for all the colours in all the
-// Families and then sorts them, firstly by distance, then by Family in the
-// order given in the Families slice and lastly by colour.
-func (fl Families) getSortedDists(sc rgba) []FamilyColour {
-	cds := fl.generateDists(sc)
+// Families and then sorts them, according to FamilyColourCompare.
+func (fl Families) getSortedDists(target rgba) []FamilyColour {
+	familyColours := fl.generateDists(target)
 
-	familyIdx := map[Family]int{}
-	for i, f := range fl {
-		familyIdx[f] = i
-	}
+	slices.SortFunc(familyColours, FamilyColourCompare)
 
-	sort.Slice(cds, func(i, j int) bool {
-		if cds[i].dist != cds[j].dist {
-			return cds[i].dist < cds[j].dist
-		}
-
-		iIdx, jIdx := familyIdx[cds[i].Family], familyIdx[cds[j].Family]
-		if iIdx != jIdx {
-			return iIdx < jIdx
-		}
-
-		iRed, jRed := cds[i].Colour.R, cds[j].Colour.R
-		if iRed != jRed {
-			return iRed < jRed
-		}
-
-		iGreen, jGreen := cds[i].Colour.G, cds[j].Colour.G
-		if iGreen != jGreen {
-			return iGreen < jGreen
-		}
-
-		iBlue, jBlue := cds[i].Colour.B, cds[j].Colour.B
-		if iBlue != jBlue {
-			return iBlue < jBlue
-		}
-
-		return false
-	})
-
-	return cds
+	return familyColours
 }
