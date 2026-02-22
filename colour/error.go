@@ -56,7 +56,7 @@ func badColourErr(c string) Error {
 func badColourCountErr(count int) Error {
 	return Error{
 		Text:  BadColourCount,
-		Value: fmt.Sprintf("expecting 0 < %d", count),
+		Value: fmt.Sprintf("the count (%d) must be greater than zero", count),
 		Count: count,
 	}
 }
@@ -65,8 +65,8 @@ func badColourCountErr(count int) Error {
 // Value set to a string representation of the bad value
 func badProximityErr(p float64) Error {
 	return Error{
-		Text:      BadColourCount,
-		Value:     fmt.Sprintf("expecting 0 <= %f < %f", p, maxProximity),
+		Text:      BadColourProximity,
+		Value:     "the proximity must be greater than or equal to 0",
 		Proximity: p,
 	}
 }
