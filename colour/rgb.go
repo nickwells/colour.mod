@@ -69,7 +69,7 @@ func extractColourComponentParts(s string) (string, string, error) {
 
 		return name, val, fmt.Errorf(
 			"unknown colour component: %q, allowed values: %s",
-			name, english.Join(aval, ", ", " or "))
+			name, english.JoinQuoted(aval, ", ", " or "))
 	}
 
 	val = strings.TrimSpace(val)
@@ -87,8 +87,8 @@ func ParseColourDefinition(s string) (color.RGBA, error) { //nolint:misspell
 
 	if !rgbOutroRE.MatchString(s) {
 		return c, fmt.Errorf(
-			"the colour definition starts with %q but has no trailing '}'",
-			rgbIntroRE.FindString(s))
+			"the colour definition starts with %q but has no trailing %q",
+			rgbIntroRE.FindString(s), "}")
 	}
 
 	strippedVal := rgbIntroRE.ReplaceAllString(s, "")
@@ -122,7 +122,7 @@ func ParseColourPart(val, partName string) (uint8, error) {
 	rVal, err := strconv.ParseUint(val, 0, 8)
 	if err != nil {
 		errIntro := fmt.Sprintf(
-			"cannot convert the %s value (%q) to a valid number", partName, val)
+			"cannot convert the %q value (%q) to a valid number", partName, val)
 		if errors.Is(err, strconv.ErrRange) {
 			return 0, fmt.Errorf("%s: %w", errIntro, strconv.ErrRange)
 		}
