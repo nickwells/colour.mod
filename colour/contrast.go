@@ -37,6 +37,7 @@ func adjustColourComponent(comp uint8, direction int) uint8 {
 		divisor = 2
 		minStep = 10
 	)
+
 	if direction < 0 {
 		diff := math.MaxUint8 - comp
 		step := diff / divisor
@@ -49,6 +50,7 @@ func adjustColourComponent(comp uint8, direction int) uint8 {
 	step := comp / divisor
 	step = max(step, minStep)
 	step = min(step, comp)
+
 	return comp - step
 }
 

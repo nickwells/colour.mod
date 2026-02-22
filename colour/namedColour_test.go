@@ -60,9 +60,11 @@ func TestColoursMatchingByRegexp(t *testing.T) {
 				if dvErr != nil {
 					t.Log(tc.IDStr())
 					t.Log("\t: bad NamedColours list:")
+
 					for _, nc := range ncs {
 						t.Logf("\t:    %#v", nc)
 					}
+
 					t.Error("\t: differences:", dvErr)
 				}
 			}
@@ -94,6 +96,7 @@ func TestColoursMatchingByFunc(t *testing.T) {
 				if name == "grey" || name == "gray" {
 					return true
 				}
+
 				return false
 			},
 			namedColours: []NamedColour{
@@ -130,9 +133,11 @@ func TestColoursMatchingByFunc(t *testing.T) {
 				if dvErr != nil {
 					t.Log(tc.IDStr())
 					t.Log("\t: bad NamedColours list:")
+
 					for _, nc := range ncs {
 						t.Logf("\t:    %#v", nc)
 					}
+
 					t.Error("\t: differences:", dvErr)
 				}
 			}
