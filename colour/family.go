@@ -217,12 +217,6 @@ func (f Family) ColourNameCount() (int, error) {
 	return colourCount, nil
 }
 
-// ColorNameCount is an alias for ColourNameCount using the alternative
-// (American) spelling.
-func (f Family) ColorNameCount() (int, error) {
-	return f.ColourNameCount()
-}
-
 // DistinctColourCount returns the number of distinct colours in the colour
 // Family.
 //
@@ -245,12 +239,6 @@ func (f Family) DistinctColourCount() (int, error) {
 	}
 
 	return len(distinctColours), nil
-}
-
-// DistinctColorCount is an alias for DistinctColourCount using the
-// alternative (American) spelling.
-func (f Family) DistinctColorCount() (int, error) {
-	return f.DistinctColourCount()
 }
 
 // IsValid returns true if f is a recognised colour Family, false otherwise.
@@ -294,15 +282,6 @@ func (f Family) AllColours() ([]color.RGBA, error) { //nolint:misspell
 	return Families{f}.AllColours()
 }
 
-// ColorNames - see [Family.ColourNames]
-//
-// This is an alias for people who follow Merriam-Webster rather than the
-// OED. Note that there is a (very) small performance disadvantage from using
-// this aliased form which the compiler might optimise away.
-func (f Family) ColorNames() ([]string, error) {
-	return f.ColourNames()
-}
-
 // Colour returns the RGBA colour of the given name in the given Family. If a
 // Family has multiple colour maps then the first matching colour is
 // returned. A non-nil error is returned if the Family is not recognised or
@@ -320,15 +299,4 @@ func (f Family) Colour(cName string) (color.RGBA, error) { //nolint:misspell
 	}
 
 	return rgba{}, badColourErr(cName)
-}
-
-// Color - see [Family.Colour]
-//
-// This is an alias for people who follow Merriam-Webster rather than the
-// OED. Note that there is a (very) small performance disadvantage from using
-// this aliased form which the compiler might optimise away.
-//
-//nolint:misspell
-func (f Family) Color(cName string) (color.RGBA, error) {
-	return f.Colour(cName)
 }
