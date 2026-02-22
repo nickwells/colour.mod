@@ -202,24 +202,25 @@ func ColoursMatchingByRegexp(fl Families, re *regexp.Regexp) (
 	if re == nil {
 		return nil, errors.New("no regular expression was provided")
 	}
+
 	return ColoursMatchingByFunc(fl,
 		func(name string, _ rgba) bool {
 			return re.MatchString(name)
 		})
 }
 
-// ColourMatchingFunc is the type of a function to be supplied to the
+// MatchingFunc is the type of a function to be supplied to the
 // ColoursMatchingByFunc function. It takes the colour name and the RGBA
 // colour value and it should return true if the colour should be in the
 // results set.
-type ColourMatchingFunc func(string, color.RGBA) bool //nolint:misspell
+type MatchingFunc func(string, color.RGBA) bool //nolint:misspell
 
 // ColoursMatchingByFunc returns a set of NamedColours where the matchFunc
 // when passed the colour name and colour returns true. The resulting colour
 // names will include the family from which they were matched, separated by a
 // colon (:). The results will be sorted according to the NamedColourCompare
 // function.
-func ColoursMatchingByFunc(fl Families, matchFunc ColourMatchingFunc) (
+func ColoursMatchingByFunc(fl Families, matchFunc MatchingFunc) (
 	[]NamedColour, error,
 ) {
 	if matchFunc == nil {

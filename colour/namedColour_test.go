@@ -79,7 +79,7 @@ func TestColoursMatchingByFunc(t *testing.T) {
 		testhelper.ID
 		testhelper.ExpErr
 		fl           Families
-		f            ColourMatchingFunc
+		f            MatchingFunc
 		namedColours []NamedColour
 	}{
 		{
