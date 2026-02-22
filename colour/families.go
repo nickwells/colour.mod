@@ -3,6 +3,7 @@ package colour
 import (
 	"fmt"
 	"image/color" //nolint:misspell
+	"maps"
 	"slices"
 
 	"github.com/nickwells/english.mod/english"
@@ -115,6 +116,10 @@ func (fl Families) AllColours() ([]color.RGBA, error) { //nolint:misspell
 
 	colourMap := map[rgba]bool{}
 
+	if len(fl) == 0 {
+		fl = standardFamilies
+	}
+
 	for _, f := range fl {
 		fi, ok := f.info()
 		if !ok {
@@ -128,9 +133,34 @@ func (fl Families) AllColours() ([]color.RGBA, error) { //nolint:misspell
 		}
 	}
 
-	for c := range colourMap {
-		colours = append(colours, c)
+	return slices.Collect(maps.Keys(colourMap)), nil
+}
+
+// AllColourNames returns a slice containing all the names of the colours in
+// each of the given Family elements in the list. The returned value has
+// distinct entries (no colour name appears twice) but in a random order. A
+// non-nil error is returned if any Familly in the list is not recognised.
+func (fl Families) AllColourNames() ([]string, error) { //nolint:misspell
+	var colours []string
+
+	colourMap := map[string]bool{}
+
+	if len(fl) == 0 {
+		fl = standardFamilies
 	}
 
-	return colours, nil
+	for _, f := range fl {
+		fi, ok := f.info()
+		if !ok {
+			return colours, badFamilyErr(f)
+		}
+
+		for _, m := range fi.colours {
+			for name := range m.cMap {
+				colourMap[name] = true
+			}
+		}
+	}
+
+	return slices.Collect(maps.Keys(colourMap)), nil
 }
