@@ -15,9 +15,26 @@ import (
 	"github.com/nickwells/english.mod/english"
 )
 
-var rgbIntroRE = regexp.MustCompile(
-	`^[[:space:]]*[rR][gG][bB]([aA])?[[:space:]]*\{`)
-var rgbOutroRE = regexp.MustCompile(`[[:space:]]*\}[[:space:]]*$`)
+var (
+	rgbIntroRE = regexp.MustCompile(
+		`^[[:space:]]*[rR][gG][bB]([aA])?[[:space:]]*\{`)
+	rgbOutroRE = regexp.MustCompile(`[[:space:]]*\}[[:space:]]*$`)
+
+	rgbAlt6RE = regexp.MustCompile(
+		`^[[:space:]]*` +
+			`#` +
+			`([[:xdigit:]][[:xdigit:]])` +
+			`([[:xdigit:]][[:xdigit:]])` +
+			`([[:xdigit:]][[:xdigit:]])` +
+			`[[:space:]]*$`)
+	rgbAlt3RE = regexp.MustCompile(
+		`^[[:space:]]*` +
+			`#` +
+			`([[:xdigit:]])` +
+			`([[:xdigit:]])` +
+			`([[:xdigit:]])` +
+			`[[:space:]]*$`)
+)
 
 var rgbDfltComponents = map[string]uint8{
 	"R": 0,
@@ -28,11 +45,20 @@ var rgbDfltComponents = map[string]uint8{
 
 // IsAPotentialColourString returns true if the given string could be a
 // string encoding a colour in the form of a RGBA value. It only checks the
-// start of the string. The string must start with "rgb" or "rgba" followed
-// by a bracket ("{"). Arbitrary amounts of white space are allowed around
-// the "rgb" or "rgba" and upper and lower case variants are treated the
-// same.
+// start of the string. The string must either be a hash ("#") followed by
+// either 3 or six hexadecimal digits (0-9, a-f) or else must start with "rgb"
+// or "rgba" followed by a bracket ("{"). Arbitrary amounts of white space
+// are allowed around the "rgb" or "rgba" and upper and lower case variants
+// are treated the same.
 func IsAPotentialColourString(s string) bool {
+	if rgbAlt3RE.MatchString(s) {
+		return true
+	}
+
+	if rgbAlt6RE.MatchString(s) {
+		return true
+	}
+
 	return rgbIntroRE.MatchString(s)
 }
 
@@ -77,12 +103,103 @@ func extractColourComponentParts(s string) (string, string, error) {
 	return name, val, nil
 }
 
+// Parse3DigitColour takes a string of the form "#xxx" where each "x" is a
+// hexadecimal digit and returns a colour value and error.  Each digit is
+// doubled so that a string of "#05f" will yield a colour with a red value of
+// 0x0, a green of 0x55 and a blue of 0xff.
+//
+// A non-nil error is returned if all the digits cannot be extracted from the
+// string (3 parts are expected) or if they cannot be parsed into an unsigned
+// 8-bit number.
+func Parse3DigitColour(s string) (color.RGBA, error) { //nolint:misspell
+	return parseNDigitColour(s, "3-digit",
+		rgbAlt3RE,
+		func(xd string) string { return xd + xd })
+}
+
+// Parse6DigitColour takes a string of the form "#xxxxxx" where each "x" is a
+// hexadecimal digit and returns a colour value and error. The digits are
+// taken in pairs so that a string of "#0145ef" will yield a colour with a
+// red value of 0x01, a green of 0x45 and a blue of 0xef,
+//
+// A non-nil error is returned if all the digits cannot be
+// extracted from the string (3 parts are expected) or if they cannot be
+// parsed into an unsigned 8-bit number.
+func Parse6DigitColour(s string) (color.RGBA, error) { //nolint:misspell
+	return parseNDigitColour(s, "6-digit",
+		rgbAlt6RE,
+		func(xd string) string { return xd })
+}
+
+// parseNDigitColour takes a string of N hexadecimal digit and returns a
+// colour value and error. A non-nil error is returned if all the digits
+// cannot be extracted from the string (3 parts are expected) or if they
+// cannot be parsed into an unsigned 8-bit number.
+func parseNDigitColour(
+	s, name string,
+	re *regexp.Regexp,
+	mkDigits func(string) string,
+) (
+	color.RGBA, //nolint:misspell
+	error,
+) {
+	idx2Component := []string{
+		"R",
+		"G",
+		"B",
+	}
+
+	errIntro := fmt.Sprintf("the %s colour (%q) is badly formed", name, s)
+
+	// FindStringSubmatch returns a slice of strings, the 0th entry is the
+	// whole string and the remaining parts, of which there should be 3, are
+	// expected to be the hex digits for the Red, Green and Blue components
+	// respectively. Note that there is no Alpha value
+	parts := re.FindStringSubmatch((s))
+	if len(parts) == 0 {
+		return rgba{}, errors.New(errIntro)
+	}
+
+	// strip the first entry (the match of the whole string)
+	parts = parts[1:]
+	if len(parts) != len(idx2Component) {
+		return rgba{}, fmt.Errorf("%s: %d parts expected, %d found",
+			errIntro,
+			len(idx2Component),
+			len(parts))
+	}
+
+	components := maps.Clone(rgbDfltComponents)
+
+	for i, xd := range parts {
+		v, err := strconv.ParseUint(mkDigits(xd), 16, 8)
+		if err != nil {
+			return rgba{},
+				fmt.Errorf("%s: digit %d(%s) cannot be converted to a number",
+					errIntro,
+					i+1, xd)
+		}
+
+		components[idx2Component[i]] = uint8(v)
+	}
+
+	return makeColour(components), nil
+}
+
 // ParseColourDefinition parses the given string into an RGBA colour.
 func ParseColourDefinition(s string) (color.RGBA, error) { //nolint:misspell
 	var c rgba
 
+	if rgbAlt3RE.MatchString(s) {
+		return Parse3DigitColour(s)
+	}
+
+	if rgbAlt6RE.MatchString(s) {
+		return Parse6DigitColour(s)
+	}
+
 	if !rgbIntroRE.MatchString(s) {
-		return c, fmt.Errorf("the colour definition is not started correctly")
+		return c, fmt.Errorf("the colour definition (%q) is invalid", s)
 	}
 
 	if !rgbOutroRE.MatchString(s) {
@@ -167,6 +284,10 @@ func RGBAllowedValues() string {
 	aVal.WriteString(").")
 	aVal.WriteString(" Upper and lowercase values are treated equally")
 	aVal.WriteString(" and whitespace is allowed anywhere.")
+	aVal.WriteString("\n\n")
+	aVal.WriteString(`Or a literal hash ("#")`)
+	aVal.WriteString(" immediately followed by")
+	aVal.WriteString(" precisely 3 or 6 hexadecimal digits")
 
 	return aVal.String()
 }
