@@ -63,6 +63,7 @@ func TestDistSquared(t *testing.T) {
 }
 
 func TestClosestWithin(t *testing.T) {
+	x11Cornsilk3 := x11Colours["cornsilk3"]
 	webGrey := webColours["grey"]
 
 	testCases := []struct {
@@ -73,6 +74,39 @@ func TestClosestWithin(t *testing.T) {
 		dist   float64
 		expFCs []FamilyColour
 	}{
+		{
+			ID:     testhelper.MkID("no family - use the StandardFamilies"),
+			fl:     Families{},
+			target: x11Cornsilk3,
+			dist:   0,
+			expFCs: []FamilyColour{
+				{
+					dist:   0,
+					Family: X11Colours,
+					CNames: []string{
+						"cornsilk3",
+					},
+					Colour: x11Cornsilk3,
+				},
+			},
+		},
+		{
+			ID: testhelper.MkID("bad - bad family"),
+			ExpErr: testhelper.MkExpErr(
+				`1 problem found: "nonesuch" is not` +
+					` a valid Family (at position 0)`),
+			fl:     Families{Family("nonesuch")},
+			target: webGrey,
+			dist:   0,
+		},
+		{
+			ID: testhelper.MkID("bad - invalid proximity"),
+			ExpErr: testhelper.MkExpErr(BadColourProximity +
+				": the proximity must be greater than or equal to 0"),
+			fl:     Families{WebColours},
+			target: webGrey,
+			dist:   -1,
+		},
 		{
 			ID:     testhelper.MkID("one Family, 0 distance, 1 match"),
 			fl:     Families{WebColours},
@@ -175,6 +209,7 @@ func TestClosestN(t *testing.T) {
 	webGreen := webColours["green"]
 	webGrey := webColours["grey"]
 	webMaroon := webColours["maroon"]
+	x11Cornsilk3 := x11Colours["cornsilk3"]
 	testCases := []struct {
 		testhelper.ID
 		testhelper.ExpErr
@@ -184,7 +219,22 @@ func TestClosestN(t *testing.T) {
 		expFCs []FamilyColour
 	}{
 		{
-			ID: testhelper.MkID("0 results expected"),
+			ID:     testhelper.MkID("bad - negative n"),
+			ExpErr: testhelper.MkExpErr("bad colour count: -1 - must be >= 0"),
+			fl:     Families{WebColours},
+			n:      -1,
+		},
+		{
+			ID:     testhelper.MkID("no families - using StandardColours"),
+			n:      1,
+			target: x11Cornsilk3,
+			expFCs: []FamilyColour{
+				{
+					Family: X11Colours,
+					Colour: x11Cornsilk3,
+					CNames: []string{"cornsilk3"},
+				},
+			},
 		},
 		{
 			ID:     testhelper.MkID("1 result, 1 family"),
@@ -198,6 +248,12 @@ func TestClosestN(t *testing.T) {
 					CNames: []string{"olive"},
 				},
 			},
+		},
+		{
+			ID:     testhelper.MkID("0 requested, 0 returned"),
+			fl:     Families{WebColours},
+			n:      0,
+			target: webOlive,
 		},
 		{
 			ID:     testhelper.MkID("4 results, 1 family"),

@@ -1,7 +1,7 @@
 package colour
 
 import (
-	"errors"
+	"fmt"
 	"image/color" //nolint:misspell
 	"math"
 	"slices"
@@ -67,13 +67,19 @@ func distSquared(target, c rgba) int {
 // If proximity is equal to zero only exact matches will be returned. If
 // proximity is greater than or equal to MaxColourProximity all colours will
 // be returned. If it is less than zero then an error will be returned.
+//
+// If no families are given then the standard families are used.
 func (fl Families) ClosestWithin(
 	target color.RGBA, //nolint:misspell
 	proximity float64,
 ) (
 	[]FamilyColour, error,
 ) {
-	if err := fl.check(); err != nil {
+	if len(fl) == 0 {
+		fl = standardFamilies
+	}
+
+	if err := fl.Check(); err != nil {
 		return []FamilyColour{}, err
 	}
 
@@ -136,15 +142,22 @@ func coloursWithin(familyColours []FamilyColour, dist int) []FamilyColour {
 //
 // The resulting slice may contain fewer than n entries if there are fewer
 // than n distinct colours in the collection of Families.
+//
+// If no families are given then the standard families are used.
 func (fl Families) ClosestN(target color.RGBA, n int) ( //nolint:misspell
 	[]FamilyColour, error,
 ) {
-	if err := fl.check(); err != nil {
+	if len(fl) == 0 {
+		fl = standardFamilies
+	}
+
+	if err := fl.Check(); err != nil {
 		return []FamilyColour{}, err
 	}
 
 	if n < 0 {
-		return []FamilyColour{}, errors.New("bad colour count, must be >= 0")
+		return []FamilyColour{},
+			fmt.Errorf("bad colour count: %d - must be >= 0", n)
 	}
 
 	if n == 0 {
@@ -185,17 +198,6 @@ func nClosestColours(familyColours []FamilyColour, n int) []FamilyColour {
 	n = min(n, len(results))
 
 	return results[:n]
-}
-
-// check checks that each of the members of Families is a valid Family.
-func (fl Families) check() error {
-	for _, f := range fl {
-		if !f.IsValid() {
-			return badFamilyErr(f)
-		}
-	}
-
-	return nil
 }
 
 // generateDists generates the proximities from the target colour for all the
