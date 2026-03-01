@@ -61,8 +61,8 @@ func TestMakeColoursBetween(t *testing.T) {
 			upper: webGreen,
 			expColours: []rgba{
 				webRed,
-				{R: 212, G: 141, B: 0, A: 255},
-				{R: 113, G: 170, B: 0, A: 255},
+				{R: 213, G: 142, B: 0, A: 255},
+				{R: 114, G: 170, B: 0, A: 255},
 				webGreen,
 			},
 		},

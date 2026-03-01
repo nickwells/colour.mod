@@ -57,9 +57,9 @@ func (hsl HSL) ToRGBA() color.RGBA { //nolint:misspell
 		r, g, b = chroma, 0, x
 	}
 
-	r = (r + m) * math.MaxUint8
-	g = (g + m) * math.MaxUint8
-	b = (b + m) * math.MaxUint8
+	r = math.Round((r + m) * math.MaxUint8)
+	g = math.Round((g + m) * math.MaxUint8)
+	b = math.Round((b + m) * math.MaxUint8)
 
 	return rgba{
 		R: uint8(r),
