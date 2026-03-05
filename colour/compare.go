@@ -1,7 +1,6 @@
 package colour
 
 import (
-	"errors"
 	"fmt"
 	"image/color" //nolint:misspell
 	"strings"
@@ -10,14 +9,13 @@ import (
 // cmpColourPart checks that the difference between the parts is greater than
 // prec and returns a non-empty string describing the problem if it is.
 func cmpColourPart(p1, p2 uint8, precision int, name string) string {
-	epsilon := precision * precision
 	diff := int(p1) - int(p2)
-	d2 := diff * diff
+	if diff < 0 {
+		diff *= -1
+	}
 
-	if d2 > epsilon {
-		return fmt.Sprintf(
-			"c1.%s(%#02x) and c2.%s(%#02x) differ by more than %d",
-			name, p1, name, p2, precision)
+	if diff > precision {
+		return fmt.Sprintf("%s differ by %d", name, diff)
 	}
 
 	return ""
@@ -29,19 +27,19 @@ func cmpColourPart(p1, p2 uint8, precision int, name string) string {
 func Compare(c1, c2 color.RGBA, precision uint8) error { //nolint:misspell
 	probs := []string{}
 
-	if p := cmpColourPart(c1.R, c2.R, int(precision), "R"); p != "" {
+	if p := cmpColourPart(c1.R, c2.R, int(precision), "R's"); p != "" {
 		probs = append(probs, p)
 	}
 
-	if p := cmpColourPart(c1.G, c2.G, int(precision), "G"); p != "" {
+	if p := cmpColourPart(c1.G, c2.G, int(precision), "G's"); p != "" {
 		probs = append(probs, p)
 	}
 
-	if p := cmpColourPart(c1.B, c2.B, int(precision), "B"); p != "" {
+	if p := cmpColourPart(c1.B, c2.B, int(precision), "B's"); p != "" {
 		probs = append(probs, p)
 	}
 
-	if p := cmpColourPart(c1.A, c2.A, int(precision), "A"); p != "" {
+	if p := cmpColourPart(c1.A, c2.A, int(precision), "A's"); p != "" {
 		probs = append(probs, p)
 	}
 
@@ -49,17 +47,19 @@ func Compare(c1, c2 color.RGBA, precision uint8) error { //nolint:misspell
 		return nil
 	}
 
-	return errors.New("the colours differ:" + strings.Join(probs, ", "))
+	return fmt.Errorf(
+		"colours (%#02v and %#02v) differ (precision: %d): %s",
+		c1, c2, precision, strings.Join(probs, ", "))
 }
 
 // WithinDist returns true if the two colours have a Euclidean distance less
-// than the limit value. Note that the maximum range of the dimensions is
+// than or equal to the dist value. Note that the range of the dimensions is
 // [0,255] and so the maximum distance is the square root of 3 times 255
 // squared or slightly more than 441. Note that the comparison is only on the
 // red, green and blue components of the colour; the alpha value is not
 // considered.
-func WithinDist(c1, c2 color.RGBA, limit float64) bool { //nolint:misspell
-	limit *= limit
+func WithinDist(c1, c2 color.RGBA, dist float64) bool { //nolint:misspell
+	dist *= dist
 
-	return float64(distSquared(c1, c2)) < limit
+	return float64(distSquared(c1, c2)) <= dist
 }
