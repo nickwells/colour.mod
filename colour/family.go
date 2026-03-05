@@ -26,28 +26,30 @@ type Family string
 
 // These represent the various families of colour names.
 const (
-	StandardColours      Family = "Standard"
-	WebColours           Family = "Web"
-	CGAColours           Family = "CGA"
-	X11Colours           Family = "X11"
-	HTMLColours          Family = "HTML"
-	PantoneColours       Family = "Pantone"
-	FarrowAndBallColours Family = "FarrowAndBall"
-	CrayolaColours       Family = "Crayola"
-	XKCDColours          Family = "xkcd"
+	StandardColours       Family = "Standard"
+	WebColours            Family = "Web"
+	CGAColours            Family = "CGA"
+	X11Colours            Family = "X11"
+	HTMLColours           Family = "HTML"
+	PantoneColours        Family = "Pantone"
+	FarrowAndBallColours  Family = "FarrowAndBall"
+	CrayolaColours        Family = "Crayola"
+	XKCDColours           Family = "xkcd"
+	EncycolorpediaColours Family = "Encycolorpedia"
 )
 
 // Some aliases for people who use Merriam-Webster rather than the OED
 const (
-	StandardColors      = StandardColours
-	WebColors           = WebColours
-	CGAColors           = CGAColours
-	X11Colors           = X11Colours
-	HTMLColors          = HTMLColours
-	PantoneColors       = PantoneColours
-	FarrowAndBallColors = FarrowAndBallColours
-	CrayolaColors       = CrayolaColours
-	XKCDColors          = XKCDColours
+	StandardColors       = StandardColours
+	WebColors            = WebColours
+	CGAColors            = CGAColours
+	X11Colors            = X11Colours
+	HTMLColors           = HTMLColours
+	PantoneColors        = PantoneColours
+	FarrowAndBallColors  = FarrowAndBallColours
+	CrayolaColors        = CrayolaColours
+	XKCDColors           = XKCDColours
+	EncycolorpediaColors = EncycolorpediaColours
 )
 
 // colourNameToRGBA is the type of the structures mapping the text names to
@@ -128,6 +130,13 @@ var allFamilies = map[string]familyInfo{
 		name:        XKCDColours.Name(),
 		description: "colour names as surveyed by xkcd, some names are NSFW",
 		colours:     Families{XKCDColours}.familyColours(),
+	},
+	EncycolorpediaColours.Name(): {
+		id:   EncycolorpediaColours,
+		name: EncycolorpediaColours.Name(),
+		description: "colour names from the Encycolorpedia.com/named" +
+			" web page as of 2026/Mar/02",
+		colours: Families{EncycolorpediaColours}.familyColours(),
 	},
 }
 
