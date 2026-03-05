@@ -123,3 +123,35 @@ func (f Family) ColorNameCount() (int, error) {
 func (f Family) DistinctColorCount() (int, error) {
 	return f.DistinctColourCount()
 }
+
+// ToGray - see [ToGrey]
+func ToGray(c color.RGBA) color.RGBA {
+	return ToGrey(c)
+}
+
+// ToGrayEqual - see [ToGreyEqual]
+func ToGrayEqual(c color.RGBA) color.RGBA {
+	return ToGreyEqual(c)
+}
+
+// ToGrayBT709 - see [ToGreyBT709]
+func ToGrayBT709(c color.RGBA) color.RGBA {
+	return ToGreyBT709(c)
+}
+
+// ToGrayBT2100 - see [ToGreyBT2100]
+func ToGrayBT2100(c color.RGBA) color.RGBA {
+	return ToGreyBT2100(c)
+}
+
+// ToGrayCustom - see [ToGreyCustom]
+func ToGrayCustom(c color.RGBA,
+	wtRed, wtGreen, wtBlue float64,
+) (color.RGBA, error) {
+	return ToGreyCustom(c, wtRed, wtGreen, wtBlue)
+}
+
+// MakeGray - see [MakeGrey]
+func MakeGray(g uint8) color.RGBA {
+	return MakeGrey(g)
+}
