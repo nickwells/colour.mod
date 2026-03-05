@@ -47,3 +47,32 @@ func DiffRGBA(t *testing.T,
 
 	return false
 }
+
+// DiffRGB compares the actual against the expected value and reports an
+// error if they differ - it ignores the Alpha values.
+func DiffRGB(t *testing.T,
+	id, name string,
+	act, exp color.RGBA, //nolint:misspell
+) bool {
+	t.Helper()
+
+	if act != exp {
+		t.Log(id)
+		t.Logf("\t: expected %s: %#v\n", name, exp)
+		t.Logf("\t:   actual %s: %#v\n", name, act)
+
+		charCnt := len(name) + len("expected") + 1
+		t.Logf("\t: %*s:\n", charCnt, "diffs")
+
+		intro := strings.Repeat(" ", charCnt)
+		reportRGBADiff(t, intro, "  red", exp.R, act.R)
+		reportRGBADiff(t, intro, "green", exp.G, act.G)
+		reportRGBADiff(t, intro, " blue", exp.B, act.B)
+
+		t.Errorf("\t: %s is incorrect\n", name)
+
+		return true
+	}
+
+	return false
+}
