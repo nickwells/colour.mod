@@ -8,6 +8,7 @@ import (
 )
 
 func TestGenerateAltSpellings(t *testing.T) {
+	//nolint:misspell
 	testCases := []struct {
 		testhelper.ID
 		s          string
@@ -96,6 +97,30 @@ func TestGenerateAltSpellings(t *testing.T) {
 			s:  "grayson",
 			expResults: []string{
 				"grayson",
+			},
+		},
+		{
+			ID: testhelper.MkID("multiple changes US->UK"),
+			s:  "gray aluminum harbor",
+			expResults: []string{
+				"gray aluminum harbor",
+				"grey aluminium harbour",
+			},
+		},
+		{
+			ID: testhelper.MkID("multiple changes UK->US"),
+			s:  "grey aluminium harbour",
+			expResults: []string{
+				"grey aluminium harbour",
+				"gray aluminum harbor",
+			},
+		},
+		{
+			ID: testhelper.MkID("repeats UK->US"),
+			s:  "grey grey grey",
+			expResults: []string{
+				"grey grey grey",
+				"gray gray gray",
 			},
 		},
 	}
@@ -282,6 +307,233 @@ func TestAddColourAliases(t *testing.T) {
 					t.Log(tc.IDStr())
 					t.Errorf("\t: expected colour missing for %q", name)
 				}
+			}
+		})
+	}
+}
+
+func TestIsAnAlias(t *testing.T) {
+	testCases := []struct {
+		testhelper.ID
+		name1   string
+		name2   string
+		expIs   bool
+		expPref string
+	}{
+		{
+			ID:      testhelper.MkID("same string"),
+			name1:   "blah",
+			name2:   "blah",
+			expIs:   true,
+			expPref: "blah",
+		},
+		{
+			ID:      testhelper.MkID("different string"),
+			name1:   "blah",
+			name2:   "something else",
+			expIs:   false,
+			expPref: "",
+		},
+		{
+			ID:      testhelper.MkID("grey/gray"),
+			name1:   "grey",
+			name2:   "gray",
+			expIs:   true,
+			expPref: "grey",
+		},
+		{
+			ID:      testhelper.MkID("with apostrophes"),
+			name1:   "xxx's",
+			name2:   "xxxs",
+			expIs:   true,
+			expPref: "xxx's",
+		},
+		{
+			ID:      testhelper.MkID("with spaces"),
+			name1:   "xxx   s",
+			name2:   "xxx-s",
+			expIs:   true,
+			expPref: "xxx   s",
+		},
+		{
+			ID:      testhelper.MkID("with spaces and apostrophes"),
+			name1:   "xxx   yyy's",
+			name2:   "xxx-yyys",
+			expIs:   true,
+			expPref: "xxx   yyy's",
+		},
+		{
+			ID:      testhelper.MkID("with grey/gray, spaces and apostrophes"),
+			name1:   "grey xxx   yyy's",
+			name2:   "gray-xxx-yyys",
+			expIs:   true,
+			expPref: "grey xxx   yyy's",
+		},
+		{
+			ID:      testhelper.MkID("with just grey/gray differing"),
+			name1:   "grey xxx   yyy's",
+			name2:   "gray xxx   yyy's",
+			expIs:   true,
+			expPref: "grey xxx   yyy's",
+		},
+		{
+			ID:      testhelper.MkID("with gray/grey, spaces and apostrophes"),
+			name1:   "gray xxx   yyy's",
+			name2:   "grey-xxx-yyys",
+			expIs:   true,
+			expPref: "gray xxx   yyy's",
+		},
+		{
+			ID:      testhelper.MkID("nancys-grey-blushes 1"),
+			name1:   "nancy's grey blushes",
+			name2:   "nancys-grey-blushes",
+			expIs:   true,
+			expPref: "nancy's grey blushes",
+		},
+		{
+			ID:      testhelper.MkID("nancy's gray blushes 2"),
+			name1:   "nancy's grey blushes",
+			name2:   "nancy's gray blushes",
+			expIs:   true,
+			expPref: "nancy's grey blushes",
+		},
+		{
+			ID:      testhelper.MkID("nancys-gray-blushes 3"),
+			name1:   "nancy's grey blushes",
+			name2:   "nancys-gray-blushes",
+			expIs:   true,
+			expPref: "nancy's grey blushes",
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.Name, func(t *testing.T) {
+			actPref, actIs := IsAnAlias(tc.name1, tc.name2)
+			actPrefAlt, actIsAlt := IsAnAlias(tc.name2, tc.name1)
+
+			// first check that the order is irrelevant
+			testhelper.DiffBool(t,
+				tc.IDStr(), "is an alias-swapped",
+				actIs, actIsAlt)
+			testhelper.DiffString(t,
+				tc.IDStr(), "pref-swapped",
+				actPref, actPrefAlt)
+
+			// now check for expected results
+			testhelper.DiffBool(t,
+				tc.IDStr(), "is an alias",
+				actIs, tc.expIs)
+			testhelper.DiffString(t,
+				tc.IDStr(), "pref",
+				actPref, tc.expPref)
+		})
+	}
+}
+
+func TestStripAliasesOf(t *testing.T) {
+	testCases := []struct {
+		testhelper.ID
+		s        string
+		names    []string
+		expNames []string
+	}{
+		{
+			ID:       testhelper.MkID("empty slice"),
+			s:        "hello",
+			expNames: []string{"hello"},
+		},
+		{
+			ID:       testhelper.MkID("target not in slice"),
+			s:        "hello",
+			names:    []string{"world", "flesh", "devil"},
+			expNames: []string{"world", "flesh", "devil", "hello"},
+		},
+		{
+			ID:       testhelper.MkID("target preferred"),
+			s:        "hello world",
+			names:    []string{"hello-world", "flesh", "devil"},
+			expNames: []string{"flesh", "devil", "hello world"},
+		},
+		{
+			ID:       testhelper.MkID("target not preferred"),
+			s:        "hello-world",
+			names:    []string{"hello world", "flesh", "devil"},
+			expNames: []string{"flesh", "devil", "hello world"},
+		},
+		{
+			ID: testhelper.MkID("multiple matches"),
+			s:  "nancy's grey blushes",
+			names: []string{
+				"nancys-grey-blushes",
+				"flesh",
+				"nancys-gray-blushes",
+				"devil",
+				"nancy's gray blushes",
+			},
+			expNames: []string{"flesh", "devil", "nancy's grey blushes"},
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.Name, func(t *testing.T) {
+			actNames := stripAliasesOf(tc.s, tc.names)
+			if testhelper.DiffStringSlice(t,
+				tc.IDStr(), "stripped names",
+				actNames, tc.expNames) {
+				t.Log("\t:   actual:", actNames)
+				t.Log("\t: expected:", tc.expNames)
+			}
+		})
+	}
+}
+
+func TestStripAliases(t *testing.T) {
+	testCases := []struct {
+		testhelper.ID
+		names    []string
+		expNames []string
+	}{
+		{
+			ID:       testhelper.MkID("no aliases"),
+			names:    []string{"a", "b", "c"},
+			expNames: []string{"a", "b", "c"},
+		},
+		{
+			ID:       testhelper.MkID("one alias"),
+			names:    []string{"a's", "b", "as", "c"},
+			expNames: []string{"a's", "b", "c"},
+		},
+		{
+			ID:       testhelper.MkID("several aliases"),
+			names:    []string{"a's", "b  x", "as", "b-x", "c"},
+			expNames: []string{"a's", "b  x", "c"},
+		},
+		{
+			ID: testhelper.MkID("many, longer aliases"),
+			names: []string{
+				"encycolorpedia:dried and weathered bamboo",
+				"encycolorpedia:dried-and-weathered-bamboo",
+				"encycolorpedia:golden-gray bamboo",
+				"encycolorpedia:golden-gray-bamboo",
+				"encycolorpedia:golden-grey bamboo",
+				"encycolorpedia:golden-grey-bamboo",
+			},
+			expNames: []string{
+				"encycolorpedia:dried and weathered bamboo",
+				"encycolorpedia:golden-grey bamboo",
+			},
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.Name, func(t *testing.T) {
+			actNames := StripAliases(tc.names)
+
+			if testhelper.DiffStringSlice(t,
+				tc.IDStr(), "stripped list",
+				actNames, tc.expNames) {
+				t.Log("\t:   actual names:", actNames)
+				t.Log("\t: expected names:", tc.expNames)
 			}
 		})
 	}
