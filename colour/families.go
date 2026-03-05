@@ -23,27 +23,27 @@ var standardFamilies = Families{
 
 // familyColours returns a list of familyColours for each family in the list.
 func (fl Families) familyColours() []familyToColourMap {
+	fToCNM := map[Family]colourNameToRGBA{
+		WebColours:            webColours,
+		CGAColours:            cgaColours,
+		HTMLColours:           htmlColours,
+		X11Colours:            x11Colours,
+		PantoneColours:        pantoneColours,
+		FarrowAndBallColours:  farrowAndBallColours,
+		CrayolaColours:        crayolaColours,
+		XKCDColours:           xkcdColours,
+		EncycolorpediaColours: encycolorpediaColours,
+	}
+
 	fcs := []familyToColourMap{}
 
 	for _, f := range fl {
-		switch f {
-		case WebColours:
-			fcs = append(fcs, familyToColourMap{f, webColours})
-		case CGAColours:
-			fcs = append(fcs, familyToColourMap{f, cgaColours})
-		case HTMLColours:
-			fcs = append(fcs, familyToColourMap{f, htmlColours})
-		case X11Colours:
-			fcs = append(fcs, familyToColourMap{f, x11Colours})
-		case PantoneColours:
-			fcs = append(fcs, familyToColourMap{f, pantoneColours})
-		case FarrowAndBallColours:
-			fcs = append(fcs, familyToColourMap{f, farrowAndBallColours})
-		case CrayolaColours:
-			fcs = append(fcs, familyToColourMap{f, crayolaColours})
-		case XKCDColours:
-			fcs = append(fcs, familyToColourMap{f, xkcdColours})
+		cnm, ok := fToCNM[f]
+		if !ok {
+			panic(badFamilyErr(f))
 		}
+
+		fcs = append(fcs, familyToColourMap{f, cnm})
 	}
 
 	return fcs
