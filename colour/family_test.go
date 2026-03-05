@@ -120,3 +120,132 @@ func TestColourByName(t *testing.T) {
 			c, tc.expColour)
 	}
 }
+
+func TestGetFamily(t *testing.T) {
+	testCases := []struct {
+		testhelper.ID
+		testhelper.ExpErr
+		name      string
+		expFamily Family
+	}{
+		{
+			ID:        testhelper.MkID("bad family"),
+			ExpErr:    testhelper.MkExpErr(`bad colour family: "nonesuch"`),
+			name:      "nonesuch",
+			expFamily: Family("nonesuch"),
+		},
+		{
+			ID:        testhelper.MkID("web"),
+			name:      "web",
+			expFamily: WebColours,
+		},
+		{
+			ID:        testhelper.MkID("x11"),
+			name:      "x11",
+			expFamily: X11Colours,
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.Name, func(t *testing.T) {
+			f, err := GetFamily(tc.name)
+
+			testhelper.CheckExpErrWithID(t, tc.IDStr(), err, tc)
+
+			testhelper.DiffString(t, tc.IDStr(), "family", f, tc.expFamily)
+		})
+	}
+}
+
+func TestDescription(t *testing.T) {
+	testCases := []struct {
+		testhelper.ID
+		testhelper.ExpErr
+		f       Family
+		expDesc string
+	}{
+		{
+			ID:      testhelper.MkID("bad family"),
+			ExpErr:  testhelper.MkExpErr(`bad colour family: "nonesuch"`),
+			f:       "nonesuch",
+			expDesc: "",
+		},
+		{
+			ID:      testhelper.MkID("web"),
+			f:       WebColours,
+			expDesc: "colour names as defined in the HTML 4.01 specification",
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.Name, func(t *testing.T) {
+			desc, err := tc.f.Description()
+			testhelper.CheckExpErrWithID(t, tc.IDStr(), err, tc)
+			testhelper.DiffString(t,
+				tc.IDStr(), "description",
+				desc, tc.expDesc)
+		})
+	}
+}
+
+func TestColourNameCount(t *testing.T) {
+	testCases := []struct {
+		testhelper.ID
+		testhelper.ExpErr
+		f        Family
+		expCount int
+	}{
+		{
+			ID:       testhelper.MkID("bad family"),
+			ExpErr:   testhelper.MkExpErr(`bad colour family: "nonesuch"`),
+			f:        "nonesuch",
+			expCount: 0,
+		},
+		{
+			ID:       testhelper.MkID("web"),
+			f:        WebColours,
+			expCount: 17,
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.Name, func(t *testing.T) {
+			count, err := tc.f.ColourNameCount()
+			testhelper.CheckExpErrWithID(t, tc.IDStr(), err, tc)
+			testhelper.DiffInt(t,
+				tc.IDStr(), "count",
+				count, tc.expCount)
+		})
+	}
+}
+
+func TestDistinctColourCount(t *testing.T) {
+	testCases := []struct {
+		testhelper.ID
+		testhelper.ExpErr
+		f        Family
+		expCount int
+	}{
+		{
+			ID:       testhelper.MkID("bad family"),
+			ExpErr:   testhelper.MkExpErr(`bad colour family: "nonesuch"`),
+			f:        "nonesuch",
+			expCount: 0,
+		},
+		{
+			ID:       testhelper.MkID("web"),
+			f:        WebColours,
+			expCount: 16,
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.Name, func(t *testing.T) {
+			count, err := tc.f.DistinctColourCount()
+			testhelper.CheckExpErrWithID(t, tc.IDStr(), err, tc)
+			testhelper.DiffInt(t,
+				tc.IDStr(), "count",
+				count, tc.expCount)
+		})
+	}
+}

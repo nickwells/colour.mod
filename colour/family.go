@@ -198,7 +198,7 @@ func (f Family) Description() (string, error) {
 	fi, ok := allFamilies[f.Name()]
 
 	if !ok {
-		return "", fmt.Errorf("%s: %q", BadFamily, f)
+		return "", badFamilyErr(f)
 	}
 
 	return fi.description, nil
