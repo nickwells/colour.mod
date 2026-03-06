@@ -168,9 +168,10 @@ func choosePreferredAlias(s1, s2 string) string {
 	return s1 // we shouldn't get here but if we do just pick an alias
 }
 
-// IsAnAlias returns true and the preferred alias if name1 is an alias of
-// name2 or vice versa. Otherwise it will return an empty string and false.
-func IsAnAlias(name1, name2 string) (string, bool) {
+// IsAColourAlias returns the preferred alias and true if name1 is an alias
+// of name2 or vice versa. Otherwise it will return an empty string and
+// false.
+func IsAColourAlias(name1, name2 string) (string, bool) {
 	if name1 == name2 {
 		return name1, true
 	}
@@ -195,7 +196,7 @@ func stripAliasesOf(s string, names []string) []string {
 	stripped := []string{}
 
 	for _, t := range names {
-		if pref, alias := IsAnAlias(s, t); alias {
+		if pref, alias := IsAColourAlias(s, t); alias {
 			s = pref
 			continue
 		}

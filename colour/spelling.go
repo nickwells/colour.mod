@@ -155,3 +155,8 @@ func ToGrayCustom(c color.RGBA,
 func MakeGray(g uint8) color.RGBA {
 	return MakeGrey(g)
 }
+
+// IsAColorAlias - see [IsAColourAlias]
+func IsAColorAlias(s1, s2 string) (string, bool) {
+	return IsAColourAlias(s1, s2)
+}

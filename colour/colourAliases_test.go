@@ -408,8 +408,8 @@ func TestIsAnAlias(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.Name, func(t *testing.T) {
-			actPref, actIs := IsAnAlias(tc.name1, tc.name2)
-			actPrefAlt, actIsAlt := IsAnAlias(tc.name2, tc.name1)
+			actPref, actIs := IsAColourAlias(tc.name1, tc.name2)
+			actPrefAlt, actIsAlt := IsAColourAlias(tc.name2, tc.name1)
 
 			// first check that the order is irrelevant
 			testhelper.DiffBool(t,
