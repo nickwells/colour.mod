@@ -12,10 +12,8 @@ func TestCompare(t *testing.T) {
 		redish  = rgba{R: 0xfe, G: 0x01, B: 0x01, A: 0xfe}
 		black   = rgba{R: 0x00, G: 0x00, B: 0x00, A: 0xff}
 		blackR1 = rgba{R: 0x01, G: 0x00, B: 0x00, A: 0xff}
-	// 	blackish    = rgba{R: 0x01, G: 0x01, B: 0x01, A: 0xfe}
-	// 	white    = rgba{R: 0xff, G: 0xff, B: 0xff, A: 0xff}
-	// 	whiteish    = rgba{R: 0xfe, G: 0xfe, B: 0xfe, A: 0xfe}
 	)
+
 	testCases := []struct {
 		testhelper.ID
 		testhelper.ExpErr
@@ -87,6 +85,7 @@ func TestWithinDist(t *testing.T) {
 		black = rgba{R: 0x00, G: 0x00, B: 0x00, A: 0xff}
 		white = rgba{R: 0xff, G: 0xff, B: 0xff, A: 0xff}
 	)
+
 	testCases := []struct {
 		testhelper.ID
 		c1, c2 rgba

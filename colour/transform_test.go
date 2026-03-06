@@ -8,11 +8,7 @@ import (
 )
 
 func TestSaturation(t *testing.T) {
-	var (
-		red = rgba{R: 0xff, A: 0xff}
-		//green = rgba{G: 0xff, A: 0xff}
-		//blue  = rgba{B: 0xff, A: 0xff}
-	)
+	red := rgba{R: 0xff, A: 0xff}
 
 	testCases := []struct {
 		testhelper.ID
@@ -63,11 +59,7 @@ func TestSaturation(t *testing.T) {
 }
 
 func TestLuminance(t *testing.T) {
-	var (
-		red = rgba{R: 0xff, A: 0xff}
-		//green = rgba{G: 0xff, A: 0xff}
-		//blue  = rgba{B: 0xff, A: 0xff}
-	)
+	red := rgba{R: 0xff, A: 0xff}
 
 	testCases := []struct {
 		testhelper.ID
@@ -221,6 +213,7 @@ func TestComplement(t *testing.T) {
 				colourtesthelper.DiffRGB(t,
 					tc.IDStr(), "no change expected",
 					cc, tc.c)
+
 				return
 			}
 
