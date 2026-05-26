@@ -38,13 +38,12 @@ func NamedColourAllowedValues(fl Families) string {
 		fDesc = " in one of the colour-name families: " + fl.String()
 	}
 
-	return "Either" +
-		"\n" +
+	return "Either\n- " +
 		colourNameAllowedValue + fDesc +
-		"\n" +
-		"or " + familyColourAllowedValue +
-		"\n" +
-		"or " + RGBAllowedValues()
+		"\nOr\n- " +
+		familyColourAllowedValue +
+		"\nOr\n- " +
+		RGBAllowedValues()
 }
 
 // NamedColour records a colour and the associated name

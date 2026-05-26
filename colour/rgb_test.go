@@ -15,9 +15,9 @@ func TestRGBAllowedValue(t *testing.T) {
 		" RGB{R: #, G: #, B: #, A: #}" +
 		" (defaults: B / G / R: 0x00, A: 0xff)." +
 		" Upper and lowercase values are treated equally" +
-		" and whitespace is allowed anywhere." +
-		"\n\n" +
-		`Or a literal hash ("#")` +
+		" and whitespace is allowed between any values." +
+		"\nOr\n" +
+		`- a literal hash ("#")` +
 		" immediately followed by precisely 3 or 6 hexadecimal digits"
 
 	if aVal != expectedVal {

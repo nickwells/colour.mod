@@ -283,9 +283,9 @@ func RGBAllowedValues() string {
 
 	aVal.WriteString(").")
 	aVal.WriteString(" Upper and lowercase values are treated equally")
-	aVal.WriteString(" and whitespace is allowed anywhere.")
-	aVal.WriteString("\n\n")
-	aVal.WriteString(`Or a literal hash ("#")`)
+	aVal.WriteString(" and whitespace is allowed between any values.")
+	aVal.WriteString("\nOr\n")
+	aVal.WriteString(`- a literal hash ("#")`)
 	aVal.WriteString(" immediately followed by")
 	aVal.WriteString(" precisely 3 or 6 hexadecimal digits")
 
